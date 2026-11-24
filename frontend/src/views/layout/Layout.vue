@@ -7,7 +7,7 @@
         <span v-show="!collapsed" class="logo-title">WMS 重建版</span>
       </div>
       <el-scrollbar class="sidebar-menu" wrap-class="sidebar-menu-wrap">
-        <el-menu :default-active="$route.path" :collapse="collapsed" :collapse-transition="false" router unique-opened>
+        <el-menu :default-active="basePath" :collapse="collapsed" :collapse-transition="false" router unique-opened>
           <el-menu-item index="/dashboard">
             <i class="el-icon-s-home menu-icon" /><span slot="title">首页</span>
           </el-menu-item>
@@ -24,8 +24,8 @@
               </el-menu-item>
             </el-submenu>
           </template>
-          <el-menu-item index="/pdaDemo">
-            <i class="el-icon-mobile-phone menu-icon" /><span slot="title">PDA 出库模拟</span>
+          <el-menu-item index="/pda">
+            <i class="el-icon-mobile-phone menu-icon" /><span slot="title">PDA 模拟</span>
           </el-menu-item>
         </el-menu>
       </el-scrollbar>
@@ -38,7 +38,7 @@
       <!-- 顶部导航：已打开页面的页签 + 用户 -->
       <header class="nav-header">
         <div class="tags-view">
-          <div v-for="t in tags" :key="t.path" class="tags-view-item" :class="{ active: t.path === $route.path }"
+          <div v-for="t in tags" :key="t.path" class="tags-view-item" :class="{ active: t.path === basePath }"
             :title="t.title" @click="go(t.path)">
             <span class="route-title">{{ t.title }}</span>
             <i v-if="t.path !== '/dashboard'" class="el-icon-close" @click.stop="close(t.path)" />
@@ -59,7 +59,7 @@
           </el-dropdown>
         </div>
       </header>
-      <main class="app-main"><router-view :key="$route.path" /></main>
+      <main class="app-main"><router-view :key="basePath" /></main>
     </section>
   </div>
 </template>
@@ -79,8 +79,12 @@ export default {
       tags: saved.length ? saved : [{ path: '/dashboard', title: '首页' }]
     }
   },
+  computed: {
+    // PDA 模拟的子页面（/pda/xxx）共用一个页签和菜单项，切换子页面时外壳不重建
+    basePath () { const p = this.$route.path; return p.startsWith('/pda/') ? '/pda' : p }
+  },
   watch: {
-    $route: { immediate: true, handler (r) { this.addTag(r.path) } },
+    $route: { immediate: true, handler () { this.addTag(this.basePath) } },
     tags (v) { sessionStorage.setItem(TAGS_KEY, JSON.stringify(v)) },
     collapsed (v) { localStorage.setItem('wms-collapsed', v ? '1' : '0') }
   },
@@ -88,6 +92,7 @@ export default {
     titleOf (path) {
       if (path === '/dashboard') return '首页'
       if (path === '/pdaDemo') return 'PDA 出库模拟'
+      if (path === '/pda') return 'PDA 模拟'
       for (const m of this.menu) {
         if (m.link && m.path === path) return m.title
         const c = (m.children || []).find(x => x.path === path)
@@ -98,15 +103,15 @@ export default {
     addTag (path) {
       if (!this.tags.some(t => t.path === path)) this.tags = this.tags.concat({ path, title: this.titleOf(path) })
     },
-    go (path) { if (path !== this.$route.path) this.$router.push(path) },
+    go (path) { if (path !== this.basePath) this.$router.push(path) },
     close (path) {
       const i = this.tags.findIndex(t => t.path === path)
       this.tags = this.tags.filter(t => t.path !== path)
-      if (path === this.$route.path) this.go((this.tags[i] || this.tags[i - 1] || { path: '/dashboard' }).path)
+      if (path === this.basePath) this.go((this.tags[i] || this.tags[i - 1] || { path: '/dashboard' }).path)
     },
     onCommand (cmd) {
       if (cmd === 'logout') this.logout()
-      if (cmd === 'closeOthers') this.tags = this.tags.filter(t => t.path === '/dashboard' || t.path === this.$route.path)
+      if (cmd === 'closeOthers') this.tags = this.tags.filter(t => t.path === '/dashboard' || t.path === this.basePath)
     },
     async logout () {
       try { await request.post('/auth/logout') } catch (e) { /* 后端未连通时只清本地 */ }

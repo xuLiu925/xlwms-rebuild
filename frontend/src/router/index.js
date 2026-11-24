@@ -99,6 +99,17 @@ const routes = [
       { path: '/dashboard', component: () => import('../views/Dashboard.vue') },
       // 本地演示页：模拟 PDA 出库作业，只连本地后端
       { path: '/pdaDemo', component: () => import('../views/pda/OutboundDemo.vue') },
+      // 批次 10：PDA 模拟（手机尺寸外壳 + 收货/上架/盘点/库存），只连本地后端
+      {
+        path: '/pda', component: () => import('../views/pda/PdaShell.vue'),
+        children: [
+          { path: '', component: () => import('../views/pda/PdaHome.vue'), meta: { title: 'PDA 首页' } },
+          { path: 'receipt', component: () => import('../views/pda/PdaReceipt.vue'), meta: { title: '收货' } },
+          { path: 'putaway', component: () => import('../views/pda/PdaPutaway.vue'), meta: { title: '上架' } },
+          { path: 'check', component: () => import('../views/pda/PdaCheck.vue'), meta: { title: '盘点' } },
+          { path: 'stock', component: () => import('../views/pda/PdaStock.vue'), meta: { title: '库存查询' } }
+        ]
+      },
       ...pageRoutes,
       ...extraRoutes
     ]

@@ -109,6 +109,9 @@ Java 后端（Spring Boot 3 / Java 17）+ Vue 2 前端。当前全部是虚构�
   报表 `views/report/{StaffEfficiency,InboundEfficiency,OutboundEfficiency}.vue`（共用 `ReportView.vue`；`ReportController` 按日期确定性推算，仅演示），
   以及 4 个通用列表页（换标、转运、序列号、作业视频，`tools/list-pages/spec-extra.mjs`）。规则见 COVERAGE.md“批次 9 的数据与规则”。
   测试共 148 个通过（`mvn clean test`），已在浏览器里联调过 9 个页面（盘点新建→PDA 盘点→盘盈显示）。
+- 批次 10（2026-11-24）：PDA 模拟界面 `/pda`（左侧菜单“PDA 模拟”）。`views/pda/PdaShell.vue` 手机外壳 + `PdaHome`、`PdaReceipt`（按箱/按箱型/按 SKU 收货）、
+  `PdaPutaway`（按 SKU 上架、整单上架）、`PdaCheck`（明盘/盲盘）、`PdaStock`（查产品、查库位、移库），接口封装 `api/pda.js`，只连本地后端。
+  界面是自绘示意，不是原样复刻。后端无改动，测试仍 148 个。细节见 COVERAGE.md“批次 10：PDA 模拟界面”。
 - 界面风格（2026-11-24）：参考领星 WMS 的页面样式重做前端外观。用户在浏览器面板里自己登录后，只做了只读观察
   （截图、读计算样式），没有点任何按钮、没有提交，真实数据未写入任何文件。
   - 主题：`frontend/src/styles/element-variables.scss`（Element SCSS 变量，主色 #005bf5），需要开发依赖 `sass@~1.32`、`sass-loader@13`。
