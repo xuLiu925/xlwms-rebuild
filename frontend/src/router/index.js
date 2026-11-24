@@ -20,13 +20,19 @@ const modules = {
   setting: ['globalSetting', 'printTemplate', 'notice', 'brand', 'agency', 'erpAuth', 'msgNotice', 'warningMsg', 'receiveAccount', 'exchangeRate'],
   toolKit: ['freightCalculation', 'requestLog', 'errorPool', 'labelRecord', 'pushRecord', 'zoneTest', 'taskCenter']
 }
+// 已实现的页面；其余子路由显示占位
+const pages = {
+  'inbound/ASN': () => import('../views/inbound/ASN.vue'),
+  'outbound/parcel': () => import('../views/outbound/Parcel.vue'),
+  'stock/sku': () => import('../views/stock/Sku.vue')
+}
 const routes = [
   { path: '/login', component: () => import('../views/Login.vue') },
   { path: '/', redirect: '/dashboard' },
   { path: '/dashboard', component: () => import('../views/Dashboard.vue') },
   ...Object.entries(modules).map(([m, kids]) => ({
     path: '/' + m, component: { render: h => h('router-view') },
-    children: kids.map(k => ({ path: k, component: m + '/' + k === 'inbound/ASN' ? () => import('../views/inbound/ASN.vue') : Stub(m + '/' + k) }))
+    children: kids.map(k => ({ path: k, component: pages[m + '/' + k] || Stub(m + '/' + k) }))
   }))
 ]
 const router = new Router({ mode: 'history', routes })
