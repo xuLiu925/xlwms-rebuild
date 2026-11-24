@@ -112,6 +112,8 @@ Java 后端（Spring Boot 3 / Java 17）+ Vue 2 前端。当前全部是虚构�
 - 批次 10（2026-11-24）：PDA 模拟界面 `/pda`（左侧菜单“PDA 模拟”）。`views/pda/PdaShell.vue` 手机外壳 + `PdaHome`、`PdaReceipt`（按箱/按箱型/按 SKU 收货）、
   `PdaPutaway`（按 SKU 上架、整单上架）、`PdaCheck`（明盘/盲盘）、`PdaStock`（查产品、查库位、移库），接口封装 `api/pda.js`，只连本地后端。
   界面是自绘示意，不是原样复刻。后端无改动，测试仍 148 个。细节见 COVERAGE.md“批次 10：PDA 模拟界面”。
+- 批次 11（2026-11-24）：PDA 模拟补 `PdaReturnReceive`（退件收货：包裹到货 + 良次品清点）、`PdaReturnPutaway`（退件上架，次品只能 E 区），
+  已联调：收 RN2611000001 → 次品放 A 区被拒 → 放 E-01-01 成功 → 网页端次品处理可见。
 - 界面风格（2026-11-24）：参考领星 WMS 的页面样式重做前端外观。用户在浏览器面板里自己登录后，只做了只读观察
   （截图、读计算样式），没有点任何按钮、没有提交，真实数据未写入任何文件。
   - 主题：`frontend/src/styles/element-variables.scss`（Element SCSS 变量，主色 #005bf5），需要开发依赖 `sass@~1.32`、`sass-loader@13`。

@@ -5,7 +5,7 @@
 
 状态说明：✅ 专门实现 · 🟦 通用列表页（规格在 `tools/list-pages/spec*.mjs`；批次 8 起其中 23 页可本地增删改） · ⬜ 占位（页面显示"待实现"）
 
-## 汇总（2026-11-24，批次 10 完成后）
+## 汇总（2026-11-24，批次 11 完成后）
 
 | 范围 | 总数 | ✅ | 🟦 | ⬜ |
 |---|---|---|---|---|
@@ -79,6 +79,7 @@ PDA 的 175 是 ApiService 方法数；其中 `receipt/listBoxType` 有两个方
    PDA 覆盖到 146/175，剩下的都在批次 7。
 7. **批次 7（已完成）**：其余 29 个 PDA 接口（device ×9、pickAndSort ×4、appendix ×4、messageBoard ×2、auth ×2、home、menu、warehouse ×2、system ×2、
    common/pic/upload、blMoveStock/boxMoveStock），PDA 覆盖到 175/175。规则见下方“批次 7 的数据与规则”。
+11. **批次 11（已完成）**：PDA 模拟补退件收货、退件上架两个页面。
 10. **批次 10（已完成）**：PDA 模拟界面 `/pda`（手机尺寸外壳 + 首页 + 收货、上架、盘点、库存查询/移库），直接调用已还原的 PDA 接口。
    规则见下方“批次 10：PDA 模拟界面”。
 9. **批次 9（已完成）**：参考菜单里有、公开路由表里没有的 9 个页面全部实现（盘点、次品处理、三张报表为专门页面，其余 4 个为通用列表页）。
@@ -196,6 +197,8 @@ PDA 的 175 是 ApiService 方法数；其中 `receipt/listBoxType` 有两个方
 - 上架：按 SKU 扫库位 + 数量（先 scanCell 校验再 v2/confirm）；剩余的整箱、箱型用“整单上架”（commitCompleteOrder）放到一个库位。
 - 盘点：开始 → 选库位填实盘数（盲盘不显示账面数）→ 提交本库位 → 完成。账面没有的产品先扫码（scanSku）加行。
 - 库存查询：查产品（search + cell/list）或查库位（customer/cellList），库位明细里可直接移库（move）。
+- 退件（批次 11）：`/pda/returnReceive` 勾选到货包裹、按 SKU 填良品/次品数（receive/submit）；`/pda/returnPutaway` 按产品×品质列出待上架行
+  （逐个调 putaway/detail/scanBarcode），先 putaway/scanCell 校验（次品只能 E 区）再 putaway/submit。退件上架的次品会出现在网页端“次品处理”。
 - 已在浏览器联调：收 RA2611000001 的一箱 → 生成 PA2611000001 → SKU-0001 上架 10 件到 A-01-01（库存 20→30）→ 移 5 件到 A-01-02 → 盲盘 B-01-01 提交。
 
 ## 批次 9 的数据与规则（参考菜单里的 9 个额外页面）

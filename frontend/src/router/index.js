@@ -107,7 +107,10 @@ const routes = [
           { path: 'receipt', component: () => import('../views/pda/PdaReceipt.vue'), meta: { title: '收货' } },
           { path: 'putaway', component: () => import('../views/pda/PdaPutaway.vue'), meta: { title: '上架' } },
           { path: 'check', component: () => import('../views/pda/PdaCheck.vue'), meta: { title: '盘点' } },
-          { path: 'stock', component: () => import('../views/pda/PdaStock.vue'), meta: { title: '库存查询' } }
+          { path: 'stock', component: () => import('../views/pda/PdaStock.vue'), meta: { title: '库存查询' } },
+          // 批次 11：退件
+          { path: 'returnReceive', component: () => import('../views/pda/PdaReturnReceive.vue'), meta: { title: '退件收货' } },
+          { path: 'returnPutaway', component: () => import('../views/pda/PdaReturnPutaway.vue'), meta: { title: '退件上架' } }
         ]
       },
       ...pageRoutes,

@@ -43,5 +43,17 @@ export const cellsOfSku = productSku => get('/pda/stock/cell/list', { productSku
 export const stockOfCell = cellNo => post('/pda/stock/customer/cellList', { cellNo, current: 1, size: 100 })
 export const stockMove = body => post('/pda/stock/move', body)
 
+// ---------- 退件 /pda/return ----------
+export const returnReceiveList = () => get('/pda/return/receive/listOrder', { current: 1, size: 50 })
+export const returnReceiveScan = scanContent => get('/pda/return/receive/scanBarcode', { scanContent })
+export const returnPackages = orderNo => get('/pda/return/receive/listPackage', { orderNo })
+export const returnProducts = orderNo => get('/pda/return/receive/listProduct', { orderNo, current: 1, size: 100 })
+export const returnReceiveSubmit = body => post('/pda/return/receive/submit', body)
+export const returnPutawayList = () => get('/pda/return/putaway/listOrder', { current: 1, size: 50 })
+export const returnPutawayScan = scanContent => post('/pda/return/putaway/scanOrderNo', { scanContent })
+export const returnPutawayDetail = (returnNo, barcode) => get('/pda/return/putaway/detail/scanBarcode', { returnNo, barcode })
+export const returnPutawayCell = (cellNo, productQuality) => get('/pda/return/putaway/scanCell', { cellNo, productQuality })
+export const returnPutawaySubmit = body => post('/pda/return/putaway/submit', body)
+
 // 本地演示专用（真实系统没有）：重置全部内存示例数据
 export const resetAll = () => request.post('/demo/reset')

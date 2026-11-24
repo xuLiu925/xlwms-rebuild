@@ -23,6 +23,8 @@ export default {
       { path: '/pda/putaway', name: '上架', desc: '按 SKU 或整单上架', icon: 'el-icon-top', color: '#28a864' },
       { path: '/pda/check', name: '盘点', desc: '明盘 / 盲盘', icon: 'el-icon-finished', color: '#f58718' },
       { path: '/pda/stock', name: '库存查询', desc: '查产品、查库位、移库', icon: 'el-icon-search', color: '#7a4cf5' },
+      { path: '/pda/returnReceive', name: '退件收货', desc: '包裹到货、良次品清点', icon: 'el-icon-refresh-left', color: '#0aa5a8' },
+      { path: '/pda/returnPutaway', name: '退件上架', desc: '次品只能放 E 区', icon: 'el-icon-sort-up', color: '#5a8f00' },
       { path: '/pdaDemo', name: '拣货与复核', desc: '波次拣货、一票多件复核', icon: 'el-icon-shopping-cart-2', color: '#df3148' }
     ]
   }),
