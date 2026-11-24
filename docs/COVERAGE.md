@@ -14,6 +14,10 @@
 
 PDA 的 175 是 ApiService 方法数；其中 `receipt/listBoxType` 有两个方法共用一个路径，按方法计 2 个。
 
+左侧菜单（2026-11-24 起）按参考系统菜单分组，见 `frontend/src/config/menuGroups.js`。参考菜单里另有 9 个路径不在公开路由表的 79 个子路由里，
+本项目只放了“待实现”占位，不计入上表：`outbound/swapBarcode`、`transfer/index`、`report/{staffEfficiency,inbound,outbound}`、
+`stock/{defective,checking,serial,workVideo}`。参考菜单的“退件”“工单”指向本项目的 `globalOrder/returnOrder`、`globalOrder/workOrder`。
+
 ## 网页端（按 router 模块）
 
 | 模块 | 子路由 | 状态 |

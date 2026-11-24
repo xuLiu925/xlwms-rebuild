@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import listPages from '../config/listPages.generated'
-import { moduleTitles, pageTitles } from '../config/menu'
+import { pageTitles } from '../config/menu'
+import { menuGroups } from '../config/menuGroups'
 import Layout from '../views/layout/Layout.vue'
 Vue.use(Router)
 const GenericList = () => import('../views/common/GenericList.vue')
@@ -59,15 +60,23 @@ const childRoute = (m, k) => {
   return { path, component: Stub(key) }
 }
 const pageRoutes = Object.entries(modules).flatMap(([m, kids]) => kids.map(k => childRoute(m, k)))
-// 左侧菜单：模块 → 子页面
-const menu = Object.entries(modules).map(([m, kids]) => ({
-  path: '/' + m,
-  title: moduleTitles[m] || m,
-  children: kids.map(k => {
-    const key = m + '/' + k
-    return { path: '/' + key, title: pageTitles[key] || (listConfigs[key] && listConfigs[key].title) || key, stub: !pages[key] && !listConfigs[key] }
-  })
-}))
+// 左侧菜单：分组见 config/menuGroups.js（前 9 组按参考系统菜单排列）
+const routed = new Set(Object.entries(modules).flatMap(([m, kids]) => kids.map(k => m + '/' + k)))
+const titleOf = (key, given) => given || pageTitles[key] || (listConfigs[key] && listConfigs[key].title) || key
+const isStub = key => !pages[key] && !listConfigs[key]
+// 参考菜单里有、公开路由表里没有的路径：生成占位路由
+const extraRoutes = []
+const menuItem = (key, given) => {
+  if (!routed.has(key) && !extraRoutes.some(r => r.path === '/' + key)) extraRoutes.push({ path: '/' + key, component: Stub(key) })
+  return { path: '/' + key, title: titleOf(key, given), stub: isStub(key) }
+}
+const menu = menuGroups.map(g => g.link
+  ? { ...menuItem(g.link, g.title), key: g.key, icon: g.icon, link: true }
+  : { key: g.key, path: '/' + g.key, title: g.title, icon: g.icon, children: g.items.map(([k, t]) => menuItem(k, t)) })
+// 公开路由表里的页面都要能从菜单进入
+const inMenu = new Set(menu.flatMap(m => m.link ? [m.path] : m.children.map(c => c.path)))
+const notInMenu = [...routed].filter(k => !inMenu.has('/' + k))
+if (notInMenu.length) console.warn('这些页面不在菜单里：', notInMenu)
 const routes = [
   { path: '/login', component: () => import('../views/Login.vue') },
   {
@@ -76,7 +85,8 @@ const routes = [
       { path: '/dashboard', component: () => import('../views/Dashboard.vue') },
       // 本地演示页：模拟 PDA 出库作业，只连本地后端
       { path: '/pdaDemo', component: () => import('../views/pda/OutboundDemo.vue') },
-      ...pageRoutes
+      ...pageRoutes,
+      ...extraRoutes
     ]
   }
 ]

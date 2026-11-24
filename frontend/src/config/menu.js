@@ -1,23 +1,5 @@
-// 左侧菜单的模块名与非通用页面的标题（通用列表页的标题来自 listPages.generated.js）。
+// 非通用页面的默认标题（通用列表页的标题来自 listPages.generated.js；菜单分组见 menuGroups.js）。
 // 模块与子路由取自公开 bundle 的路由表；中文名是本项目的翻译，未必与真实菜单一致。
-export const moduleTitles = {
-  customer: '客户',
-  globalOrder: '全局订单',
-  stock: '库存',
-  basicData: '基础数据',
-  inbound: '入库',
-  outbound: '出库',
-  returnGoods: '退货',
-  logisticsManage: '物流管理',
-  logisticsPrice: '物流报价',
-  quotesReceivable: '应收报价',
-  receivableSettlement: '应收结算',
-  statisticalAnalysis: '统计分析',
-  auth: '权限',
-  setting: '设置',
-  toolKit: '工具箱'
-}
-
 export const pageTitles = {
   'inbound/ASN': '入库管理',
   'inbound/receivePutaway': '收货上架',

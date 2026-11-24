@@ -11,14 +11,19 @@
           <el-menu-item index="/dashboard">
             <i class="el-icon-s-home menu-icon" /><span slot="title">首页</span>
           </el-menu-item>
-          <el-submenu v-for="m in menu" :key="m.path" :index="m.path" popper-class="sidebar-popper">
-            <template slot="title">
-              <i :class="icon(m.path)" class="menu-icon" /><span class="submenu-title">{{ m.title }}</span>
-            </template>
-            <el-menu-item v-for="c in m.children" :key="c.path" :index="c.path">
-              {{ c.title }}<span v-if="c.stub" class="stub">待实现</span>
+          <template v-for="m in menu">
+            <el-menu-item v-if="m.link" :key="m.key" :index="m.path">
+              <i :class="m.icon" class="menu-icon" /><span slot="title">{{ m.title }}<span v-if="m.stub" class="stub">待实现</span></span>
             </el-menu-item>
-          </el-submenu>
+            <el-submenu v-else :key="m.key" :index="m.path" popper-class="sidebar-popper">
+              <template slot="title">
+                <i :class="m.icon" class="menu-icon" /><span class="submenu-title">{{ m.title }}</span>
+              </template>
+              <el-menu-item v-for="c in m.children" :key="c.path" :index="c.path">
+                {{ c.title }}<span v-if="c.stub" class="stub">待实现</span>
+              </el-menu-item>
+            </el-submenu>
+          </template>
           <el-menu-item index="/pdaDemo">
             <i class="el-icon-mobile-phone menu-icon" /><span slot="title">PDA 出库模拟</span>
           </el-menu-item>
@@ -61,13 +66,6 @@
 <script>
 import request from '../../api/request'
 
-// 模块图标（Element 自带图标；参考系统用的是自己的 iconfont，这里不引用）
-const ICONS = {
-  customer: 'el-icon-user', globalOrder: 'el-icon-s-order', stock: 'el-icon-box', basicData: 'el-icon-s-grid',
-  inbound: 'el-icon-download', outbound: 'el-icon-upload2', returnGoods: 'el-icon-refresh-left', logisticsManage: 'el-icon-truck',
-  logisticsPrice: 'el-icon-price-tag', quotesReceivable: 'el-icon-tickets', receivableSettlement: 'el-icon-wallet',
-  statisticalAnalysis: 'el-icon-data-analysis', auth: 'el-icon-lock', setting: 'el-icon-setting', toolKit: 'el-icon-suitcase'
-}
 const TAGS_KEY = 'wms-tags'
 
 export default {
@@ -87,12 +85,12 @@ export default {
     collapsed (v) { localStorage.setItem('wms-collapsed', v ? '1' : '0') }
   },
   methods: {
-    icon (path) { return ICONS[path.slice(1)] || 'el-icon-menu' },
     titleOf (path) {
       if (path === '/dashboard') return '首页'
       if (path === '/pdaDemo') return 'PDA 出库模拟'
       for (const m of this.menu) {
-        const c = m.children.find(x => x.path === path)
+        if (m.link && m.path === path) return m.title
+        const c = (m.children || []).find(x => x.path === path)
         if (c) return c.title
       }
       return path
