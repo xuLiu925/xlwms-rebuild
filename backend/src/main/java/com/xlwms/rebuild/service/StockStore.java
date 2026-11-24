@@ -80,6 +80,9 @@ public class StockStore {
         product("SKU-0009", "示例马克杯 9", "C004", "示例客户4");
         product("SKU-0010", "示例收纳箱 10", "C005", "示例客户5");
         product("SKU-0011", "示例折叠椅 11", "C005", "示例客户5");
+        // 新品（批次 5）：入库后需要测量尺寸重量，见 NewProductStore
+        product("SKU-0012", "示例保温杯 12", "C001", "示例客户1");
+        product("SKU-0013", "示例毛巾 13", "C002", "示例客户2");
         boxTypes.put("BOX-0010-A", new BoxType("BOX-0010-A", "SKU-0010", 12, 60, 40, 40, 14.5));
         boxTypes.put("BOX-0011-A", new BoxType("BOX-0011-A", "SKU-0011", 4, 90, 55, 30, 21.0));
         cells.addAll(List.of("A-01-01", "A-01-02", "A-02-01", "B-01-01", "B-01-03", "C-03-02", "D-01-01", "D-01-02",
@@ -216,6 +219,31 @@ public class StockStore {
             r.qty = newQty;
         }
         return before;
+    }
+
+    /** 入库上架：把 qty 加到目标库位（目标库位必须存在且未锁定）。 */
+    public synchronized void putIn(String cellNo, String sku, String boxType, int quality, int qty) {
+        requireCell(cellNo, true);
+        product(sku);
+        if (qty <= 0) {
+            throw new BizException("上架数量必须大于 0");
+        }
+        Row r = exact(cellNo.trim(), sku, boxType, quality);
+        if (r == null) {
+            add(cellNo.trim(), sku, boxType, quality, qty);
+        } else {
+            r.qty += qty;
+        }
+    }
+
+    /** 有某 SKU 库存的库位（推荐上架库位用），按库位号排序。 */
+    public synchronized List<String> cellsHolding(String sku) {
+        return rows.stream().filter(r -> r.qty > 0 && r.productSku.equals(sku)).map(r -> r.cellNo).distinct().sorted().toList();
+    }
+
+    /** 没有任何库存、也未锁定的库位。 */
+    public synchronized List<String> emptyCells() {
+        return cells.stream().filter(c -> !LOCKED_CELLS.contains(c) && rows.stream().noneMatch(r -> r.qty > 0 && r.cellNo.equals(c))).toList();
     }
 
     /** 扣减库存（拣货用）。 */

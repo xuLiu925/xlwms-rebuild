@@ -81,7 +81,11 @@ Java 后端（Spring Boot 3 / Java 17）+ Vue 2 前端。当前全部是虚构�
   盘点 `/pda/inventoryCheck/**` ×6（`InventoryCheckStore`，complete 时把实盘数写回库存）、出库确认与大货复核 `/pda/delivery/**` ×8
   （`PdaDeliveryController`）、按箱拣货 ×8（`WaveBoxController` + `FreightStore`，拣货扣减按箱库存）、`review/getCustomerCode4More`。
   路径/参数/字段取自 APK，业务规则和编码是本项目假设（见 COVERAGE.md“批次 4 的数据与规则”）。`POST /demo/reset` 重置全部内存数据。
-  测试共 114 个通过。下一步是批次 5（PDA 收货/上架/新品维护）。
+- 批次 5（2026-11-24）：PDA 再补 44 个接口，PDA 覆盖 104/175。收货 18 个方法 + `blReceipt/measureBoxType`
+  （`PdaReceiptFlowController` + `ReceiptStore`，4 张虚构入库单）、上架 20 个（`PdaShelfFlowController` + `PutawayStore`，上架写入 `StockStore`）、
+  新品维护 5 个（`PdaNewProductController` + `NewProductStore`）。收货自动生成上架单。`StockStore` 新增新品 SKU-0012/0013 与 `putIn`。
+  **遗留**：批次 1 的 8 个收货/上架接口（`ReceiptController`、`ShelvesController`）仍是无状态骨架，没接到新 Store。
+  规则见 COVERAGE.md“批次 5 的数据与规则”。测试共 121 个通过（做过一次变异检查：去掉超收校验后有 2 个用例失败）。下一步是批次 6（PDA 退货）。
 - 官方文档：2026-11-24 搜索未找到领星海外仓 WMS 的公开帮助中心或开放 API 文档（apifox 上搜到的“海外仓开放平台”属于 jcex，不是领星）。
 
 ## 未知 / 未验证

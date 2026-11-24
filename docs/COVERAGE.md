@@ -5,12 +5,14 @@
 
 状态说明：✅ 专门实现 · 🟦 通用列表页（规格在 `tools/list-pages/spec*.mjs`，只读） · ⬜ 占位（页面显示"待实现"）
 
-## 汇总（2026-11-24，批次 4 完成后）
+## 汇总（2026-11-24，批次 5 完成后）
 
 | 范围 | 总数 | ✅ | 🟦 | ⬜ |
 |---|---|---|---|---|
 | 网页端子路由 | 79 | 21 | 58 | 0 |
-| PDA 接口（ApiService） | 175 | 60 | — | 115 |
+| PDA 接口（ApiService） | 175 | 104 | — | 71 |
+
+PDA 的 175 是 ApiService 方法数；其中 `receipt/listBoxType` 有两个方法共用一个路径，按方法计 2 个。
 
 ## 网页端（按 router 模块）
 
@@ -43,8 +45,8 @@
 
 | 模块 | 接口数 | 已实现 | 说明 |
 |---|---|---|---|
-| receipt 收货 | 22 | 4 | scanPallet / getBoxTypeInfo / skuReceipt / wholeOrderReceipt |
-| shelf 上架 | 24 | 4 | v2 scanBarcode / getRecommendCell / confirm / box/submitShelf |
+| receipt 收货 | 22 | 22 | 批次 1 的 4 个是无状态骨架（`ReceiptController`）；批次 5 补 18 个（`PdaReceiptFlowController` + `ReceiptStore`） |
+| shelf 上架 | 24 | 24 | 批次 1 的 4 个 /v2 是无状态骨架（`ShelvesController`）；批次 5 补 20 个（`PdaShelfFlowController` + `PutawayStore`，含 /shelf/selectCell） |
 | return 退货收货/上架/创建 | 24 | 6 | putaway 6 个（destruct 未做） |
 | blReturnIn FBA 退货 | 24 | 0 | |
 | wave 波次拣货 | 16 | 16 | 按件拣货 8 个（`WaveController`）+ 按箱拣货 8 个（批次 4，`WaveBoxController`） |
@@ -53,10 +55,10 @@
 | delivery 出库确认 | 8 | 8 | 批次 4，`PdaDeliveryController`：出库确认 3 个 + 大货复核 5 个 |
 | review 复核 | 6 | 6 | 批次 4 补了 getCustomerCode4More |
 | inventoryCheck 盘点 | 6 | 6 | 批次 4，`PdaInventoryCheckController` + `InventoryCheckStore` |
-| newProduct 新品维护 | 5 | 0 | |
+| newProduct 新品维护 | 5 | 5 | 批次 5，`PdaNewProductController` + `NewProductStore` |
 | pickAndSort 边拣边分 | 4 | 0 | |
 | appendix 附件 | 4 | 0 | 上传类，本地只做假实现 |
-| 其他（auth/home/menu/warehouse/system/messageBoard/common/blReceipt/blMoveStock） | 13 | 0 | |
+| 其他（auth/home/menu/warehouse/system/messageBoard/common/blReceipt/blMoveStock） | 13 | 1 | 批次 5 做了 blReceipt/measureBoxType |
 
 ## 分批计划
 
@@ -67,7 +69,8 @@
    本地演示登录（`/auth/login`，不校验不保存密码），以及不依赖 MySQL 的 H2 本地运行方式（`.claude/launch.json` 的 backend-h2）。网页端 79/79 都有页面。
 4. **批次 4（已完成）**：PDA 库内与出库补全 33 个接口：stock ×10、inventoryCheck ×6、delivery ×8、wave 按箱拣货 ×8、review 剩余 1。
    PDA 端覆盖到 60/175。规则见下方“批次 4 的数据与规则”。
-5. **批次 5**：PDA 收货/上架补全：receipt ×18、shelf ×20、newProduct ×5。
+5. **批次 5（已完成）**：PDA 收货/上架/新品维护 44 个接口（receipt ×18 方法、shelf ×20、newProduct ×5、blReceipt/measureBoxType），PDA 覆盖到 104/175。
+   **遗留**：批次 1 的 8 个收货/上架接口仍是无状态骨架，没有接到 `ReceiptStore`/`PutawayStore`，后续应改成有状态实现。
 6. **批次 6**：PDA 退货：return receive/create ×17、destruct、blReturnIn ×24。
 7. **批次 7**：其他 PDA 接口（device、pickAndSort、appendix、messageBoard、auth/home/menu/warehouse/system），以及网页端的本地增删改（只写本地库）。
 
@@ -99,6 +102,21 @@
   按单号自动区分两类，整批先校验再出库，任何一单不满足就整批不生效。
 - **序列号**：`delivery/review/getSysBaseParam` 固定返回 false（不要求扫序列号）；`scanProductSn` 只做校验和回显，响应字段是占位。
 - **重置**：`POST /gateway/wms/demo/reset` 把所有内存示例数据恢复初始状态（本地演示专用）。
+
+## 批次 5 的数据与规则（PDA 收货 / 上架 / 新品）
+
+路径、查询参数名、请求体与响应字段取自 APK；规则与编码是本项目假设。流程：收货（`ReceiptStore`）→ 自动生成上架单（`PutawayStore`，单号 PA + 入库单号后段）→ 上架写入 `StockStore`。
+
+- **4 张示例入库单**：RA2611000001 按箱预报（3 个箱唛，含新品 SKU-0012）；RA2611000002 按箱型预报；RA2611000003 按箱型、中转入库；
+  RA2611000004 按箱预报、托盘收货（含新品 SKU-0013）。forecastType 1 按箱 / 2 按箱型；inboundType 1 普通 / 2 中转。
+- **收货**：状态沿用 10 在途 / 11 收货中 / 15 已收货；不允许超收；一个箱唛只收一次；“完成收货”接口允许少收后直接置为 15。
+  带了 rowVersion 就必须与当前一致（每次变更加 1）。多箱 / 多托盘提交先全部校验再收货，任一项不通过则整体不生效；
+  `batchReceipt/submit` 和 `measureBoxType/batch` 按单处理，失败的单写进返回列表，成功的单照常生效。
+- **上架**：putawayType 1 按 SKU / 2 按箱型 / 3 整托。按 SKU 上架只累计数量；整箱上架要求箱内每个 SKU 的待上架数都够，
+  避免同一批货上架两次。`commitCompleteOrder` 把剩余全部上架到一个库位。`batch/submit` 里的 expectedPendingPutawayQty 与服务端不一致时该单失败（提示刷新）。
+  推荐库位：已有该 SKU 库存的库位优先，否则第一个空库位。锁定库位 E-09-09 一律拒绝。
+- **托盘**：托盘号在上架完成前不能被另一次收货复用；`preCheckPalletList` 返回目标库位上已有其他托盘的冲突，空列表表示可提交。
+- **新品**：SKU-0012、SKU-0013 初始为待测量；`receiptMeasure` 先校验全部再记录（0~300 cm、0~500 kg），测量后从待维护清单移除。
 
 ## 已知限制（通用列表页）
 
