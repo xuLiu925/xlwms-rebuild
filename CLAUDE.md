@@ -33,6 +33,9 @@ Java 后端（Spring Boot 3 / Java 17）+ Vue 2 前端。当前全部是虚构�
   `PalletReceiptScanReq`、`SkuForecastReceiptReq`（含 Sku/SkuPallet/PalletSku 内部类）、`BoxTypeInfoReq`；
   `ReceiptController` 实现 `/gateway/wms/pda/receipt/{scanPallet,getBoxTypeInfo,skuReceipt,wholeOrderReceipt}`，
   全部返回虚构示例数据，不连生产。真实路径取自 ApiService（`/gateway/wms/pda/...`，与网页端 `/gateway/wms` 同网关）。
+- 上架 DTO（2026-11-24）：`dto/shelves/` 下 `SkuShelvesReq`（含 SkuShelvesItem）、`BoxShelvesReq`（含 BoxShelvesItem）；
+  `ShelvesController` 实现 `/gateway/wms/pda/shelf/v2/{scanBarcode(GET),getRecommendCell/v2(GET),confirm,box/submitShelf}`，
+  同样虚构数据、不连生产。测试共 8 个通过。退货上架 `/return/putaway/*`（ShelvesInfoReq）尚未实现。
 
 ## 未知 / 未验证
 - 构建已修通（2026-11-24）：后端 JDK 17 下 `mvn test` 2 个测试通过；前端 Node 22 下 `npm install && npm run build` 成功（已提交 package-lock.json）。
