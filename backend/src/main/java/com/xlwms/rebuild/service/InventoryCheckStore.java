@@ -13,7 +13,8 @@ import org.springframework.stereotype.Service;
 /**
  * PDA 盘点（/pda/inventoryCheck/**）的内存示例数据，重启或 reset 后恢复。数据虚构，规则是本项目假设：
  * <ul>
- *   <li>盘点单 status：0 待盘点 / 1 盘点中 / 2 已完成；checkType：1 明盘 / 2 盲盘</li>
+ *   <li>盘点单 status：0 待盘点 / 1 盘点中 / 2 已完成 / 3 已取消；checkType：1 明盘 / 2 盲盘</li>
+ *   <li>网页端（批次 9）可新建盘点单：库位必须存在且不能和其他未完成的盘点单重叠；只有待盘点的单能取消，取消后 PDA 列表不再显示</li>
  *   <li>start 时按 {@link StockStore} 当前库存给每个库位拍账面快照（bookStock）</li>
  *   <li>每个库位提交实盘数（solidStock）后标记完成；全部库位完成才能 complete</li>
  *   <li>complete 时把实盘数写回库存（盘盈盘亏直接调整）；只调散件库存</li>
@@ -101,6 +102,46 @@ public class InventoryCheckStore {
                 .orElseThrow(() -> new BizException("盘点单不存在：" + orderSn));
     }
 
+    /** 网页端新建盘点单。单号按当前最大序号 + 1。 */
+    public synchronized Order create(int checkType, List<String> cellNos, String remark, String createTime) {
+        if (checkType != 1 && checkType != 2) {
+            throw new BizException("盘点方式只能是 1 明盘 / 2 盲盘");
+        }
+        if (cellNos == null || cellNos.isEmpty()) {
+            throw new BizException("请选择要盘点的库位");
+        }
+        List<String> cells = cellNos.stream().map(c -> c == null ? "" : c.trim()).distinct().toList();
+        java.util.Set<String> known = stock.cells();
+        for (String c : cells) {
+            if (!known.contains(c)) {
+                throw new BizException("库位不存在：" + c);
+            }
+            for (Order o : orders.values()) {
+                if ((o.status == 0 || o.status == 1) && o.cellNos.contains(c)) {
+                    throw new BizException("库位 " + c + " 已在未完成的盘点单 " + o.orderSn + " 中");
+                }
+            }
+        }
+        if (remark != null && remark.length() > 128) {
+            throw new BizException("备注不能超过 128 个字符");
+        }
+        int max = orders.keySet().stream().mapToInt(k -> Integer.parseInt(k.substring(6))).max().orElse(0);
+        String sn = String.format("IC2611%06d", max + 1);
+        Order o = new Order(sn, checkType, remark == null ? "" : remark.trim(), createTime, cells);
+        orders.put(sn, o);
+        return o;
+    }
+
+    /** 取消：只有待盘点的单能取消。 */
+    public synchronized Order cancel(String orderSn) {
+        Order o = get(orderSn);
+        if (o.status != 0) {
+            throw new BizException("只有待盘点的单能取消");
+        }
+        o.status = 3;
+        return o;
+    }
+
     private Detail detail(String cellNo, String sku, int quality, int book) {
         return new Detail(String.valueOf(++itemSeq), cellNo, sku, quality, book);
     }
@@ -110,6 +151,9 @@ public class InventoryCheckStore {
         Order o = get(orderSn);
         if (o.status == 2) {
             return List.of(new CheckError("盘点单已完成", "", "", "", ""));
+        }
+        if (o.status == 3) {
+            return List.of(new CheckError("盘点单已取消", "", "", "", ""));
         }
         if (o.status == 1) {
             return List.of();
@@ -186,7 +230,7 @@ public class InventoryCheckStore {
     public synchronized List<CheckError> complete(String orderSn) {
         Order o = get(orderSn);
         if (o.status != 1) {
-            return List.of(new CheckError(o.status == 0 ? "盘点单尚未开始" : "盘点单已完成", "", "", "", ""));
+            return List.of(new CheckError(o.status == 0 ? "盘点单尚未开始" : o.status == 3 ? "盘点单已取消" : "盘点单已完成", "", "", "", ""));
         }
         List<CheckError> errors = new ArrayList<>();
         o.cells.values().stream().filter(c -> !c.completed)

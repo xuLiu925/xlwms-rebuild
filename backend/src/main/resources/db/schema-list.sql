@@ -710,3 +710,62 @@ CREATE TABLE lp_push_record (
   result INT,
   push_time VARCHAR(19)
 );
+
+DROP TABLE IF EXISTS lp_swap_barcode;
+CREATE TABLE lp_swap_barcode (
+  id BIGINT NOT NULL PRIMARY KEY,
+  task_no VARCHAR(128),
+  customer_code VARCHAR(128),
+  customer_name VARCHAR(128),
+  wh_code VARCHAR(128),
+  sku VARCHAR(128),
+  old_barcode VARCHAR(128),
+  new_barcode VARCHAR(128),
+  qty INT,
+  done_qty INT,
+  status INT,
+  create_time VARCHAR(19)
+);
+
+DROP TABLE IF EXISTS lp_transfer;
+CREATE TABLE lp_transfer (
+  id BIGINT NOT NULL PRIMARY KEY,
+  transfer_no VARCHAR(128),
+  customer_code VARCHAR(128),
+  wh_code VARCHAR(128),
+  destination VARCHAR(128),
+  carrier VARCHAR(128),
+  tracking_no VARCHAR(128),
+  box_count INT,
+  weight_kg DECIMAL(14,2),
+  status INT,
+  create_time VARCHAR(19)
+);
+
+DROP TABLE IF EXISTS lp_stock_serial;
+CREATE TABLE lp_stock_serial (
+  id BIGINT NOT NULL PRIMARY KEY,
+  serial_no VARCHAR(128),
+  sku VARCHAR(128),
+  customer_code VARCHAR(128),
+  wh_code VARCHAR(128),
+  cell_no VARCHAR(128),
+  source_no VARCHAR(128),
+  outbound_no VARCHAR(128),
+  status INT,
+  in_time VARCHAR(19)
+);
+
+DROP TABLE IF EXISTS lp_work_video;
+CREATE TABLE lp_work_video (
+  id BIGINT NOT NULL PRIMARY KEY,
+  video_no VARCHAR(128),
+  biz_type VARCHAR(128),
+  biz_no VARCHAR(128),
+  wh_code VARCHAR(128),
+  operator VARCHAR(128),
+  duration_sec INT,
+  size_mb DECIMAL(14,2),
+  status INT,
+  record_time VARCHAR(19)
+);

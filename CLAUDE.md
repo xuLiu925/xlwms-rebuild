@@ -102,7 +102,13 @@ Java 后端（Spring Boot 3 / Java 17）+ Vue 2 前端。当前全部是虚构�
   其余 35 个日志/单据/流水类页面仍只读。后端 `list/GenericEditController`（`POST /gateway/wms/{key}/{add,update,delete}`，占位路径，
   只写本地 lp_* 表，重启恢复），生成器给注册表加了 editable/unique/idBase 与列的 required/auto；前端 `GenericList.vue` 加新建/编辑/删除。
   校验与唯一键规则见 COVERAGE.md“批次 8 的数据与规则”。测试共 136 个通过（`mvn clean test`），已在浏览器里联调过客户列表的新建、编辑、删除。
-  `.claude/launch.json` 新增 `backend-h2-alt`（8090）+ `frontend-alt`（8091，`API_TARGET` 指向 8090），用于 8080/8081 被占用时联调。
+  `.claude/launch.json` 新增 `backend-h2-alt`（18090，8090 被系统保留）+ `frontend-alt`（8091，`API_TARGET` 指向 18090），用于 8080/8081 被占用时联调。
+- 批次 9（2026-11-24）：参考菜单里另有、公开路由表里没有的 9 个页面全部实现，左侧菜单不再有“待实现”占位。
+  盘点 `views/stock/Checking.vue`（`InventoryCheckWebController`，与 PDA 盘点共用 `InventoryCheckStore`，新增已取消状态）、
+  次品处理 `views/stock/Defective.vue`（`DefectiveController` + `DefectiveStore`，读写 `StockStore` 次品库存）、
+  报表 `views/report/{StaffEfficiency,InboundEfficiency,OutboundEfficiency}.vue`（共用 `ReportView.vue`；`ReportController` 按日期确定性推算，仅演示），
+  以及 4 个通用列表页（换标、转运、序列号、作业视频，`tools/list-pages/spec-extra.mjs`）。规则见 COVERAGE.md“批次 9 的数据与规则”。
+  测试共 148 个通过（`mvn clean test`），已在浏览器里联调过 9 个页面（盘点新建→PDA 盘点→盘盈显示）。
 - 界面风格（2026-11-24）：参考领星 WMS 的页面样式重做前端外观。用户在浏览器面板里自己登录后，只做了只读观察
   （截图、读计算样式），没有点任何按钮、没有提交，真实数据未写入任何文件。
   - 主题：`frontend/src/styles/element-variables.scss`（Element SCSS 变量，主色 #005bf5），需要开发依赖 `sass@~1.32`、`sass-loader@13`。

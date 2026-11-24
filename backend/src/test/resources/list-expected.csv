@@ -56,3 +56,7 @@ receiveAccount,5
 errorPool,14
 labelRecord,14
 pushRecord,16
+swapBarcode,12
+transfer,14
+stockSerial,20
+workVideo,16

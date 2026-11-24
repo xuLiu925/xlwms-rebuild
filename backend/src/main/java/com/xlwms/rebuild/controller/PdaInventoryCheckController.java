@@ -121,6 +121,7 @@ public class PdaInventoryCheckController {
     @PostMapping("/list")
     public R<Map<String, Object>> list(@RequestBody ListReq req) {
         List<Map<String, Object>> all = store.list().stream()
+                .filter(o -> o.status != 3)
                 .filter(o -> req.orderSn() == null || req.orderSn().isBlank() || o.orderSn.contains(req.orderSn().trim()))
                 .map(PdaInventoryCheckController::listItem).toList();
         return R.ok(PageUtil.page(all, Math.max(1, req.current()), req.size() <= 0 ? 20 : req.size()));

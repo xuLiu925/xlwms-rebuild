@@ -2,6 +2,7 @@ package com.xlwms.rebuild.controller;
 
 import com.xlwms.rebuild.common.R;
 import com.xlwms.rebuild.service.AppendixStore;
+import com.xlwms.rebuild.service.DefectiveStore;
 import com.xlwms.rebuild.service.DeviceStore;
 import com.xlwms.rebuild.service.FbaReturnStore;
 import com.xlwms.rebuild.service.FreightStore;
@@ -34,13 +35,15 @@ public class DemoResetController {
     private final PickAndSortStore pickAndSort;
     private final AppendixStore appendix;
     private final MessageBoardStore messageBoard;
+    private final DefectiveStore defective;
 
     public DemoResetController(OutboundSampleStore outbound, InboundWorkStore inbound, StockStore stock,
                                InventoryCheckStore inventoryCheck, FreightStore freight,
                                ReceiptStore receipts, NewProductStore newProducts,
                                ReturnStore returns, FbaReturnStore fbaReturns,
                                DeviceStore devices, PickAndSortStore pickAndSort,
-                               AppendixStore appendix, MessageBoardStore messageBoard) {
+                               AppendixStore appendix, MessageBoardStore messageBoard,
+                               DefectiveStore defective) {
         this.outbound = outbound;
         this.inbound = inbound;
         this.stock = stock;
@@ -54,6 +57,7 @@ public class DemoResetController {
         this.pickAndSort = pickAndSort;
         this.appendix = appendix;
         this.messageBoard = messageBoard;
+        this.defective = defective;
     }
 
     @PostMapping("/gateway/wms/demo/reset")
@@ -72,6 +76,7 @@ public class DemoResetController {
         pickAndSort.reset();
         appendix.reset();
         messageBoard.reset();
+        defective.reset();
         return R.ok(true);
     }
 }

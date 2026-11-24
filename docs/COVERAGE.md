@@ -5,7 +5,7 @@
 
 状态说明：✅ 专门实现 · 🟦 通用列表页（规格在 `tools/list-pages/spec*.mjs`；批次 8 起其中 23 页可本地增删改） · ⬜ 占位（页面显示"待实现"）
 
-## 汇总（2026-11-24，批次 8 完成后）
+## 汇总（2026-11-24，批次 9 完成后）
 
 | 范围 | 总数 | ✅ | 🟦 | ⬜ |
 |---|---|---|---|---|
@@ -15,8 +15,8 @@
 PDA 的 175 是 ApiService 方法数；其中 `receipt/listBoxType` 有两个方法共用一个路径，按方法计 2 个。
 
 左侧菜单（2026-11-24 起）按参考系统菜单分组，见 `frontend/src/config/menuGroups.js`。参考菜单里另有 9 个路径不在公开路由表的 79 个子路由里，
-本项目只放了“待实现”占位，不计入上表：`outbound/swapBarcode`、`transfer/index`、`report/{staffEfficiency,inbound,outbound}`、
-`stock/{defective,checking,serial,workVideo}`。参考菜单的“退件”“工单”指向本项目的 `globalOrder/returnOrder`、`globalOrder/workOrder`。
+不计入上表；批次 9 已全部实现（见“批次 9 的数据与规则”）：`stock/checking` 盘点、`stock/defective` 次品处理、
+`report/{staffEfficiency,inbound,outbound}` 三张报表为专门页面，`outbound/swapBarcode`、`transfer/index`、`stock/{serial,workVideo}` 为通用列表页。参考菜单的“退件”“工单”指向本项目的 `globalOrder/returnOrder`、`globalOrder/workOrder`。
 
 ## 网页端（按 router 模块）
 
@@ -79,6 +79,8 @@ PDA 的 175 是 ApiService 方法数；其中 `receipt/listBoxType` 有两个方
    PDA 覆盖到 146/175，剩下的都在批次 7。
 7. **批次 7（已完成）**：其余 29 个 PDA 接口（device ×9、pickAndSort ×4、appendix ×4、messageBoard ×2、auth ×2、home、menu、warehouse ×2、system ×2、
    common/pic/upload、blMoveStock/boxMoveStock），PDA 覆盖到 175/175。规则见下方“批次 7 的数据与规则”。
+9. **批次 9（已完成）**：参考菜单里有、公开路由表里没有的 9 个页面全部实现（盘点、次品处理、三张报表为专门页面，其余 4 个为通用列表页）。
+   路由表对这类路径也会先找已实现页面，再退回占位。
 8. **批次 8（已完成）**：网页端通用列表页本地增删改。58 个通用列表页中 23 个基础资料 / 报价 / 设置类页面可新建、编辑、删除，
    其余 35 个日志、单据、流水类页面保持只读。规则见下方“批次 8 的数据与规则”。
 
@@ -179,6 +181,24 @@ PDA 的 175 是 ApiService 方法数；其中 `receipt/listBoxType` 有两个方
 - **版本检查**：最新版本占位为 2.0.0；code 1 有新版本 / 0 已是最新（占位），没有安装包，url 为空。查询参数名 version 按 APK 常量推断。
 - **按箱移库**（`/blMoveStock/boxMoveStock`）：boxList（按箱，数量为箱数）、skuList、returnList 可混合提交；先整批校验
   （库位存在、目标未锁定、源目标不同、客户一致、FNSKU 一致、同一来源的数量合计不超过可用数、次品只能去 E 区），全部通过才执行。
+
+## 批次 9 的数据与规则（参考菜单里的 9 个额外页面）
+
+所有路径、字段、编码都是本项目占位，真实网页接口未抓取。
+
+| 页面 | 后端 | 状态存放 | 说明 |
+|---|---|---|---|
+| 库内-盘点 `stock/checking` | `InventoryCheckWebController` `/inventoryCheck/{statistics,page,detail,cells,create,cancel}` | `InventoryCheckStore`（与 PDA 盘点共用） | 网页新建的单 PDA 可直接盘；PDA 完成后网页显示盘盈盘亏 |
+| 库内-次品处理 `stock/defective` | `DefectiveController` `/stockDefective/{page,toGood,destroy,records}` | `StockStore` 次品库存 + `DefectiveStore` 处理记录 | 与 PDA 库内、退货上架共用库存 |
+| 报表-人效看板 / 入库效率 / 出库效率 | `ReportController` `/report/{staffEfficiency,inbound,outbound}` | 无状态 | 没有作业流水，数字按“日期+仓库+指标”确定性推算，仅演示 |
+| 换标、转运、序列号、作业视频 | 通用列表页（`tools/list-pages/spec-extra.mjs`） | lp_* 表 | 只读；作业视频只有元数据 |
+
+- **盘点**：新增 status 3 已取消。新建时库位必须是 `StockStore` 登记的库位，且不能和其他待盘点/盘点中的单重叠；单号取当前最大序号 + 1。
+  只有待盘点的单能取消；取消后 PDA 列表不显示，PDA 开始/完成会返回“盘点单已取消”。盘点开始前没有账面快照，详情只列库位。
+- **次品处理**：转良品从次品库存扣减、加到目标库位（留空为原库位）的良品库存，目标库位必须存在且未锁定；销毁必须填处理说明。
+  数量不超过可用数（库存 - 冻结），先校验再改库存。初始只有 A-02-01 的 SKU-0003 次品 2 件（没有加种子数据，避免改动 PDA 测试的库存基数）。
+- **报表**：请求体 startDate / endDate（默认截至今天的最近 7 天）、whCode（空为两仓合计）。开始不能晚于结束，区间最多 31 天。
+  人效看板按人效（件/小时）排名；返回 cards（汇总卡片）、series（每日柱状图）、rows（明细表）。
 
 ## 批次 8 的数据与规则（通用列表页增删改）
 

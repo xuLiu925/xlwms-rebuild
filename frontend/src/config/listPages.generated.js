@@ -9955,5 +9955,890 @@ export default [
       }
     ],
     "mockTotal": 16
+  },
+  {
+    "key": "swapBarcode",
+    "route": "outbound/swapBarcode",
+    "title": "换标",
+    "columns": [
+      {
+        "name": "taskNo",
+        "label": "换标单号",
+        "type": "str",
+        "width": 150,
+        "kw": true,
+        "filter": false,
+        "enum": null,
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "customerCode",
+        "label": "客户代码",
+        "type": "str",
+        "width": 100,
+        "kw": false,
+        "filter": true,
+        "enum": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "customerName",
+        "label": "客户名称",
+        "type": "str",
+        "width": 110,
+        "kw": false,
+        "filter": false,
+        "enum": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "whCode",
+        "label": "仓库",
+        "type": "str",
+        "width": 80,
+        "kw": false,
+        "filter": true,
+        "enum": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "sku",
+        "label": "SKU",
+        "type": "str",
+        "width": 110,
+        "kw": true,
+        "filter": false,
+        "enum": null,
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "oldBarcode",
+        "label": "原标签",
+        "type": "str",
+        "width": 130,
+        "kw": false,
+        "filter": false,
+        "enum": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "newBarcode",
+        "label": "新标签",
+        "type": "str",
+        "width": 130,
+        "kw": false,
+        "filter": false,
+        "enum": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "qty",
+        "label": "数量",
+        "type": "int",
+        "width": 70,
+        "kw": false,
+        "filter": false,
+        "enum": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "doneQty",
+        "label": "已换数量",
+        "type": "int",
+        "width": 90,
+        "kw": false,
+        "filter": false,
+        "enum": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "status",
+        "label": "状态",
+        "type": "int",
+        "width": 90,
+        "kw": false,
+        "filter": false,
+        "enum": {
+          "10": [
+            "待处理",
+            "info"
+          ],
+          "20": [
+            "处理中",
+            "warning"
+          ],
+          "30": [
+            "已完成",
+            "success"
+          ],
+          "90": [
+            "已取消",
+            "danger"
+          ]
+        },
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "createTime",
+        "label": "创建时间",
+        "type": "time",
+        "width": 160,
+        "kw": false,
+        "filter": false,
+        "enum": null,
+        "required": false,
+        "auto": "create"
+      }
+    ],
+    "editable": false,
+    "unique": null,
+    "tabs": "status",
+    "filterOptions": {
+      "customerCode": [
+        "C001",
+        "C002",
+        "C003",
+        "C004",
+        "C005"
+      ],
+      "whCode": [
+        "WH01",
+        "WH02"
+      ]
+    },
+    "mock": [
+      {
+        "id": "5030000000000001",
+        "taskNo": "SB20261100001",
+        "customerCode": "C001",
+        "customerName": "示例客户1",
+        "whCode": "WH01",
+        "sku": "SKU-0001",
+        "oldBarcode": "BC00010001",
+        "newBarcode": "FN-DEMO-0100",
+        "qty": 10,
+        "doneQty": 0,
+        "status": 10,
+        "statusName": "待处理",
+        "createTime": "2026-11-01 09:00:00"
+      },
+      {
+        "id": "5030000000000002",
+        "taskNo": "SB20261100002",
+        "customerCode": "C002",
+        "customerName": "示例客户2",
+        "whCode": "WH02",
+        "sku": "SKU-0002",
+        "oldBarcode": "BC00010002",
+        "newBarcode": "FN-DEMO-0101",
+        "qty": 15,
+        "doneQty": 7,
+        "status": 20,
+        "statusName": "处理中",
+        "createTime": "2026-11-02 10:07:00"
+      },
+      {
+        "id": "5030000000000003",
+        "taskNo": "SB20261100003",
+        "customerCode": "C003",
+        "customerName": "示例客户3",
+        "whCode": "WH01",
+        "sku": "SKU-0003",
+        "oldBarcode": "BC00010003",
+        "newBarcode": "FN-DEMO-0102",
+        "qty": 20,
+        "doneQty": 20,
+        "status": 30,
+        "statusName": "已完成",
+        "createTime": "2026-11-03 11:14:00"
+      },
+      {
+        "id": "5030000000000004",
+        "taskNo": "SB20261100004",
+        "customerCode": "C004",
+        "customerName": "示例客户4",
+        "whCode": "WH02",
+        "sku": "SKU-0004",
+        "oldBarcode": "BC00010004",
+        "newBarcode": "FN-DEMO-0103",
+        "qty": 25,
+        "doneQty": 25,
+        "status": 30,
+        "statusName": "已完成",
+        "createTime": "2026-11-04 12:21:00"
+      },
+      {
+        "id": "5030000000000005",
+        "taskNo": "SB20261100005",
+        "customerCode": "C005",
+        "customerName": "示例客户5",
+        "whCode": "WH01",
+        "sku": "SKU-0005",
+        "oldBarcode": "BC00010005",
+        "newBarcode": "FN-DEMO-0104",
+        "qty": 30,
+        "doneQty": 0,
+        "status": 90,
+        "statusName": "已取消",
+        "createTime": "2026-11-05 13:28:00"
+      }
+    ],
+    "mockTotal": 12
+  },
+  {
+    "key": "transfer",
+    "route": "transfer/index",
+    "title": "转运",
+    "columns": [
+      {
+        "name": "transferNo",
+        "label": "转运单号",
+        "type": "str",
+        "width": 150,
+        "kw": true,
+        "filter": false,
+        "enum": null,
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "customerCode",
+        "label": "客户代码",
+        "type": "str",
+        "width": 100,
+        "kw": false,
+        "filter": true,
+        "enum": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "whCode",
+        "label": "仓库",
+        "type": "str",
+        "width": 80,
+        "kw": false,
+        "filter": true,
+        "enum": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "destination",
+        "label": "目的地",
+        "type": "str",
+        "width": 110,
+        "kw": false,
+        "filter": true,
+        "enum": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "carrier",
+        "label": "承运商",
+        "type": "str",
+        "width": 120,
+        "kw": false,
+        "filter": true,
+        "enum": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "trackingNo",
+        "label": "跟踪号",
+        "type": "str",
+        "width": 140,
+        "kw": true,
+        "filter": false,
+        "enum": null,
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "boxCount",
+        "label": "箱数",
+        "type": "int",
+        "width": 70,
+        "kw": false,
+        "filter": false,
+        "enum": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "weightKg",
+        "label": "重量(kg)",
+        "type": "num",
+        "width": 100,
+        "kw": false,
+        "filter": false,
+        "enum": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "status",
+        "label": "状态",
+        "type": "int",
+        "width": 90,
+        "kw": false,
+        "filter": false,
+        "enum": {
+          "10": [
+            "待入库",
+            "info"
+          ],
+          "20": [
+            "已入库",
+            "warning"
+          ],
+          "30": [
+            "已出库",
+            "primary"
+          ],
+          "40": [
+            "已签收",
+            "success"
+          ],
+          "90": [
+            "已取消",
+            "danger"
+          ]
+        },
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "createTime",
+        "label": "创建时间",
+        "type": "time",
+        "width": 160,
+        "kw": false,
+        "filter": false,
+        "enum": null,
+        "required": false,
+        "auto": "create"
+      }
+    ],
+    "editable": false,
+    "unique": null,
+    "tabs": "status",
+    "filterOptions": {
+      "customerCode": [
+        "C001",
+        "C002",
+        "C003",
+        "C004",
+        "C005"
+      ],
+      "whCode": [
+        "WH01",
+        "WH02"
+      ],
+      "destination": [
+        "示例仓 X1",
+        "示例仓 X2",
+        "示例仓 X3"
+      ],
+      "carrier": [
+        "示例承运商A",
+        "示例承运商B",
+        "示例承运商C"
+      ]
+    },
+    "mock": [
+      {
+        "id": "5040000000000001",
+        "transferNo": "TF20261100001",
+        "customerCode": "C001",
+        "whCode": "WH01",
+        "destination": "示例仓 X1",
+        "carrier": "示例承运商A",
+        "trackingNo": "",
+        "boxCount": 3,
+        "weightKg": 35.5,
+        "status": 10,
+        "statusName": "待入库",
+        "createTime": "2026-11-01 09:00:00"
+      },
+      {
+        "id": "5040000000000002",
+        "transferNo": "TF20261100002",
+        "customerCode": "C002",
+        "whCode": "WH02",
+        "destination": "示例仓 X2",
+        "carrier": "示例承运商B",
+        "trackingNo": "",
+        "boxCount": 4,
+        "weightKg": 42.75,
+        "status": 20,
+        "statusName": "已入库",
+        "createTime": "2026-11-02 10:07:00"
+      },
+      {
+        "id": "5040000000000003",
+        "transferNo": "TF20261100003",
+        "customerCode": "C003",
+        "whCode": "WH01",
+        "destination": "示例仓 X3",
+        "carrier": "示例承运商C",
+        "trackingNo": "TRK00300026",
+        "boxCount": 5,
+        "weightKg": 50,
+        "status": 30,
+        "statusName": "已出库",
+        "createTime": "2026-11-03 11:14:00"
+      },
+      {
+        "id": "5040000000000004",
+        "transferNo": "TF20261100004",
+        "customerCode": "C004",
+        "whCode": "WH02",
+        "destination": "示例仓 X1",
+        "carrier": "示例承运商A",
+        "trackingNo": "TRK00300039",
+        "boxCount": 6,
+        "weightKg": 57.25,
+        "status": 40,
+        "statusName": "已签收",
+        "createTime": "2026-11-04 12:21:00"
+      },
+      {
+        "id": "5040000000000005",
+        "transferNo": "TF20261100005",
+        "customerCode": "C005",
+        "whCode": "WH01",
+        "destination": "示例仓 X2",
+        "carrier": "示例承运商B",
+        "trackingNo": "TRK00300052",
+        "boxCount": 7,
+        "weightKg": 64.5,
+        "status": 40,
+        "statusName": "已签收",
+        "createTime": "2026-11-05 13:28:00"
+      }
+    ],
+    "mockTotal": 14
+  },
+  {
+    "key": "stockSerial",
+    "route": "stock/serial",
+    "title": "序列号管理",
+    "columns": [
+      {
+        "name": "serialNo",
+        "label": "序列号",
+        "type": "str",
+        "width": 160,
+        "kw": true,
+        "filter": false,
+        "enum": null,
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "sku",
+        "label": "SKU",
+        "type": "str",
+        "width": 110,
+        "kw": true,
+        "filter": false,
+        "enum": null,
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "customerCode",
+        "label": "客户代码",
+        "type": "str",
+        "width": 100,
+        "kw": false,
+        "filter": true,
+        "enum": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "whCode",
+        "label": "仓库",
+        "type": "str",
+        "width": 80,
+        "kw": false,
+        "filter": true,
+        "enum": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "cellNo",
+        "label": "库位",
+        "type": "str",
+        "width": 100,
+        "kw": false,
+        "filter": false,
+        "enum": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "sourceNo",
+        "label": "入库单号",
+        "type": "str",
+        "width": 150,
+        "kw": true,
+        "filter": false,
+        "enum": null,
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "outboundNo",
+        "label": "出库单号",
+        "type": "str",
+        "width": 150,
+        "kw": false,
+        "filter": false,
+        "enum": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "status",
+        "label": "状态",
+        "type": "int",
+        "width": 90,
+        "kw": false,
+        "filter": false,
+        "enum": {
+          "10": [
+            "在库",
+            "success"
+          ],
+          "20": [
+            "已出库",
+            "info"
+          ],
+          "30": [
+            "已冻结",
+            "warning"
+          ]
+        },
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "inTime",
+        "label": "入库时间",
+        "type": "time",
+        "width": 160,
+        "kw": false,
+        "filter": false,
+        "enum": null,
+        "required": false,
+        "auto": "none"
+      }
+    ],
+    "editable": false,
+    "unique": null,
+    "tabs": "status",
+    "filterOptions": {
+      "customerCode": [
+        "C001",
+        "C002",
+        "C003",
+        "C004",
+        "C005"
+      ],
+      "whCode": [
+        "WH01",
+        "WH02"
+      ]
+    },
+    "mock": [
+      {
+        "id": "5050000000000001",
+        "serialNo": "SN-DEMO-000001",
+        "sku": "SKU-0001",
+        "customerCode": "C001",
+        "whCode": "WH01",
+        "cellNo": "A-01-01",
+        "sourceNo": "ASN20261100001",
+        "outboundNo": "",
+        "status": 10,
+        "statusName": "在库",
+        "inTime": "2026-11-01 09:00:00"
+      },
+      {
+        "id": "5050000000000002",
+        "serialNo": "SN-DEMO-000002",
+        "sku": "SKU-0002",
+        "customerCode": "C002",
+        "whCode": "WH02",
+        "cellNo": "A-01-02",
+        "sourceNo": "ASN20261100002",
+        "outboundNo": "",
+        "status": 10,
+        "statusName": "在库",
+        "inTime": "2026-11-02 10:07:00"
+      },
+      {
+        "id": "5050000000000003",
+        "serialNo": "SN-DEMO-000003",
+        "sku": "SKU-0003",
+        "customerCode": "C003",
+        "whCode": "WH01",
+        "cellNo": "",
+        "sourceNo": "ASN20261100003",
+        "outboundNo": "OB20261100003",
+        "status": 20,
+        "statusName": "已出库",
+        "inTime": "2026-11-03 11:14:00"
+      },
+      {
+        "id": "5050000000000004",
+        "serialNo": "SN-DEMO-000004",
+        "sku": "SKU-0004",
+        "customerCode": "C004",
+        "whCode": "WH02",
+        "cellNo": "C-03-02",
+        "sourceNo": "ASN20261100004",
+        "outboundNo": "",
+        "status": 10,
+        "statusName": "在库",
+        "inTime": "2026-11-04 12:21:00"
+      },
+      {
+        "id": "5050000000000005",
+        "serialNo": "SN-DEMO-000005",
+        "sku": "SKU-0005",
+        "customerCode": "C005",
+        "whCode": "WH01",
+        "cellNo": "A-01-01",
+        "sourceNo": "ASN20261100005",
+        "outboundNo": "",
+        "status": 30,
+        "statusName": "已冻结",
+        "inTime": "2026-11-05 13:28:00"
+      }
+    ],
+    "mockTotal": 20
+  },
+  {
+    "key": "workVideo",
+    "route": "stock/workVideo",
+    "title": "作业视频",
+    "columns": [
+      {
+        "name": "videoNo",
+        "label": "视频编号",
+        "type": "str",
+        "width": 150,
+        "kw": true,
+        "filter": false,
+        "enum": null,
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "bizType",
+        "label": "作业类型",
+        "type": "str",
+        "width": 100,
+        "kw": false,
+        "filter": true,
+        "enum": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "bizNo",
+        "label": "关联单号",
+        "type": "str",
+        "width": 150,
+        "kw": true,
+        "filter": false,
+        "enum": null,
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "whCode",
+        "label": "仓库",
+        "type": "str",
+        "width": 80,
+        "kw": false,
+        "filter": true,
+        "enum": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "operator",
+        "label": "操作人",
+        "type": "str",
+        "width": 100,
+        "kw": false,
+        "filter": true,
+        "enum": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "durationSec",
+        "label": "时长(秒)",
+        "type": "int",
+        "width": 90,
+        "kw": false,
+        "filter": false,
+        "enum": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "sizeMb",
+        "label": "大小(MB)",
+        "type": "num",
+        "width": 100,
+        "kw": false,
+        "filter": false,
+        "enum": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "status",
+        "label": "状态",
+        "type": "int",
+        "width": 90,
+        "kw": false,
+        "filter": false,
+        "enum": {
+          "0": [
+            "上传失败",
+            "danger"
+          ],
+          "1": [
+            "已上传",
+            "success"
+          ]
+        },
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "recordTime",
+        "label": "录制时间",
+        "type": "time",
+        "width": 160,
+        "kw": false,
+        "filter": false,
+        "enum": null,
+        "required": false,
+        "auto": "none"
+      }
+    ],
+    "editable": false,
+    "unique": null,
+    "tabs": "status",
+    "filterOptions": {
+      "bizType": [
+        "复核",
+        "打包",
+        "收货",
+        "退件"
+      ],
+      "whCode": [
+        "WH01",
+        "WH02"
+      ],
+      "operator": [
+        "示例员工1",
+        "示例员工2",
+        "示例员工3",
+        "示例员工4",
+        "示例员工5",
+        "示例员工6"
+      ]
+    },
+    "mock": [
+      {
+        "id": "5060000000000001",
+        "videoNo": "VD20261100001",
+        "bizType": "收货",
+        "bizNo": "ASN20261100001",
+        "whCode": "WH01",
+        "operator": "示例员工1",
+        "durationSec": 30,
+        "sizeMb": 12.5,
+        "status": 1,
+        "statusName": "已上传",
+        "recordTime": "2026-11-01 09:00:00"
+      },
+      {
+        "id": "5060000000000002",
+        "videoNo": "VD20261100002",
+        "bizType": "复核",
+        "bizNo": "OB20261100002",
+        "whCode": "WH02",
+        "operator": "示例员工2",
+        "durationSec": 47,
+        "sizeMb": 21.5,
+        "status": 1,
+        "statusName": "已上传",
+        "recordTime": "2026-11-02 10:07:00"
+      },
+      {
+        "id": "5060000000000003",
+        "videoNo": "VD20261100003",
+        "bizType": "打包",
+        "bizNo": "OB20261100003",
+        "whCode": "WH01",
+        "operator": "示例员工3",
+        "durationSec": 64,
+        "sizeMb": 30.5,
+        "status": 1,
+        "statusName": "已上传",
+        "recordTime": "2026-11-03 11:14:00"
+      },
+      {
+        "id": "5060000000000004",
+        "videoNo": "VD20261100004",
+        "bizType": "退件",
+        "bizNo": "RN20261100004",
+        "whCode": "WH02",
+        "operator": "示例员工4",
+        "durationSec": 81,
+        "sizeMb": 39.5,
+        "status": 1,
+        "statusName": "已上传",
+        "recordTime": "2026-11-04 12:21:00"
+      },
+      {
+        "id": "5060000000000005",
+        "videoNo": "VD20261100005",
+        "bizType": "收货",
+        "bizNo": "ASN20261100005",
+        "whCode": "WH01",
+        "operator": "示例员工5",
+        "durationSec": 98,
+        "sizeMb": 48.5,
+        "status": 1,
+        "statusName": "已上传",
+        "recordTime": "2026-11-05 13:28:00"
+      }
+    ],
+    "mockTotal": 16
   }
 ]

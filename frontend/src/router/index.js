@@ -58,25 +58,30 @@ const pages = {
   'statisticalAnalysis/inventoryAgeAnalysis': () => import('../views/statistics/InventoryAge.vue'),
   'setting/globalSetting': () => import('../views/setting/GlobalSetting.vue'),
   'toolKit/freightCalculation': () => import('../views/toolKit/FreightCalculation.vue'),
-  'toolKit/zoneTest': () => import('../views/toolKit/ZoneTest.vue')
+  'toolKit/zoneTest': () => import('../views/toolKit/ZoneTest.vue'),
+  // 批次 9：参考菜单里有、公开路由表里没有的页面（接口路径为本项目占位）
+  'stock/checking': () => import('../views/stock/Checking.vue'),
+  'stock/defective': () => import('../views/stock/Defective.vue'),
+  'report/staffEfficiency': () => import('../views/report/StaffEfficiency.vue'),
+  'report/inbound': () => import('../views/report/InboundEfficiency.vue'),
+  'report/outbound': () => import('../views/report/OutboundEfficiency.vue')
 }
-const childRoute = (m, k) => {
-  const key = m + '/' + k
+const routeOf = key => {
   const path = '/' + key
   if (pages[key]) return { path, component: pages[key] }
   // 通用只读列表页（配置由 tools/list-pages/gen.mjs 生成）
   if (listConfigs[key]) return { path, component: GenericList, props: { config: listConfigs[key] } }
   return { path, component: Stub(key) }
 }
-const pageRoutes = Object.entries(modules).flatMap(([m, kids]) => kids.map(k => childRoute(m, k)))
+const pageRoutes = Object.entries(modules).flatMap(([m, kids]) => kids.map(k => routeOf(m + '/' + k)))
 // 左侧菜单：分组见 config/menuGroups.js（前 9 组按参考系统菜单排列）
 const routed = new Set(Object.entries(modules).flatMap(([m, kids]) => kids.map(k => m + '/' + k)))
 const titleOf = (key, given) => given || pageTitles[key] || (listConfigs[key] && listConfigs[key].title) || key
 const isStub = key => !pages[key] && !listConfigs[key]
-// 参考菜单里有、公开路由表里没有的路径：生成占位路由
+// 参考菜单里有、公开路由表里没有的路径：已实现的用对应页面（批次 9），否则生成占位路由
 const extraRoutes = []
 const menuItem = (key, given) => {
-  if (!routed.has(key) && !extraRoutes.some(r => r.path === '/' + key)) extraRoutes.push({ path: '/' + key, component: Stub(key) })
+  if (!routed.has(key) && !extraRoutes.some(r => r.path === '/' + key)) extraRoutes.push(routeOf(key))
   return { path: '/' + key, title: titleOf(key, given), stub: isStub(key) }
 }
 const menu = menuGroups.map(g => g.link

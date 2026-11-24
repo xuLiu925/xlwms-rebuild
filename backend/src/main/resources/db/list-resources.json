@@ -5000,5 +5000,453 @@
       }
     ],
     "tabsColumn": "result"
+  },
+  {
+    "editable": false,
+    "unique": null,
+    "idBase": 5030000000000000,
+    "key": "swapBarcode",
+    "table": "lp_swap_barcode",
+    "columns": [
+      {
+        "name": "taskNo",
+        "column": "task_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null,
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "customerName",
+        "column": "customer_name",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "whCode",
+        "column": "wh_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "sku",
+        "column": "sku",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null,
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "oldBarcode",
+        "column": "old_barcode",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "newBarcode",
+        "column": "new_barcode",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "qty",
+        "column": "qty",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "doneQty",
+        "column": "done_qty",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "10": "待处理",
+          "20": "处理中",
+          "30": "已完成",
+          "90": "已取消"
+        },
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "createTime",
+        "column": "create_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "editable": false,
+    "unique": null,
+    "idBase": 5040000000000000,
+    "key": "transfer",
+    "table": "lp_transfer",
+    "columns": [
+      {
+        "name": "transferNo",
+        "column": "transfer_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null,
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "whCode",
+        "column": "wh_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "destination",
+        "column": "destination",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "carrier",
+        "column": "carrier",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "trackingNo",
+        "column": "tracking_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null,
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "boxCount",
+        "column": "box_count",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "weightKg",
+        "column": "weight_kg",
+        "type": "num",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "10": "待入库",
+          "20": "已入库",
+          "30": "已出库",
+          "40": "已签收",
+          "90": "已取消"
+        },
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "createTime",
+        "column": "create_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "editable": false,
+    "unique": null,
+    "idBase": 5050000000000000,
+    "key": "stockSerial",
+    "table": "lp_stock_serial",
+    "columns": [
+      {
+        "name": "serialNo",
+        "column": "serial_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null,
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "sku",
+        "column": "sku",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null,
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "whCode",
+        "column": "wh_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "cellNo",
+        "column": "cell_no",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "sourceNo",
+        "column": "source_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null,
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "outboundNo",
+        "column": "outbound_no",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "10": "在库",
+          "20": "已出库",
+          "30": "已冻结"
+        },
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "inTime",
+        "column": "in_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null,
+        "required": false,
+        "auto": "none"
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "editable": false,
+    "unique": null,
+    "idBase": 5060000000000000,
+    "key": "workVideo",
+    "table": "lp_work_video",
+    "columns": [
+      {
+        "name": "videoNo",
+        "column": "video_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null,
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "bizType",
+        "column": "biz_type",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "bizNo",
+        "column": "biz_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null,
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "whCode",
+        "column": "wh_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "operator",
+        "column": "operator",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "durationSec",
+        "column": "duration_sec",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "sizeMb",
+        "column": "size_mb",
+        "type": "num",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null,
+        "required": false,
+        "auto": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "上传失败",
+          "1": "已上传"
+        },
+        "required": true,
+        "auto": null
+      },
+      {
+        "name": "recordTime",
+        "column": "record_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null,
+        "required": false,
+        "auto": "none"
+      }
+    ],
+    "tabsColumn": "status"
   }
 ]

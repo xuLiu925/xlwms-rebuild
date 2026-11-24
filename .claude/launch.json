@@ -51,12 +51,12 @@
         "D:/java/xlwms-rebuild/backend/pom.xml",
         "spring-boot:run",
         "-Dspring-boot.run.useTestClasspath=true",
-        "-Dspring-boot.run.arguments=--spring.config.additional-location=file:D:/java/xlwms-rebuild/backend/src/test/resources/application-h2.yml --server.port=8090"
+        "-Dspring-boot.run.arguments=--spring.config.additional-location=file:D:/java/xlwms-rebuild/backend/src/test/resources/application-h2.yml --server.port=18090"
       ],
       "env": {
         "JAVA_HOME": "D:/java/java-17.0.1"
       },
-      "port": 8090,
+      "port": 18090,
       "autoPort": false
     },
     {
@@ -72,7 +72,7 @@
         "8091"
       ],
       "env": {
-        "API_TARGET": "http://localhost:8090"
+        "API_TARGET": "http://localhost:18090"
       },
       "port": 8091,
       "autoPort": false
