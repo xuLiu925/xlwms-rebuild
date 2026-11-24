@@ -2,8 +2,8 @@
   <div class="page">
     <p class="hint">按库龄分段统计在库数量。演示数据的库龄天数由 SKU 推算，不是真实入库日期。</p>
     <el-form inline size="small" @submit.native.prevent="load">
-      <el-form-item label="搜索"><el-input v-model="query.keyword" clearable placeholder="SKU / 品名" style="width:180px" /></el-form-item>
-      <el-form-item label="客户代码"><el-input v-model="query.customerCode" clearable style="width:120px" /></el-form-item>
+      <el-form-item><el-input v-model="query.keyword" clearable placeholder="SKU / 品名" style="width:180px" /></el-form-item>
+      <el-form-item><el-input v-model="query.customerCode" clearable style="width:120px"  placeholder="客户代码"/></el-form-item>
       <el-form-item><el-button type="primary" native-type="submit">查询</el-button></el-form-item>
     </el-form>
 

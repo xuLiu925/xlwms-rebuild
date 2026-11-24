@@ -2,12 +2,12 @@
   <div class="page">
     <p class="hint">多品波次拣完后，在播种墙上把产品分到各出库单的格口。示例波次 WV26110004 已拣完；条码 BC00010008、BC00010009。</p>
     <el-form inline size="small" @submit.native.prevent="scan">
-      <el-form-item label="波次">
-        <el-select v-model="waveNo" placeholder="选择波次" style="width:220px" @change="loadWave">
+      <el-form-item>
+        <el-select v-model="waveNo" placeholder="波次（选择）" style="width:220px" @change="loadWave">
           <el-option v-for="w in waves" :key="w.waveNo" :label="w.waveNo + '（' + w.pickStatusName + '）'" :value="w.waveNo" />
         </el-select>
       </el-form-item>
-      <el-form-item label="扫描条码"><el-input v-model="barcode" style="width:180px" :disabled="!wave" /></el-form-item>
+      <el-form-item><el-input v-model="barcode" style="width:180px" :disabled="!wave"  placeholder="扫描条码"/></el-form-item>
       <el-form-item><el-button type="primary" native-type="submit" :disabled="!wave">分拣</el-button></el-form-item>
     </el-form>
     <el-alert v-if="lastGrid" :closable="false" type="success" :title="'请放入 ' + lastGrid + ' 号格口（' + lastDelivery + '）'" />

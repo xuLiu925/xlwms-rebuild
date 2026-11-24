@@ -1,17 +1,17 @@
 <template>
   <div class="page">
     <el-form inline size="small" @submit.native.prevent="search">
-      <el-form-item label="单号">
+      <el-form-item>
         <el-input v-model="query.keyword" clearable placeholder="出库单号 / 跟踪号 / 波次号" style="width:240px" />
       </el-form-item>
-      <el-form-item label="客户">
-        <el-select v-model="query.customerCode" clearable placeholder="全部" style="width:140px">
+      <el-form-item>
+        <el-select v-model="query.customerCode" clearable placeholder="客户" style="width:140px">
           <el-option v-for="c in customers" :key="c.value" :label="c.label" :value="c.value" />
         </el-select>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit">查询</el-button>
-        <el-button @click="reset">重置</el-button>
+        <el-button class="btn-reset" @click="reset">重置</el-button>
       </el-form-item>
     </el-form>
 

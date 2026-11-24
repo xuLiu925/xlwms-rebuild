@@ -2,7 +2,7 @@
   <div class="page">
     <p class="hint">扫包裹号，整箱视为复核通过（本项目假设的规则）。示例：OB2611000401-1、OB2611000401-2、OB2611000402-1。</p>
     <el-form inline size="small" @submit.native.prevent="scan">
-      <el-form-item label="包裹号"><el-input v-model="packNo" style="width:220px" /></el-form-item>
+      <el-form-item><el-input v-model="packNo" style="width:220px"  placeholder="包裹号"/></el-form-item>
       <el-form-item><el-button type="primary" native-type="submit">复核</el-button></el-form-item>
     </el-form>
     <order-card :order="order" />

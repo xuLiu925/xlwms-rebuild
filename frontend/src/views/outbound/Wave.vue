@@ -1,12 +1,12 @@
 <template>
   <div class="page">
     <el-form inline size="small" @submit.native.prevent="search">
-      <el-form-item label="单号">
+      <el-form-item>
         <el-input v-model="query.keyword" clearable placeholder="波次号 / 出库单号" style="width:220px" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit">查询</el-button>
-        <el-button @click="reset">重置</el-button>
+        <el-button class="btn-reset" @click="reset">重置</el-button>
       </el-form-item>
       <el-form-item style="float:right">
         <router-link to="/pdaDemo"><el-button type="text">去 PDA 作业模拟 →</el-button></router-link>

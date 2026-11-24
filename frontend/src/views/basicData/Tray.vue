@@ -1,22 +1,22 @@
 <template>
   <div class="page">
     <el-form inline size="small" @submit.native.prevent="search">
-      <el-form-item label="搜索">
+      <el-form-item>
         <el-input v-model="query.keyword" clearable placeholder="托盘号 / 库位" style="width:200px" />
       </el-form-item>
-      <el-form-item label="仓库">
-        <el-select v-model="query.whCode" clearable placeholder="全部" style="width:120px">
+      <el-form-item>
+        <el-select v-model="query.whCode" clearable placeholder="仓库" style="width:120px">
           <el-option label="WH01" value="WH01" /><el-option label="WH02" value="WH02" />
         </el-select>
       </el-form-item>
-      <el-form-item label="状态">
-        <el-select v-model="query.status" clearable placeholder="全部" style="width:110px">
+      <el-form-item>
+        <el-select v-model="query.status" clearable placeholder="状态" style="width:110px">
           <el-option label="空闲" :value="0" /><el-option label="在用" :value="1" />
         </el-select>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit">查询</el-button>
-        <el-button @click="reset">重置</el-button>
+        <el-button class="btn-reset" @click="reset">重置</el-button>
       </el-form-item>
     </el-form>
 

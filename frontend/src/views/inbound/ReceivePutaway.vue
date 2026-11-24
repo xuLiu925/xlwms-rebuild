@@ -3,8 +3,8 @@
     <h3>收货上架 <el-button size="mini" @click="reset">重置演示数据</el-button></h3>
     <p class="hint">本地演示：扫描入库单 → 扫条码收货 → 选库位上架。数据只在本地后端内存中，重启即恢复。</p>
     <el-form inline size="small" @submit.native.prevent="load">
-      <el-form-item label="入库单号">
-        <el-select v-model="asnNo" filterable allow-create placeholder="扫描或选择" style="width:200px" @change="load">
+      <el-form-item>
+        <el-select v-model="asnNo" filterable allow-create placeholder="入库单号（扫描或选择）" style="width:200px" @change="load">
           <el-option v-for="a in asns" :key="a.asnNo" :label="a.asnNo + '（' + a.statusName + '）'" :value="a.asnNo" />
         </el-select>
       </el-form-item>
@@ -19,7 +19,7 @@
       </el-descriptions>
 
       <el-form inline size="small" class="scan" @submit.native.prevent="doReceive">
-        <el-form-item label="收货：条码/SKU"><el-input ref="code" v-model="code" style="width:180px" /></el-form-item>
+        <el-form-item><el-input ref="code" v-model="code" style="width:180px"  placeholder="收货：条码/SKU"/></el-form-item>
         <el-form-item label="数量"><el-input-number v-model="qty" :min="1" /></el-form-item>
         <el-form-item><el-button type="primary" native-type="submit">收货</el-button></el-form-item>
       </el-form>
