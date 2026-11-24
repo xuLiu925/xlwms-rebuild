@@ -35,7 +35,10 @@ Java 后端（Spring Boot 3 / Java 17）+ Vue 2 前端。当前全部是虚构�
   全部返回虚构示例数据，不连生产。真实路径取自 ApiService（`/gateway/wms/pda/...`，与网页端 `/gateway/wms` 同网关）。
 - 上架 DTO（2026-11-24）：`dto/shelves/` 下 `SkuShelvesReq`（含 SkuShelvesItem）、`BoxShelvesReq`（含 BoxShelvesItem）；
   `ShelvesController` 实现 `/gateway/wms/pda/shelf/v2/{scanBarcode(GET),getRecommendCell/v2(GET),confirm,box/submitShelf}`，
-  同样虚构数据、不连生产。测试共 8 个通过。退货上架 `/return/putaway/*`（ShelvesInfoReq）尚未实现。
+  同样虚构数据、不连生产。
+- 退货上架 DTO（2026-11-24）：`dto/returnputaway/` 下 `ReturnPutawayScanReq`、`ShelvesInfoReq`（含 ShelvesSubmit）、`Appendix`；
+  `ReturnPutawayController` 实现 `/gateway/wms/pda/return/putaway/{scanBarcode,scanOrderNo,scanCell(GET),listOrder(GET),detail/scanBarcode(GET),submit}`，
+  虚构数据、不连生产。销毁 `destruct`（破坏性操作）未实现。测试共 11 个通过。
 
 ## 未知 / 未验证
 - 构建已修通（2026-11-24）：后端 JDK 17 下 `mvn test` 2 个测试通过；前端 Node 22 下 `npm install && npm run build` 成功（已提交 package-lock.json）。
