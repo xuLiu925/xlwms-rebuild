@@ -1,38 +1,44 @@
 <template>
-  <div class="page">
-    <h3>复核 <el-button size="mini" @click="reset">重置出库演示数据</el-button></h3>
-    <p class="hint">扫出库单号或快递单号，再逐件扫产品条码。示例：OB2611000301（单件）、OB2611000401（两个包裹）。与 PDA 出库模拟共用本地状态。</p>
-    <el-form inline size="small" @submit.native.prevent="load">
-      <el-form-item><el-input v-model="no" style="width:200px"  placeholder="出库单/快递单号"/></el-form-item>
-      <el-form-item><el-button type="primary" native-type="submit">查询</el-button></el-form-item>
-    </el-form>
-    <el-form v-if="order && order.status === 10" inline size="small" @submit.native.prevent="scan">
-      <el-form-item><el-input ref="barcode" v-model="barcode" style="width:200px"  placeholder="扫描条码"/></el-form-item>
-      <el-form-item><el-button type="success" native-type="submit">确认</el-button></el-form-item>
-    </el-form>
-    <el-alert v-if="order && order.status >= 20" :closable="false" type="success" :title="order.status === 20 ? '复核完成，可到“称重出库”页称重出库' : '已出库'" />
-    <order-card :order="order" class="card" />
-  </div>
+  <work-layout title="复核验货" :empty="!order" empty-text="请扫描出库单号开始复核">
+    <template #side>
+      <div class="work-tip"><i class="el-icon-warning" />本地演示：示例 OB2611000301（单件）、OB2611000401（两个包裹）。与 PDA 出库模拟共用状态。</div>
+      <div class="work-field">
+        <div class="work-label">出库单号/快递单号</div>
+        <el-input v-model="no" placeholder="请扫描" clearable @keyup.enter.native="load" />
+      </div>
+      <div class="work-field">
+        <div class="work-label">Barcode</div>
+        <el-input ref="barcode" v-model="barcode" placeholder="请扫描" :disabled="!order || order.status !== 10" @keyup.enter.native="scan" />
+      </div>
+    </template>
+    <template #footer>
+      <el-button type="text" @click="reset">重置出库演示数据</el-button>
+    </template>
+    <el-alert v-if="order && order.status >= 20" class="done" :closable="false" type="success" show-icon
+      :title="order.status === 20 ? '复核完成，可到“称重”页称重出库' : '已出库'" />
+    <order-card :order="order" />
+  </work-layout>
 </template>
 <script>
 import * as api from '../../api/work'
 import OrderCard from './OrderCard.vue'
+import WorkLayout from '../common/WorkLayout.vue'
 export default {
-  components: { OrderCard },
+  components: { OrderCard, WorkLayout },
   data: () => ({ no: '', barcode: '', order: null }),
   methods: {
     async load () {
+      if (!this.no.trim()) return
       try { this.order = await api.reviewOrder(this.no.trim()); this.$nextTick(() => this.$refs.barcode && this.$refs.barcode.focus()) } catch (e) { this.order = null; this.$message.error(e.message) }
     },
     async scan () {
+      if (!this.barcode.trim()) return
       try { this.order = await api.reviewScan({ no: this.order.deliveryNo, barcode: this.barcode.trim() }); this.barcode = '' } catch (e) { this.$message.error(e.message) }
     },
-    async reset () { await api.resetOutbound(); this.order = null; this.$message.success('已重置') }
+    async reset () { await api.resetOutbound(); this.order = null; this.no = ''; this.$message.success('已重置') }
   }
 }
 </script>
 <style scoped>
-.page { padding: 24px }
-.hint { color: #909399; font-size: 12px }
-.card { margin-top: 12px }
+.done { margin-bottom: 12px }
 </style>

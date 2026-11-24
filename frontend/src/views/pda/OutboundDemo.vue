@@ -131,18 +131,18 @@ export default {
 </script>
 <style scoped>
 .page { padding: 24px }
-.hint { color: #909399; font-size: 12px; max-width: 760px }
+.hint { color: #888c94; font-size: 12px; max-width: 760px }
 .phones { display: flex; gap: 24px; flex-wrap: wrap }
-.phone { width: 340px; border: 8px solid #303133; border-radius: 24px; overflow: hidden; background: #f5f7fa }
-.bar { background: #409eff; color: #fff; padding: 10px 14px; font-weight: 600 }
+.phone { width: 340px; border: 8px solid #0b1019; border-radius: 24px; overflow: hidden; background: #f5f6f9 }
+.bar { background: #005bf5; color: #fff; padding: 10px 14px; font-weight: 600 }
 .body { padding: 12px; min-height: 460px; display: flex; flex-direction: column }
 .item { background: #fff; border-radius: 6px; padding: 8px 10px; margin-bottom: 6px; cursor: pointer; font-size: 13px }
 .item.done { opacity: .5 }
 .head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px }
-.tag { margin-left: 6px; font-size: 11px; color: #409eff }
+.tag { margin-left: 6px; font-size: 11px; color: #005bf5 }
 .right { float: right; font-weight: 600 }
-.muted { color: #909399; font-size: 12px }
+.muted { color: #888c94; font-size: 12px }
 .mt { margin-top: 8px }
-.ok { color: #67c23a; font-size: 13px }
-.empty { color: #909399; text-align: center; margin-top: 40px }
+.ok { color: #28a864; font-size: 13px }
+.empty { color: #888c94; text-align: center; margin-top: 40px }
 </style>

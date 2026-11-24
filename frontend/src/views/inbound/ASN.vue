@@ -1,6 +1,6 @@
 <template>
-  <div style="padding:24px">
-    <el-tabs v-model="status"><el-tab-pane v-for="s in stats" :key="s.status" :name="String(s.status)" :label="s.statusName + ' ' + s.statusSum" /></el-tabs>
+  <div class="page">
+    <el-tabs v-model="status"><el-tab-pane v-for="s in stats" :key="s.status" :name="String(s.status)" ><span slot="label">{{ s.statusName }}<span class="label-num">({{ s.statusSum }})</span></span></el-tab-pane></el-tabs>
     <el-table :data="rows" border>
       <el-table-column prop="asnNo" label="入库单号" />
       <el-table-column prop="customerName" label="客户" />

@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <el-tabs v-if="config.tabs" v-model="tab" @tab-click="search">
-      <el-tab-pane v-for="s in stats" :key="s.status" :name="s.status === '' ? 'all' : String(s.status)" :label="s.statusName + ' (' + s.statusSum + ')'" />
+      <el-tab-pane v-for="s in stats" :key="s.status" :name="s.status === '' ? 'all' : String(s.status)" ><span slot="label">{{ s.statusName }}<span class="label-num">({{ s.statusSum }})</span></span></el-tab-pane>
     </el-tabs>
     <!-- 查询条：和参考系统一样不用外置标签，字段名写在占位文字里 -->
     <el-form inline @submit.native.prevent="search">

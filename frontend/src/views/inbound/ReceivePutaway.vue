@@ -1,14 +1,28 @@
 <template>
-  <div class="page">
-    <h3>收货上架 <el-button size="mini" @click="reset">重置演示数据</el-button></h3>
-    <p class="hint">本地演示：扫描入库单 → 扫条码收货 → 选库位上架。数据只在本地后端内存中，重启即恢复。</p>
-    <el-form inline size="small" @submit.native.prevent="load">
-      <el-form-item>
-        <el-select v-model="asnNo" filterable allow-create placeholder="入库单号（扫描或选择）" style="width:200px" @change="load">
+  <work-layout title="收货上架" :empty="!asn" empty-text="请扫描入库单号开始收货" empty-icon="el-icon-download">
+    <template #side>
+      <div class="work-tip"><i class="el-icon-warning" />本地演示：扫入库单 → 扫条码收货 → 选库位上架。数据只在本地后端内存中，重启即恢复。</div>
+      <div class="work-field">
+        <div class="work-label">入库单号</div>
+        <el-select v-model="asnNo" filterable allow-create placeholder="请扫描或选择" @change="load">
           <el-option v-for="a in asns" :key="a.asnNo" :label="a.asnNo + '（' + a.statusName + '）'" :value="a.asnNo" />
         </el-select>
-      </el-form-item>
-    </el-form>
+      </div>
+      <div class="work-field">
+        <div class="work-label">Barcode / SKU</div>
+        <el-input ref="code" v-model="code" placeholder="请扫描" :disabled="!asn" @keyup.enter.native="doReceive" />
+      </div>
+      <div class="work-field">
+        <div class="work-label">收货数量</div>
+        <el-input-number v-model="qty" :min="1" :controls="false" :disabled="!asn" />
+      </div>
+      <div class="work-actions">
+        <el-button type="primary" :disabled="!asn || !code.trim()" @click="doReceive">确认收货</el-button>
+      </div>
+    </template>
+    <template #footer>
+      <el-button type="text" @click="reset">重置入库演示数据</el-button>
+    </template>
 
     <template v-if="asn">
       <el-descriptions :column="4" size="small" border>
@@ -17,17 +31,10 @@
         <el-descriptions-item label="仓库">{{ asn.whCode }}</el-descriptions-item>
         <el-descriptions-item label="状态"><el-tag size="mini">{{ asn.statusName }}</el-tag></el-descriptions-item>
       </el-descriptions>
-
-      <el-form inline size="small" class="scan" @submit.native.prevent="doReceive">
-        <el-form-item><el-input ref="code" v-model="code" style="width:180px"  placeholder="收货：条码/SKU"/></el-form-item>
-        <el-form-item label="数量"><el-input-number v-model="qty" :min="1" /></el-form-item>
-        <el-form-item><el-button type="primary" native-type="submit">收货</el-button></el-form-item>
-      </el-form>
-
-      <el-table :data="asn.lines" border size="small">
+      <el-table :data="asn.lines" border class="tbl">
         <el-table-column prop="sku" label="SKU" width="110" />
         <el-table-column prop="barcode" label="条码" width="120" />
-        <el-table-column prop="productName" label="品名" />
+        <el-table-column prop="productName" label="品名" min-width="120" />
         <el-table-column prop="planQty" label="预报" width="70" align="right" />
         <el-table-column prop="receivedQty" label="已收" width="70" align="right" />
         <el-table-column prop="shelvedQty" label="已上架" width="80" align="right" />
@@ -38,18 +45,20 @@
                 <el-option v-for="c in cells" :key="c" :label="c" :value="c" />
               </el-select>
               <el-input-number v-model="shelf[row.sku].qty" size="mini" :min="1" :max="row.pendingShelfQty" style="width:110px" />
-              <el-button size="mini" type="success" @click="doPutaway(row)">上架</el-button>
+              <el-button size="mini" type="primary" plain @click="doPutaway(row)">上架</el-button>
             </template>
             <span v-else class="muted">{{ cellText(row) }}</span>
           </template>
         </el-table-column>
       </el-table>
     </template>
-  </div>
+  </work-layout>
 </template>
 <script>
 import * as api from '../../api/work'
+import WorkLayout from '../common/WorkLayout.vue'
 export default {
+  components: { WorkLayout },
   data: () => ({ asns: [], asnNo: '', asn: null, code: '', qty: 1, cells: [], shelf: {} }),
   async created () { await this.loadList() },
   methods: {
@@ -58,7 +67,10 @@ export default {
     },
     async load () {
       if (!this.asnNo) return
-      try { this.setAsn(await api.asnDetail(this.asnNo)); this.cells = await api.shelfCells(this.asn.whCode) } catch (e) { this.asn = null; this.$message.error(e.message) }
+      try {
+        this.setAsn(await api.asnDetail(this.asnNo)); this.cells = await api.shelfCells(this.asn.whCode)
+        this.$nextTick(() => this.$refs.code && this.$refs.code.focus())
+      } catch (e) { this.asn = null; this.$message.error(e.message) }
     },
     setAsn (a) {
       const shelf = {}
@@ -67,6 +79,7 @@ export default {
       this.asn = a
     },
     async doReceive () {
+      if (!this.asn || !this.code.trim()) return
       try {
         this.setAsn(await api.receive({ asnNo: this.asn.asnNo, barcode: this.code.trim(), qty: this.qty }))
         this.$message.success('收货成功'); this.code = ''; this.qty = 1; this.loadList()
@@ -86,8 +99,6 @@ export default {
 }
 </script>
 <style scoped>
-.page { padding: 24px }
-.hint { color: #909399; font-size: 12px }
-.scan { margin-top: 12px }
-.muted { color: #909399 }
+.tbl { margin-top: 12px }
+.muted { color: #888c94 }
 </style>

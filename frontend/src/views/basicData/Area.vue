@@ -68,5 +68,5 @@ export default {
 <style scoped>
 .page { padding: 24px }
 .pager { margin-top: 12px; text-align: right }
-.hint { color: #e6a23c; font-size: 12px }
+.hint { color: #f58718; font-size: 12px }
 </style>

@@ -33,7 +33,7 @@ export default {
   data: () => ({
     query: { keyword: '', customerCode: '', bucket: '', current: 1, size: 10 },
     summary: [], rows: [], total: 0, loading: false,
-    colors: ['#67c23a', '#95d475', '#e6a23c', '#f89898', '#f56c6c']
+    colors: ['#28a864', '#95d475', '#f58718', '#f89898', '#df3148']
   }),
   computed: { maxQty () { return Math.max(1, ...this.summary.map(b => b.qty)) } },
   created () { this.load() },
@@ -54,13 +54,13 @@ export default {
 </script>
 <style scoped>
 .page { padding: 24px }
-.hint { color: #909399; font-size: 12px }
-.bars { margin: 8px 0 16px; max-width: 760px }
+.hint { color: #888c94; font-size: 12px }
+.bars { background: #fff; border-radius: 4px; padding: 12px 16px; margin-bottom: 12px }
 .bar { display: flex; align-items: center; padding: 4px 6px; cursor: pointer; border-radius: 4px }
-.bar.active { background: #ecf5ff }
-.label { width: 90px; font-size: 13px; color: #606266 }
-.track { flex: 1; height: 14px; background: #f2f6fc; border-radius: 7px; overflow: hidden }
+.bar.active { background: #e6effe }
+.label { width: 90px; font-size: 13px; color: #55585f }
+.track { flex: 1; height: 14px; background: #f0f2f5; border-radius: 7px; overflow: hidden }
 .fill { height: 100% }
-.num { width: 160px; text-align: right; font-size: 12px; color: #606266 }
+.num { width: 160px; text-align: right; font-size: 12px; color: #55585f }
 .pager { margin-top: 12px; text-align: right }
 </style>

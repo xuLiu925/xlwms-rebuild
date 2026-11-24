@@ -1,5 +1,9 @@
 <template>
   <div class="page">
+    <el-tabs v-model="status" @tab-click="search">
+      <el-tab-pane name="" ><span slot="label">{{ '全部' }}<span class="label-num">({{ allCount }})</span></span></el-tab-pane>
+      <el-tab-pane v-for="s in stats" :key="s.status" :name="String(s.status)" ><span slot="label">{{ s.statusName }}<span class="label-num">({{ s.statusSum }})</span></span></el-tab-pane>
+    </el-tabs>
     <el-form inline size="small" @submit.native.prevent="search">
       <el-form-item>
         <el-input v-model="query.keyword" clearable placeholder="出库单号 / 跟踪号 / 波次号" style="width:240px" />
@@ -15,10 +19,6 @@
       </el-form-item>
     </el-form>
 
-    <el-tabs v-model="status" @tab-click="search">
-      <el-tab-pane name="" :label="'全部 ' + allCount" />
-      <el-tab-pane v-for="s in stats" :key="s.status" :name="String(s.status)" :label="s.statusName + ' ' + s.statusSum" />
-    </el-tabs>
 
     <el-table v-loading="loading" :data="rows" border size="small">
       <el-table-column prop="deliveryNo" label="出库单号" min-width="130" />
@@ -88,5 +88,5 @@ export default {
 <style scoped>
 .page { padding: 24px }
 .pager { margin-top: 12px; text-align: right }
-.hint { color: #e6a23c; font-size: 12px }
+.hint { color: #f58718; font-size: 12px }
 </style>

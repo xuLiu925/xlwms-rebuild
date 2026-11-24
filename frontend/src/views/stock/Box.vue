@@ -89,9 +89,9 @@ export default {
 <style scoped>
 .page { padding: 24px }
 .summary { display: flex; gap: 12px; margin-bottom: 12px }
-.card { flex: 1; padding: 12px 16px; background: #f5f7fa; border-radius: 4px }
+.card { flex: 1; padding: 12px 16px; background: #f5f6f9; border-radius: 4px }
 .num { font-size: 20px; font-weight: 600 }
-.label { color: #909399; font-size: 12px; margin-top: 4px }
+.label { color: #888c94; font-size: 12px; margin-top: 4px }
 .pager { margin-top: 12px; text-align: right }
-.hint { color: #e6a23c; font-size: 12px }
+.hint { color: #f58718; font-size: 12px }
 </style>

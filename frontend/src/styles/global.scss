@@ -11,7 +11,7 @@ a { color: #005bf5; text-decoration: none; }
 
 // ---------- 页面骨架 ----------
 // 主区灰底；页签条、查询条、页面标题是贴边白条；其余内容左右留 16px，表格与分页拼成一块白卡片。
-.app-main > :not(.dashboard) {
+.app-main > :not(.dashboard):not(.work-page) {
   background: transparent;
   padding: 0 0 16px !important;
   min-height: 100%;
@@ -28,6 +28,7 @@ a { color: #005bf5; text-decoration: none; }
     .el-tabs__item { height: 48px; line-height: 48px; font-size: 16px; padding: 0 20px !important; color: #0b1019; }
     .el-tabs__item.is-top:nth-child(2) { padding-left: 0 !important; }
     .el-tabs__item.is-active { color: #0f37ff; font-weight: 600; }
+    .label-num { margin-left: 2px; color: #888c94; font-weight: 400; font-size: 14px; }
   }
   > .el-form--inline {
     background: #fff; padding: 16px 16px 4px; margin: 0;
@@ -37,12 +38,28 @@ a { color: #005bf5; text-decoration: none; }
   > :not(h3):not(.el-tabs):not(.el-form--inline):not(.el-dialog__wrapper) { margin-left: 16px; margin-right: 16px; }
   > .el-form--inline + *:not(.el-form--inline), > .el-tabs + *:not(.el-form--inline), > h3 + *:not(.el-form--inline):not(.el-tabs) { margin-top: 16px; }
   > p { color: #55585f; font-size: 13px; }
+  // 页面开头的说明文字：贴边浅蓝提示条
+  > p.hint:first-child {
+    margin: 0 !important; padding: 8px 16px; background: #e6effe; color: #33363c; font-size: 12px; line-height: 20px; max-width: none;
+  }
+  > p.hint:first-child + :not(.el-form--inline):not(.el-tabs) { margin-top: 16px; }
+  // 竖排表单（设置类）放在白色卡片里
+  > .el-form:not(.el-form--inline) { background: #fff; padding: 8px 24px 16px; border-radius: 4px; max-width: none !important; }
   > .el-table { border-radius: 4px 4px 0 0; }
   > .el-table + .el-pagination {
     margin-top: 0; padding: 10px 12px; background: #fff; border: 1px solid #e6e8eb; border-top: none; border-radius: 0 0 4px 4px;
   }
   > .el-card, > .el-alert { margin-top: 12px; }
 }
+
+// 占位页
+.stub-page {
+  margin-top: 16px; background: #fff; border-radius: 4px; min-height: 420px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.stub-icon { width: 80px; height: 80px; border-radius: 50%; background: #f0f2f5; color: #a6abb4; font-size: 32px; display: flex; align-items: center; justify-content: center; }
+.stub-title { margin-top: 16px; font-size: 20px; font-weight: 600; color: #888c94; }
+.stub-path { margin-top: 6px; font-size: 12px; color: #a6abb4; }
 
 // ---------- 控件尺寸：small 统一为 36px / 14px ----------
 .el-input--small, .el-select--small { font-size: 14px; }

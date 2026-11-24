@@ -7,7 +7,16 @@ import Layout from '../views/layout/Layout.vue'
 Vue.use(Router)
 const GenericList = () => import('../views/common/GenericList.vue')
 const listConfigs = Object.fromEntries(listPages.map(c => [c.route, c]))
-const Stub = name => ({ render: h => h('div', { style: 'padding:24px' }, name + '（待实现）') })
+// 占位页：参考系统里有、本项目还没做的页面
+const Stub = name => ({
+  render: h => h('div', { class: 'page' }, [
+    h('div', { class: 'stub-page' }, [
+      h('div', { class: 'stub-icon' }, [h('i', { class: 'el-icon-document' })]),
+      h('div', { class: 'stub-title' }, '页面待实现'),
+      h('div', { class: 'stub-path' }, '/' + name)
+    ])
+  ])
+})
 // 模块与子路由取自公开 bundle 的路由表
 const modules = {
   customer: ['list', 'recharge'],

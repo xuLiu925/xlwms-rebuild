@@ -1,5 +1,9 @@
 <template>
   <div class="page">
+    <el-tabs v-model="status" @tab-click="search">
+      <el-tab-pane name="all" ><span slot="label">{{ '全部' }}<span class="label-num">({{ allCount }})</span></span></el-tab-pane>
+      <el-tab-pane v-for="s in stats" :key="s.status" :name="String(s.status)" ><span slot="label">{{ s.statusName }}<span class="label-num">({{ s.statusSum }})</span></span></el-tab-pane>
+    </el-tabs>
     <el-form inline size="small" @submit.native.prevent="search">
       <el-form-item>
         <el-input v-model="query.keyword" clearable placeholder="波次号 / 出库单号" style="width:220px" />
@@ -13,10 +17,6 @@
       </el-form-item>
     </el-form>
 
-    <el-tabs v-model="status" @tab-click="search">
-      <el-tab-pane name="all" :label="'全部 ' + allCount" />
-      <el-tab-pane v-for="s in stats" :key="s.status" :name="String(s.status)" :label="s.statusName + ' ' + s.statusSum" />
-    </el-tabs>
 
     <el-table v-loading="loading" :data="rows" border size="small" row-key="waveNo">
       <el-table-column type="expand">
@@ -100,7 +100,7 @@ export default {
 .expand { display: flex; gap: 16px; padding: 0 12px }
 .sub { flex: 1 }
 .sub h4 { margin: 4px 0 8px }
-.qty { font-size: 12px; color: #909399 }
+.qty { font-size: 12px; color: #888c94 }
 .pager { margin-top: 12px; text-align: right }
-.hint { color: #909399; font-size: 12px }
+.hint { color: #888c94; font-size: 12px }
 </style>

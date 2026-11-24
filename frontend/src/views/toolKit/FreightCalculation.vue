@@ -43,6 +43,6 @@ export default {
 </script>
 <style scoped>
 .page { padding: 24px }
-.hint { color: #909399; font-size: 12px }
-.muted { color: #909399 }
+.hint { color: #888c94; font-size: 12px }
+.muted { color: #888c94 }
 </style>

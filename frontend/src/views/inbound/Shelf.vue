@@ -14,7 +14,7 @@
             <el-option v-for="c in cells[row.whCode] || []" :key="c" :label="c" :value="c" />
           </el-select>
           <el-input-number v-model="row.qty" size="mini" :min="1" :max="row.pendingShelfQty" style="width:110px" />
-          <el-button size="mini" type="success" @click="doPutaway(row)">确认上架</el-button>
+          <el-button size="mini" type="primary" plain @click="doPutaway(row)">确认上架</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -49,5 +49,5 @@ export default {
 </script>
 <style scoped>
 .page { padding: 24px }
-.hint { color: #909399; font-size: 12px }
+.hint { color: #888c94; font-size: 12px }
 </style>

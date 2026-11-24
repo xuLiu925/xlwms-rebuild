@@ -1,21 +1,25 @@
 <template>
-  <div class="page">
-    <p class="hint">扫包裹号，整箱视为复核通过（本项目假设的规则）。示例：OB2611000401-1、OB2611000401-2、OB2611000402-1。</p>
-    <el-form inline size="small" @submit.native.prevent="scan">
-      <el-form-item><el-input v-model="packNo" style="width:220px"  placeholder="包裹号"/></el-form-item>
-      <el-form-item><el-button type="primary" native-type="submit">复核</el-button></el-form-item>
-    </el-form>
+  <work-layout title="包裹复核" :empty="!order" empty-text="请扫描包裹号">
+    <template #side>
+      <div class="work-tip"><i class="el-icon-warning" />整箱视为复核通过（本项目假设的规则）。示例：OB2611000401-1、OB2611000401-2、OB2611000402-1。</div>
+      <div class="work-field">
+        <div class="work-label">包裹号</div>
+        <el-input v-model="packNo" placeholder="请扫描" clearable @keyup.enter.native="scan" />
+      </div>
+    </template>
     <order-card :order="order" />
-  </div>
+  </work-layout>
 </template>
 <script>
 import * as api from '../../api/work'
 import OrderCard from './OrderCard.vue'
+import WorkLayout from '../common/WorkLayout.vue'
 export default {
-  components: { OrderCard },
+  components: { OrderCard, WorkLayout },
   data: () => ({ packNo: '', order: null }),
   methods: {
     async scan () {
+      if (!this.packNo.trim()) return
       try {
         this.order = await api.boxReviewScan({ packNo: this.packNo.trim() })
         this.$message.success(this.order.status === 20 ? '整单复核完成' : '包裹已复核')
@@ -25,7 +29,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-.page { padding: 24px }
-.hint { color: #909399; font-size: 12px }
-</style>

@@ -38,7 +38,7 @@ export default {
 </script>
 <style scoped>
 .page { padding: 24px }
-.hint { color: #909399; font-size: 12px }
+.hint { color: #888c94; font-size: 12px }
 .res { max-width: 420px; margin-top: 12px }
-.zone { font-size: 32px; font-weight: 600; color: #409eff }
+.zone { font-size: 32px; font-weight: 600; color: #005bf5 }
 </style>

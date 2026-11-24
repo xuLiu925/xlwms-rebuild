@@ -42,5 +42,5 @@ export default {
 </script>
 <style scoped>
 .page { padding: 24px }
-.hint { color: #909399; font-size: 12px }
+.hint { color: #888c94; font-size: 12px }
 </style>
