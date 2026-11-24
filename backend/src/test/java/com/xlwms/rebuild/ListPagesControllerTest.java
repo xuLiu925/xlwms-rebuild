@@ -82,4 +82,41 @@ class ListPagesControllerTest {
                         .content("{\"status\":20}"))
                 .andExpect(jsonPath("$.data.returnCount").value(4));
     }
+
+    @Test
+    void basicProductPageAndFilter() throws Exception {
+        mvc.perform(post("/gateway/wms/basicProduct/page"))
+                .andExpect(jsonPath("$.data.total").value(20))
+                .andExpect(jsonPath("$.data.records[0].id").isString());
+        mvc.perform(post("/gateway/wms/basicProduct/page").contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"status\":0}"))
+                .andExpect(jsonPath("$.data.total").value(3));
+    }
+
+    @Test
+    void basicAreaPageWorksWithoutBody() throws Exception {
+        mvc.perform(post("/gateway/wms/basicArea/page"))
+                .andExpect(jsonPath("$.data.total").value(6));
+    }
+
+    @Test
+    void basicCellFilterByUsageStatus() throws Exception {
+        mvc.perform(post("/gateway/wms/basicCell/page").contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"usageStatus\":1}"))
+                .andExpect(jsonPath("$.data.total").value(8));
+    }
+
+    @Test
+    void basicTrayFilterByStatus() throws Exception {
+        mvc.perform(post("/gateway/wms/basicTray/page").contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"status\":1}"))
+                .andExpect(jsonPath("$.data.total").value(8));
+    }
+
+    @Test
+    void basicPackMaterialFilterByStatus() throws Exception {
+        mvc.perform(post("/gateway/wms/basicPackMaterial/page").contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"status\":0}"))
+                .andExpect(jsonPath("$.data.total").value(1));
+    }
 }

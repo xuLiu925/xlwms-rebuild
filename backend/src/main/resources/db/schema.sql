@@ -85,3 +85,74 @@ CREATE TABLE stock_return (
   cell_code     VARCHAR(32),
   receive_time  VARCHAR(32)
 );
+
+DROP TABLE IF EXISTS basic_product;
+CREATE TABLE basic_product (
+  id            BIGINT       NOT NULL PRIMARY KEY,
+  sku           VARCHAR(64),
+  barcode       VARCHAR(64),
+  product_name  VARCHAR(128),
+  category      VARCHAR(64),
+  customer_code VARCHAR(32),
+  customer_name VARCHAR(64),
+  length_mm     INT,
+  width_mm      INT,
+  height_mm     INT,
+  weight_g      INT,
+  status        INT,
+  status_name   VARCHAR(16),
+  create_time   VARCHAR(32)
+);
+
+DROP TABLE IF EXISTS basic_area;
+CREATE TABLE basic_area (
+  id          BIGINT       NOT NULL PRIMARY KEY,
+  area_code   VARCHAR(32),
+  area_name   VARCHAR(64),
+  wh_code     VARCHAR(32),
+  area_type   VARCHAR(16),
+  cell_count  INT,
+  status      INT,
+  status_name VARCHAR(16),
+  remark      VARCHAR(128)
+);
+
+DROP TABLE IF EXISTS basic_cell;
+CREATE TABLE basic_cell (
+  id           BIGINT       NOT NULL PRIMARY KEY,
+  cell_code    VARCHAR(32),
+  area_code    VARCHAR(32),
+  area_name    VARCHAR(64),
+  wh_code      VARCHAR(32),
+  cell_type    VARCHAR(16),
+  usage_status INT,
+  usage_name   VARCHAR(16),
+  create_time  VARCHAR(32)
+);
+
+DROP TABLE IF EXISTS basic_tray;
+CREATE TABLE basic_tray (
+  id          BIGINT       NOT NULL PRIMARY KEY,
+  tray_no     VARCHAR(32),
+  wh_code     VARCHAR(32),
+  area_code   VARCHAR(32),
+  cell_code   VARCHAR(32),
+  status      INT,
+  status_name VARCHAR(16),
+  sku_kinds   INT,
+  total_qty   INT,
+  bind_time   VARCHAR(32)
+);
+
+DROP TABLE IF EXISTS basic_pack_material;
+CREATE TABLE basic_pack_material (
+  id            BIGINT       NOT NULL PRIMARY KEY,
+  material_code VARCHAR(32),
+  material_name VARCHAR(64),
+  material_type VARCHAR(16),
+  spec          VARCHAR(32),
+  unit          VARCHAR(8),
+  stock_qty     INT,
+  status        INT,
+  status_name   VARCHAR(16)
+);

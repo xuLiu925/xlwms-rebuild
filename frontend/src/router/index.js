@@ -27,7 +27,12 @@ const pages = {
   'outbound/wave': () => import('../views/outbound/Wave.vue'),
   'stock/sku': () => import('../views/stock/Sku.vue'),
   'stock/box': () => import('../views/stock/Box.vue'),
-  'stock/return': () => import('../views/stock/Return.vue')
+  'stock/return': () => import('../views/stock/Return.vue'),
+  'basicData/product': () => import('../views/basicData/Product.vue'),
+  'basicData/area': () => import('../views/basicData/Area.vue'),
+  'basicData/cell': () => import('../views/basicData/Cell.vue'),
+  'basicData/tray': () => import('../views/basicData/Tray.vue'),
+  'basicData/packMaterial': () => import('../views/basicData/PackMaterial.vue')
 }
 const routes = [
   { path: '/login', component: () => import('../views/Login.vue') },

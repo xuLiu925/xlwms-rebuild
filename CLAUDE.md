@@ -48,6 +48,12 @@ Java 后端（Spring Boot 3 / Java 17）+ Vue 2 前端。当前全部是虚构�
   `StockReturnController`（`/gateway/wms/stockReturn/{page,returnTotal}`），对应实体/Mapper/表 `stock_box`(18 行)、`stock_return`(15 行)，
   走 MyBatis-Plus + 本地 MySQL/H2，全部虚构数据。**注意**：这两组的接口路径、请求体字段、退货状态编码
   （10 待上架/20 已上架/30 待销毁/40 已销毁）都是本项目占位，真实接口未抓取。测试共 26 个通过。
+- 基础数据只读页（2026-11-24）：新增 5 个 `views/basicData/` 页——产品资料 `Product.vue`、库区 `Area.vue`、库位 `Cell.vue`、
+  托盘 `Tray.vue`、包材 `PackMaterial.vue`，路由 `pages` 注册 `basicData/{product,area,cell,tray,packMaterial}`。
+  后端 `Basic{Product,Area,Cell,Tray,PackMaterial}Controller`（`/gateway/wms/basic{Product,Area,Cell,Tray,PackMaterial}/page`），
+  对应实体/Mapper/表 `basic_product`(20)、`basic_area`(6)、`basic_cell`(24)、`basic_tray`(15)、`basic_pack_material`(10)，
+  走 MyBatis-Plus + 本地 MySQL/H2，全部虚构数据。前端 `api/basic.js`、`mock/basic.js` 配套。
+  **注意**：接口路径、请求体字段与各状态/类型编码（产品 0 停用/1 启用、库位占用 0 空闲/1 占用/2 锁定、托盘 0 空闲/1 在用等）均为本项目占位，真实接口未抓取。测试共 31 个通过。
 - 出库作业（2026-11-24）：按 APK 还原波次拣货 `/pda/wave/{pickList,page,pageCell,skuDetail,scanCell,scanSku,pick,queryIntercepting}`
   与复核 `/pda/review/{get4piecePackage,review4packageV2,get4MorePiece,morePieceV2,confirmDelivery}`（`WaveController`、`ReviewController`，
   DTO 在 `dto/wave`、`dto/review`，用 Java record）。响应字段按 APK 的 WavePageBean/PiecePackageBean/MorePieceBean/PutAwayStatus 等还原。
