@@ -98,7 +98,11 @@ Java 后端（Spring Boot 3 / Java 17）+ Vue 2 前端。当前全部是虚构�
   按箱移库 `/blMoveStock/boxMoveStock`，整批校验后执行）。PDA 登录 `/auth/{login,getUserInfo}` 与网页端共用 `AuthController`
   （同时接受 account / loginAccount，去掉 `Bearer ` 前缀）。规则见 COVERAGE.md“批次 7 的数据与规则”。
   测试共 129 个通过（`mvn clean test`）。变异检查：把按箱移库的“同一来源合计”改成逐行检查后 1 个用例失败。
-  原计划里的网页端本地增删改没有做，58 个通用列表页仍只读。
+- 批次 8（2026-11-24）：网页端通用列表页本地增删改。23 个基础资料/报价/设置类页面（`spec.mjs` 的 `editable`）可新建、编辑、删除，
+  其余 35 个日志/单据/流水类页面仍只读。后端 `list/GenericEditController`（`POST /gateway/wms/{key}/{add,update,delete}`，占位路径，
+  只写本地 lp_* 表，重启恢复），生成器给注册表加了 editable/unique/idBase 与列的 required/auto；前端 `GenericList.vue` 加新建/编辑/删除。
+  校验与唯一键规则见 COVERAGE.md“批次 8 的数据与规则”。测试共 136 个通过（`mvn clean test`），已在浏览器里联调过客户列表的新建、编辑、删除。
+  `.claude/launch.json` 新增 `backend-h2-alt`（8090）+ `frontend-alt`（8091，`API_TARGET` 指向 8090），用于 8080/8081 被占用时联调。
 - 界面风格（2026-11-24）：参考领星 WMS 的页面样式重做前端外观。用户在浏览器面板里自己登录后，只做了只读观察
   （截图、读计算样式），没有点任何按钮、没有提交，真实数据未写入任何文件。
   - 主题：`frontend/src/styles/element-variables.scss`（Element SCSS 变量，主色 #005bf5），需要开发依赖 `sass@~1.32`、`sass-loader@13`。

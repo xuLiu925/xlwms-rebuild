@@ -263,3 +263,11 @@ const batch1 = [
 ]
 
 export const resources = [...batch1, ...orders, ...finance, ...settings]
+
+// 批次 8：允许在本地库新建/编辑/删除的资源（基础资料、报价、设置类）。日志、单据、流水类页面保持只读。
+// 只写本地开发库；字段、校验规则都是本项目假设。
+export const editable = new Set([
+  'customer', 'seedWall', 'pickCart', 'account', 'role', 'channel', 'channelGroup', 'exchangeRate', 'notice', 'waveRule',
+  'fuelPlan', 'zoneTemp', 'surcharge', 'freightTemp', 'logisticsPriceSetting', 'operateBill', 'warehouseRent', 'quotationScheme',
+  'billTemplate', 'printTemplate', 'brand', 'agency', 'receiveAccount'
+])

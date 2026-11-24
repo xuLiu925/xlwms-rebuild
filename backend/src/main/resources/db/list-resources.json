@@ -1,5 +1,8 @@
 [
   {
+    "editable": true,
+    "unique": "customerCode",
+    "idBase": 3100000000000000,
     "key": "customer",
     "table": "lp_customer",
     "columns": [
@@ -9,7 +12,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerName",
@@ -17,7 +22,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "contactName",
@@ -25,7 +32,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "settleCurrency",
@@ -33,7 +42,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "balance",
@@ -41,7 +52,9 @@
         "type": "money",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "creditLimit",
@@ -49,7 +62,9 @@
         "type": "money",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -60,7 +75,9 @@
         "enumLabels": {
           "0": "停用",
           "1": "启用"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -68,12 +85,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 3200000000000000,
     "key": "customerRecharge",
     "table": "lp_customer_recharge",
     "columns": [
@@ -83,7 +105,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -91,7 +115,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerName",
@@ -99,7 +125,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "amount",
@@ -107,7 +135,9 @@
         "type": "money",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "currency",
@@ -115,7 +145,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "payMethod",
@@ -123,7 +155,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -135,7 +169,9 @@
           "10": "待审核",
           "20": "已通过",
           "30": "已驳回"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "applyTime",
@@ -143,7 +179,9 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "none"
       },
       {
         "name": "auditTime",
@@ -151,12 +189,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "none"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": true,
+    "unique": "wallCode",
+    "idBase": 3300000000000000,
     "key": "seedWall",
     "table": "lp_seed_wall",
     "columns": [
@@ -166,7 +209,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "wallName",
@@ -174,7 +219,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -182,7 +229,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "rowCount",
@@ -190,7 +239,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "colCount",
@@ -198,7 +249,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "gridCount",
@@ -206,7 +259,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -217,7 +272,9 @@
         "enumLabels": {
           "0": "停用",
           "1": "启用"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -225,12 +282,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": true,
+    "unique": "cartCode",
+    "idBase": 3400000000000000,
     "key": "pickCart",
     "table": "lp_pick_cart",
     "columns": [
@@ -240,7 +302,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "cartName",
@@ -248,7 +312,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -256,7 +322,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "gridCount",
@@ -264,7 +332,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "bindWaveNo",
@@ -272,7 +342,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "status",
@@ -284,7 +356,9 @@
           "0": "空闲",
           "1": "使用中",
           "2": "停用"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -292,12 +366,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "update"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": true,
+    "unique": "username",
+    "idBase": 3500000000000000,
     "key": "account",
     "table": "lp_account",
     "columns": [
@@ -307,7 +386,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "realName",
@@ -315,7 +396,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "roleName",
@@ -323,7 +406,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCodes",
@@ -331,7 +416,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -342,7 +429,9 @@
         "enumLabels": {
           "0": "停用",
           "1": "启用"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "lastLoginTime",
@@ -350,12 +439,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "none"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": true,
+    "unique": "roleCode",
+    "idBase": 3600000000000000,
     "key": "role",
     "table": "lp_role",
     "columns": [
@@ -365,7 +459,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "roleName",
@@ -373,7 +469,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "userCount",
@@ -381,7 +479,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "remark",
@@ -389,7 +489,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -400,7 +502,9 @@
         "enumLabels": {
           "0": "停用",
           "1": "启用"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -408,12 +512,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": true,
+    "unique": "channelCode",
+    "idBase": 3700000000000000,
     "key": "channel",
     "table": "lp_channel",
     "columns": [
@@ -423,7 +532,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "channelName",
@@ -431,7 +542,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "carrier",
@@ -439,7 +552,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "serviceType",
@@ -447,7 +562,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -455,7 +572,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -466,7 +585,9 @@
         "enumLabels": {
           "0": "停用",
           "1": "启用"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -474,12 +595,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "update"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": true,
+    "unique": "groupCode",
+    "idBase": 3800000000000000,
     "key": "channelGroup",
     "table": "lp_channel_group",
     "columns": [
@@ -489,7 +615,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "groupName",
@@ -497,7 +625,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "channelCount",
@@ -505,7 +635,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "remark",
@@ -513,7 +645,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -524,7 +658,9 @@
         "enumLabels": {
           "0": "停用",
           "1": "启用"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -532,12 +668,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "update"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": true,
+    "unique": null,
+    "idBase": 3900000000000000,
     "key": "exchangeRate",
     "table": "lp_exchange_rate",
     "columns": [
@@ -547,7 +688,9 @@
         "type": "str",
         "kw": true,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "toCurrency",
@@ -555,7 +698,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "rate",
@@ -563,7 +708,9 @@
         "type": "rate",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "effectiveDate",
@@ -571,7 +718,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "updateUser",
@@ -579,12 +728,17 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       }
     ],
     "tabsColumn": null
   },
   {
+    "editable": true,
+    "unique": "title",
+    "idBase": 4000000000000000,
     "key": "notice",
     "table": "lp_notice",
     "columns": [
@@ -594,7 +748,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "noticeType",
@@ -602,7 +758,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "publisher",
@@ -610,7 +768,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -622,7 +782,9 @@
           "0": "草稿",
           "1": "已发布",
           "2": "已撤回"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "publishTime",
@@ -630,12 +792,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4100000000000000,
     "key": "requestLog",
     "table": "lp_request_log",
     "columns": [
@@ -645,7 +812,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "apiName",
@@ -653,7 +822,9 @@
         "type": "str",
         "kw": true,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -661,7 +832,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "costMs",
@@ -669,7 +842,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "result",
@@ -680,7 +855,9 @@
         "enumLabels": {
           "0": "失败",
           "1": "成功"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "requestTime",
@@ -688,12 +865,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "none"
       }
     ],
     "tabsColumn": "result"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4200000000000000,
     "key": "taskCenter",
     "table": "lp_task_center",
     "columns": [
@@ -703,7 +885,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "taskName",
@@ -711,7 +895,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "taskType",
@@ -719,7 +905,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "progress",
@@ -727,7 +915,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -740,7 +930,9 @@
           "20": "执行中",
           "30": "已完成",
           "40": "失败"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createUser",
@@ -748,7 +940,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -756,7 +950,9 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       },
       {
         "name": "finishTime",
@@ -764,12 +960,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "none"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4300000000000000,
     "key": "returnOrder",
     "table": "lp_return_order",
     "columns": [
@@ -779,7 +980,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -787,7 +990,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "customerName",
@@ -795,7 +1000,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "sourceOrderNo",
@@ -803,7 +1010,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "trackingNo",
@@ -811,7 +1020,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "returnType",
@@ -819,7 +1030,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "skuQty",
@@ -827,7 +1040,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -835,7 +1050,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -848,7 +1065,9 @@
           "20": "已收货",
           "30": "已上架",
           "90": "已取消"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -856,12 +1075,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4400000000000000,
     "key": "outboundAbnormal",
     "table": "lp_outbound_abnormal",
     "columns": [
@@ -871,7 +1095,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "waveNo",
@@ -879,7 +1105,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -887,7 +1115,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "abnormalType",
@@ -895,7 +1125,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "remark",
@@ -903,7 +1135,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -914,7 +1148,9 @@
         "enumLabels": {
           "0": "待处理",
           "1": "已处理"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "reportUser",
@@ -922,7 +1158,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "reportTime",
@@ -930,12 +1168,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "none"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4500000000000000,
     "key": "outboundIntercept",
     "table": "lp_outbound_intercept",
     "columns": [
@@ -945,7 +1188,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -953,7 +1198,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "interceptReason",
@@ -961,7 +1208,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "orderStatusName",
@@ -969,7 +1218,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -981,7 +1232,9 @@
           "10": "拦截中",
           "20": "拦截成功",
           "30": "拦截失败"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "applyTime",
@@ -989,12 +1242,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "none"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4600000000000000,
     "key": "globalAsn",
     "table": "lp_global_asn",
     "columns": [
@@ -1004,7 +1262,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -1012,7 +1272,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "customerName",
@@ -1020,7 +1282,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -1028,7 +1292,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "boxCount",
@@ -1036,7 +1302,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "skuQty",
@@ -1044,7 +1312,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -1058,7 +1328,9 @@
           "15": "已收货",
           "30": "已上架",
           "90": "已取消"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "etaDate",
@@ -1066,7 +1338,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -1074,12 +1348,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4610000000000000,
     "key": "globalParcel",
     "table": "lp_global_parcel",
     "columns": [
@@ -1089,7 +1368,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "platformOrderNo",
@@ -1097,7 +1378,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -1105,7 +1388,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -1113,7 +1398,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "channelName",
@@ -1121,7 +1408,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "trackingNo",
@@ -1129,7 +1418,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "skuQty",
@@ -1137,7 +1428,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -1153,7 +1446,9 @@
           "50": "已出库",
           "80": "已拦截",
           "90": "已取消"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -1161,12 +1456,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4620000000000000,
     "key": "globalFreight",
     "table": "lp_global_freight",
     "columns": [
@@ -1176,7 +1476,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -1184,7 +1486,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -1192,7 +1496,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "boxCount",
@@ -1200,7 +1506,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "palletCount",
@@ -1208,7 +1516,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "deliveryType",
@@ -1216,7 +1526,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -1229,7 +1541,9 @@
           "20": "作业中",
           "30": "已出库",
           "90": "已取消"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -1237,12 +1551,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4630000000000000,
     "key": "globalReturn",
     "table": "lp_global_return",
     "columns": [
@@ -1252,7 +1571,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -1260,7 +1581,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -1268,7 +1591,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "returnType",
@@ -1276,7 +1601,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "skuQty",
@@ -1284,7 +1611,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -1297,7 +1626,9 @@
           "20": "已收货",
           "30": "已上架",
           "90": "已取消"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -1305,12 +1636,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4640000000000000,
     "key": "directMailOrder",
     "table": "lp_direct_mail_order",
     "columns": [
@@ -1320,7 +1656,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -1328,7 +1666,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "channelName",
@@ -1336,7 +1676,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "trackingNo",
@@ -1344,7 +1686,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "weightKg",
@@ -1352,7 +1696,9 @@
         "type": "num",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -1365,7 +1711,9 @@
           "20": "已打单",
           "30": "已交接",
           "90": "已取消"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -1373,12 +1721,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4650000000000000,
     "key": "directMailBox",
     "table": "lp_direct_mail_box",
     "columns": [
@@ -1388,7 +1741,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "channelName",
@@ -1396,7 +1751,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "orderCount",
@@ -1404,7 +1761,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "weightKg",
@@ -1412,7 +1771,9 @@
         "type": "num",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -1424,7 +1785,9 @@
           "10": "装箱中",
           "20": "已封箱",
           "30": "已交接"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -1432,12 +1795,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4660000000000000,
     "key": "claim",
     "table": "lp_claim",
     "columns": [
@@ -1447,7 +1815,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "orderNo",
@@ -1455,7 +1825,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -1463,7 +1835,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "claimType",
@@ -1471,7 +1845,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "claimAmount",
@@ -1479,7 +1855,9 @@
         "type": "money",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "currency",
@@ -1487,7 +1865,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -1500,7 +1880,9 @@
           "20": "处理中",
           "30": "已赔付",
           "40": "已驳回"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -1508,12 +1890,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4670000000000000,
     "key": "workOrder",
     "table": "lp_work_order",
     "columns": [
@@ -1523,7 +1910,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "title",
@@ -1531,7 +1920,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -1539,7 +1930,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "workType",
@@ -1547,7 +1940,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "priority",
@@ -1555,7 +1950,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -1568,7 +1965,9 @@
           "20": "处理中",
           "30": "已完成",
           "90": "已关闭"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -1576,12 +1975,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4680000000000000,
     "key": "arrivalScan",
     "table": "lp_arrival_scan",
     "columns": [
@@ -1591,7 +1995,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "asnNo",
@@ -1599,7 +2005,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -1607,7 +2015,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -1615,7 +2025,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "boxCount",
@@ -1623,7 +2035,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "scanUser",
@@ -1631,7 +2045,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -1642,7 +2058,9 @@
         "enumLabels": {
           "0": "未匹配",
           "1": "已匹配"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "scanTime",
@@ -1650,12 +2068,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "none"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4690000000000000,
     "key": "deliveryGoods",
     "table": "lp_delivery_goods",
     "columns": [
@@ -1665,7 +2088,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "asnNo",
@@ -1673,7 +2098,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -1681,7 +2108,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -1689,7 +2118,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "appointDate",
@@ -1697,7 +2128,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "vehicleType",
@@ -1705,7 +2138,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -1718,7 +2153,9 @@
           "20": "已确认",
           "30": "已到仓",
           "90": "已取消"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -1726,12 +2163,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4700000000000000,
     "key": "palletReceive",
     "table": "lp_pallet_receive",
     "columns": [
@@ -1741,7 +2183,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "asnNo",
@@ -1749,7 +2193,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "trayNo",
@@ -1757,7 +2203,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -1765,7 +2213,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -1773,7 +2223,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "boxCount",
@@ -1781,7 +2233,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "skuQty",
@@ -1789,7 +2243,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "operator",
@@ -1797,7 +2253,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -1808,7 +2266,9 @@
         "enumLabels": {
           "10": "收货中",
           "20": "已完成"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "receiptTime",
@@ -1816,12 +2276,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "none"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4710000000000000,
     "key": "palletForming",
     "table": "lp_pallet_forming",
     "columns": [
@@ -1831,7 +2296,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "trayNo",
@@ -1839,7 +2306,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "asnNo",
@@ -1847,7 +2316,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -1855,7 +2326,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "boxCount",
@@ -1863,7 +2336,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "operator",
@@ -1871,7 +2346,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -1883,7 +2360,9 @@
           "10": "组托中",
           "20": "已完成",
           "30": "已上架"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -1891,12 +2370,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4720000000000000,
     "key": "newProduct",
     "table": "lp_new_product",
     "columns": [
@@ -1906,7 +2390,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "productName",
@@ -1914,7 +2400,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -1922,7 +2410,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "asnNo",
@@ -1930,7 +2420,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "lengthCm",
@@ -1938,7 +2430,9 @@
         "type": "num",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "widthCm",
@@ -1946,7 +2440,9 @@
         "type": "num",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "heightCm",
@@ -1954,7 +2450,9 @@
         "type": "num",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "weightKg",
@@ -1962,7 +2460,9 @@
         "type": "num",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -1973,7 +2473,9 @@
         "enumLabels": {
           "0": "待测量",
           "1": "已测量"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -1981,12 +2483,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4730000000000000,
     "key": "inventoryClaim",
     "table": "lp_inventory_claim",
     "columns": [
@@ -1996,7 +2503,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "barcode",
@@ -2004,7 +2513,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -2012,7 +2523,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "cellCode",
@@ -2020,7 +2533,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "qty",
@@ -2028,7 +2543,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "claimCustomerCode",
@@ -2036,7 +2553,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -2048,7 +2567,9 @@
           "10": "待认领",
           "20": "已认领",
           "30": "已作废"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -2056,12 +2577,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4740000000000000,
     "key": "outFreight",
     "table": "lp_out_freight",
     "columns": [
@@ -2071,7 +2597,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -2079,7 +2607,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -2087,7 +2617,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "boxCount",
@@ -2095,7 +2627,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "palletCount",
@@ -2103,7 +2637,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "deliveryType",
@@ -2111,7 +2647,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "appointTime",
@@ -2119,7 +2657,9 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "none"
       },
       {
         "name": "status",
@@ -2133,7 +2673,9 @@
           "30": "待装柜",
           "40": "已出库",
           "90": "已取消"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -2141,12 +2683,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": true,
+    "unique": "ruleCode",
+    "idBase": 4750000000000000,
     "key": "waveRule",
     "table": "lp_wave_rule",
     "columns": [
@@ -2156,7 +2703,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "ruleName",
@@ -2164,7 +2713,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -2172,7 +2723,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "orderType",
@@ -2180,7 +2733,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "maxOrderCount",
@@ -2188,7 +2743,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "priority",
@@ -2196,7 +2753,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -2207,7 +2766,9 @@
         "enumLabels": {
           "0": "停用",
           "1": "启用"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -2215,12 +2776,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "update"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4760000000000000,
     "key": "scanForm",
     "table": "lp_scan_form",
     "columns": [
@@ -2230,7 +2796,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "carrier",
@@ -2238,7 +2806,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -2246,7 +2816,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "parcelCount",
@@ -2254,7 +2826,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "totalWeightKg",
@@ -2262,7 +2836,9 @@
         "type": "num",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -2273,7 +2849,9 @@
         "enumLabels": {
           "10": "待交接",
           "20": "已交接"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "handoverTime",
@@ -2281,7 +2859,9 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "none"
       },
       {
         "name": "createTime",
@@ -2289,12 +2869,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4770000000000000,
     "key": "splitOrder",
     "table": "lp_split_order",
     "columns": [
@@ -2304,7 +2889,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "newOrderNos",
@@ -2312,7 +2899,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -2320,7 +2909,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "splitReason",
@@ -2328,7 +2919,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "operator",
@@ -2336,7 +2929,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "splitTime",
@@ -2344,12 +2939,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "none"
       }
     ],
     "tabsColumn": null
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4780000000000000,
     "key": "swapOrder",
     "table": "lp_swap_order",
     "columns": [
@@ -2359,7 +2959,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "oldTrackingNo",
@@ -2367,7 +2969,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "newTrackingNo",
@@ -2375,7 +2979,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "channelName",
@@ -2383,7 +2989,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "reason",
@@ -2391,7 +2999,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -2403,7 +3013,9 @@
           "10": "待换单",
           "20": "已换单",
           "30": "失败"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -2411,12 +3023,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4790000000000000,
     "key": "rebrand",
     "table": "lp_rebrand",
     "columns": [
@@ -2426,7 +3043,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -2434,7 +3053,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -2442,7 +3063,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "sku",
@@ -2450,7 +3073,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "qty",
@@ -2458,7 +3083,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "newBarcode",
@@ -2466,7 +3093,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "status",
@@ -2478,7 +3107,9 @@
           "10": "待处理",
           "20": "处理中",
           "30": "已完成"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -2486,12 +3117,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4800000000000000,
     "key": "returnOutbound",
     "table": "lp_return_outbound",
     "columns": [
@@ -2501,7 +3137,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "returnNo",
@@ -2509,7 +3147,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -2517,7 +3157,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -2525,7 +3167,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "skuQty",
@@ -2533,7 +3177,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "outboundType",
@@ -2541,7 +3187,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -2553,7 +3201,9 @@
           "10": "待出库",
           "20": "已出库",
           "90": "已取消"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -2561,12 +3211,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": true,
+    "unique": "planCode",
+    "idBase": 4810000000000000,
     "key": "fuelPlan",
     "table": "lp_fuel_plan",
     "columns": [
@@ -2576,7 +3231,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "planName",
@@ -2584,7 +3241,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "carrier",
@@ -2592,7 +3251,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "fuelRate",
@@ -2600,7 +3261,9 @@
         "type": "num",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "effectiveDate",
@@ -2608,7 +3271,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "expireDate",
@@ -2616,7 +3281,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -2627,7 +3294,9 @@
         "enumLabels": {
           "0": "停用",
           "1": "启用"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -2635,12 +3304,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "update"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": true,
+    "unique": "tempCode",
+    "idBase": 4820000000000000,
     "key": "zoneTemp",
     "table": "lp_zone_temp",
     "columns": [
@@ -2650,7 +3324,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "tempName",
@@ -2658,7 +3334,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "carrier",
@@ -2666,7 +3344,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "country",
@@ -2674,7 +3354,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "zoneCount",
@@ -2682,7 +3364,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -2693,7 +3377,9 @@
         "enumLabels": {
           "0": "停用",
           "1": "启用"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -2701,12 +3387,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "update"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": true,
+    "unique": "chargeCode",
+    "idBase": 4830000000000000,
     "key": "surcharge",
     "table": "lp_surcharge",
     "columns": [
@@ -2716,7 +3407,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "chargeName",
@@ -2724,7 +3417,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "carrier",
@@ -2732,7 +3427,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "chargeType",
@@ -2740,7 +3437,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "amount",
@@ -2748,7 +3447,9 @@
         "type": "money",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "currency",
@@ -2756,7 +3457,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -2767,7 +3470,9 @@
         "enumLabels": {
           "0": "停用",
           "1": "启用"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -2775,12 +3480,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "update"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": true,
+    "unique": "tempCode",
+    "idBase": 4840000000000000,
     "key": "freightTemp",
     "table": "lp_freight_temp",
     "columns": [
@@ -2790,7 +3500,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "tempName",
@@ -2798,7 +3510,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "channelName",
@@ -2806,7 +3520,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "billingMode",
@@ -2814,7 +3530,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "currency",
@@ -2822,7 +3540,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -2833,7 +3553,9 @@
         "enumLabels": {
           "0": "停用",
           "1": "启用"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -2841,12 +3563,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "update"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": true,
+    "unique": null,
+    "idBase": 4850000000000000,
     "key": "logisticsPriceSetting",
     "table": "lp_logistics_price_setting",
     "columns": [
@@ -2856,7 +3583,9 @@
         "type": "str",
         "kw": true,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerName",
@@ -2864,7 +3593,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "channelName",
@@ -2872,7 +3603,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "freightTempName",
@@ -2880,7 +3613,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "discountRate",
@@ -2888,7 +3623,9 @@
         "type": "rate",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -2899,7 +3636,9 @@
         "enumLabels": {
           "0": "停用",
           "1": "启用"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -2907,12 +3646,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "update"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": true,
+    "unique": "itemCode",
+    "idBase": 4860000000000000,
     "key": "operateBill",
     "table": "lp_operate_bill",
     "columns": [
@@ -2922,7 +3666,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "itemName",
@@ -2930,7 +3676,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "billingUnit",
@@ -2938,7 +3686,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "unitPrice",
@@ -2946,7 +3696,9 @@
         "type": "money",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "currency",
@@ -2954,7 +3706,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -2965,7 +3719,9 @@
         "enumLabels": {
           "0": "停用",
           "1": "启用"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -2973,12 +3729,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "update"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": true,
+    "unique": "planCode",
+    "idBase": 4870000000000000,
     "key": "warehouseRent",
     "table": "lp_warehouse_rent",
     "columns": [
@@ -2988,7 +3749,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "planName",
@@ -2996,7 +3759,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -3004,7 +3769,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "freeDays",
@@ -3012,7 +3779,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "unitPrice",
@@ -3020,7 +3789,9 @@
         "type": "money",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "currency",
@@ -3028,7 +3799,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -3039,7 +3812,9 @@
         "enumLabels": {
           "0": "停用",
           "1": "启用"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -3047,12 +3822,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "update"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": true,
+    "unique": "schemeCode",
+    "idBase": 4880000000000000,
     "key": "quotationScheme",
     "table": "lp_quotation_scheme",
     "columns": [
@@ -3062,7 +3842,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "schemeName",
@@ -3070,7 +3852,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCount",
@@ -3078,7 +3862,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "currency",
@@ -3086,7 +3872,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "effectiveDate",
@@ -3094,7 +3882,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -3106,7 +3896,9 @@
           "0": "草稿",
           "1": "生效",
           "2": "失效"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -3114,12 +3906,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "update"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4890000000000000,
     "key": "businessExpenses",
     "table": "lp_business_expenses",
     "columns": [
@@ -3129,7 +3926,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "bizNo",
@@ -3137,7 +3936,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -3145,7 +3946,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "feeType",
@@ -3153,7 +3956,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "amount",
@@ -3161,7 +3966,9 @@
         "type": "money",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "currency",
@@ -3169,7 +3976,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -3180,7 +3989,9 @@
         "enumLabels": {
           "10": "未出账",
           "20": "已出账"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "feeTime",
@@ -3188,12 +3999,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "none"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4900000000000000,
     "key": "billsReceivable",
     "table": "lp_bills_receivable",
     "columns": [
@@ -3203,7 +4019,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -3211,7 +4029,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "customerName",
@@ -3219,7 +4039,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "billPeriod",
@@ -3227,7 +4049,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "amount",
@@ -3235,7 +4059,9 @@
         "type": "money",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "currency",
@@ -3243,7 +4069,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -3255,7 +4083,9 @@
           "10": "待确认",
           "20": "已确认",
           "30": "已结清"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -3263,12 +4093,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4910000000000000,
     "key": "expend",
     "table": "lp_expend",
     "columns": [
@@ -3278,7 +4113,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -3286,7 +4123,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "billNo",
@@ -3294,7 +4133,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "amount",
@@ -3302,7 +4143,9 @@
         "type": "money",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "currency",
@@ -3310,7 +4153,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "balanceAfter",
@@ -3318,7 +4163,9 @@
         "type": "money",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "expendTime",
@@ -3326,12 +4173,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "none"
       }
     ],
     "tabsColumn": null
   },
   {
+    "editable": true,
+    "unique": "tempCode",
+    "idBase": 4920000000000000,
     "key": "billTemplate",
     "table": "lp_bill_template",
     "columns": [
@@ -3341,7 +4193,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "tempName",
@@ -3349,7 +4203,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "billCycle",
@@ -3357,7 +4213,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "feeTypes",
@@ -3365,7 +4223,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -3376,7 +4236,9 @@
         "enumLabels": {
           "0": "停用",
           "1": "启用"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -3384,12 +4246,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "update"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": true,
+    "unique": "tempCode",
+    "idBase": 4930000000000000,
     "key": "printTemplate",
     "table": "lp_print_template",
     "columns": [
@@ -3399,7 +4266,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "tempName",
@@ -3407,7 +4276,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "tempType",
@@ -3415,7 +4286,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "paperSize",
@@ -3423,7 +4296,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "isDefault",
@@ -3434,7 +4309,9 @@
         "enumLabels": {
           "0": "否",
           "1": "是"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "status",
@@ -3445,7 +4322,9 @@
         "enumLabels": {
           "0": "停用",
           "1": "启用"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -3453,12 +4332,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "update"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": true,
+    "unique": "brandCode",
+    "idBase": 4940000000000000,
     "key": "brand",
     "table": "lp_brand",
     "columns": [
@@ -3468,7 +4352,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "brandName",
@@ -3476,7 +4362,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "domain",
@@ -3484,7 +4372,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -3495,7 +4385,9 @@
         "enumLabels": {
           "0": "停用",
           "1": "启用"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -3503,12 +4395,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "update"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": true,
+    "unique": "agencyCode",
+    "idBase": 4950000000000000,
     "key": "agency",
     "table": "lp_agency",
     "columns": [
@@ -3518,7 +4415,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "agencyName",
@@ -3526,7 +4425,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "agencyType",
@@ -3534,7 +4435,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "contactName",
@@ -3542,7 +4445,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -3553,7 +4458,9 @@
         "enumLabels": {
           "0": "停用",
           "1": "启用"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -3561,12 +4468,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "update"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4960000000000000,
     "key": "erpAuth",
     "table": "lp_erp_auth",
     "columns": [
@@ -3576,7 +4488,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -3584,7 +4498,9 @@
         "type": "str",
         "kw": true,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "appKeyMasked",
@@ -3592,7 +4508,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "authTime",
@@ -3600,7 +4518,9 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "none"
       },
       {
         "name": "expireTime",
@@ -3608,7 +4528,9 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "none"
       },
       {
         "name": "status",
@@ -3619,12 +4541,17 @@
         "enumLabels": {
           "0": "已过期",
           "1": "有效"
-        }
+        },
+        "required": true,
+        "auto": null
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4970000000000000,
     "key": "msgNotice",
     "table": "lp_msg_notice",
     "columns": [
@@ -3634,7 +4561,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "msgType",
@@ -3642,7 +4571,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "receiver",
@@ -3650,7 +4581,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "readFlag",
@@ -3661,7 +4594,9 @@
         "enumLabels": {
           "0": "未读",
           "1": "已读"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "sendTime",
@@ -3669,12 +4604,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "none"
       }
     ],
     "tabsColumn": "readFlag"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 4980000000000000,
     "key": "warningMsg",
     "table": "lp_warning_msg",
     "columns": [
@@ -3684,7 +4624,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "content",
@@ -3692,7 +4634,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -3700,7 +4644,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "level",
@@ -3712,7 +4658,9 @@
           "1": "提示",
           "2": "警告",
           "3": "严重"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "handled",
@@ -3723,7 +4671,9 @@
         "enumLabels": {
           "0": "未处理",
           "1": "已处理"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -3731,12 +4681,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "level"
   },
   {
+    "editable": true,
+    "unique": "accountName",
+    "idBase": 4990000000000000,
     "key": "receiveAccount",
     "table": "lp_receive_account",
     "columns": [
@@ -3746,7 +4701,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "bankName",
@@ -3754,7 +4711,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "accountNoMasked",
@@ -3762,7 +4721,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "currency",
@@ -3770,7 +4731,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -3781,7 +4744,9 @@
         "enumLabels": {
           "0": "停用",
           "1": "启用"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -3789,12 +4754,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "update"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 5000000000000000,
     "key": "errorPool",
     "table": "lp_error_pool",
     "columns": [
@@ -3804,7 +4774,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "bizType",
@@ -3812,7 +4784,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "bizNo",
@@ -3820,7 +4794,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "errorMsg",
@@ -3828,7 +4804,9 @@
         "type": "str",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "retryCount",
@@ -3836,7 +4814,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -3848,7 +4828,9 @@
           "0": "待处理",
           "1": "已解决",
           "2": "已忽略"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -3856,12 +4838,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "status"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 5010000000000000,
     "key": "labelRecord",
     "table": "lp_label_record",
     "columns": [
@@ -3871,7 +4858,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "trackingNo",
@@ -3879,7 +4868,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "channelName",
@@ -3887,7 +4878,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "labelFormat",
@@ -3895,7 +4888,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "result",
@@ -3906,7 +4901,9 @@
         "enumLabels": {
           "0": "失败",
           "1": "成功"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -3914,12 +4911,17 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "create"
       }
     ],
     "tabsColumn": "result"
   },
   {
+    "editable": false,
+    "unique": null,
+    "idBase": 5020000000000000,
     "key": "pushRecord",
     "table": "lp_push_record",
     "columns": [
@@ -3929,7 +4931,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "bizNo",
@@ -3937,7 +4941,9 @@
         "type": "str",
         "kw": true,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -3945,7 +4951,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "pushType",
@@ -3953,7 +4961,9 @@
         "type": "str",
         "kw": false,
         "filter": true,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "costMs",
@@ -3961,7 +4971,9 @@
         "type": "int",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "result",
@@ -3972,7 +4984,9 @@
         "enumLabels": {
           "0": "失败",
           "1": "成功"
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "pushTime",
@@ -3980,7 +4994,9 @@
         "type": "time",
         "kw": false,
         "filter": false,
-        "enumLabels": null
+        "enumLabels": null,
+        "required": false,
+        "auto": "none"
       }
     ],
     "tabsColumn": "result"

@@ -12,7 +12,9 @@ export default [
         "width": 100,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerName",
@@ -20,7 +22,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "contactName",
@@ -29,7 +33,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "settleCurrency",
@@ -38,7 +44,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "balance",
@@ -47,7 +55,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "creditLimit",
@@ -56,7 +66,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -74,7 +86,9 @@ export default [
             "启用",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -83,9 +97,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": true,
+    "unique": "customerCode",
     "tabs": "status",
     "filterOptions": {
       "settleCurrency": [
@@ -170,7 +188,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -179,7 +199,9 @@ export default [
         "width": 100,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerName",
@@ -187,7 +209,9 @@ export default [
         "type": "str",
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "amount",
@@ -196,7 +220,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "currency",
@@ -205,7 +231,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "payMethod",
@@ -214,7 +242,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -236,7 +266,9 @@ export default [
             "已驳回",
             "danger"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "applyTime",
@@ -245,7 +277,9 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "none"
       },
       {
         "name": "auditTime",
@@ -254,9 +288,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "none"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "currency": [
@@ -349,7 +387,9 @@ export default [
         "width": 120,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "wallName",
@@ -357,7 +397,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -366,7 +408,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "rowCount",
@@ -375,7 +419,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "colCount",
@@ -384,7 +430,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "gridCount",
@@ -393,7 +441,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -411,7 +461,9 @@ export default [
             "启用",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -420,9 +472,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": true,
+    "unique": "wallCode",
     "tabs": "status",
     "filterOptions": {
       "whCode": [
@@ -506,7 +562,9 @@ export default [
         "width": 120,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "cartName",
@@ -514,7 +572,9 @@ export default [
         "type": "str",
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -523,7 +583,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "gridCount",
@@ -532,7 +594,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "bindWaveNo",
@@ -541,7 +605,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "status",
@@ -563,7 +629,9 @@ export default [
             "停用",
             "info"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -572,9 +640,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "update"
       }
     ],
+    "editable": true,
+    "unique": "cartCode",
     "tabs": "status",
     "filterOptions": {
       "whCode": [
@@ -653,7 +725,9 @@ export default [
         "width": 120,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "realName",
@@ -662,7 +736,9 @@ export default [
         "width": 120,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "roleName",
@@ -671,7 +747,9 @@ export default [
         "width": 120,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCodes",
@@ -680,7 +758,9 @@ export default [
         "width": 120,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -698,7 +778,9 @@ export default [
             "启用",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "lastLoginTime",
@@ -707,9 +789,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "none"
       }
     ],
+    "editable": true,
+    "unique": "username",
     "tabs": "status",
     "filterOptions": {
       "roleName": [
@@ -785,7 +871,9 @@ export default [
         "width": 140,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "roleName",
@@ -794,7 +882,9 @@ export default [
         "width": 140,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "userCount",
@@ -803,7 +893,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "remark",
@@ -811,7 +903,9 @@ export default [
         "type": "str",
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -829,7 +923,9 @@ export default [
             "启用",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -838,9 +934,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": true,
+    "unique": "roleCode",
     "tabs": "status",
     "filterOptions": {},
     "mock": [
@@ -909,7 +1009,9 @@ export default [
         "width": 130,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "channelName",
@@ -917,7 +1019,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "carrier",
@@ -926,7 +1030,9 @@ export default [
         "width": 120,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "serviceType",
@@ -935,7 +1041,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -944,7 +1052,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -962,7 +1072,9 @@ export default [
             "启用",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -971,9 +1083,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "update"
       }
     ],
+    "editable": true,
+    "unique": "channelCode",
     "tabs": "status",
     "filterOptions": {
       "carrier": [
@@ -1062,7 +1178,9 @@ export default [
         "width": 130,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "groupName",
@@ -1070,7 +1188,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "channelCount",
@@ -1079,7 +1199,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "remark",
@@ -1087,7 +1209,9 @@ export default [
         "type": "str",
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -1105,7 +1229,9 @@ export default [
             "启用",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -1114,9 +1240,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "update"
       }
     ],
+    "editable": true,
+    "unique": "groupCode",
     "tabs": "status",
     "filterOptions": {},
     "mock": [
@@ -1185,7 +1315,9 @@ export default [
         "width": 90,
         "kw": true,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "toCurrency",
@@ -1194,7 +1326,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "rate",
@@ -1203,7 +1337,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "effectiveDate",
@@ -1212,7 +1348,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "updateUser",
@@ -1221,9 +1359,13 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       }
     ],
+    "editable": true,
+    "unique": null,
     "tabs": null,
     "filterOptions": {
       "fromCurrency": [
@@ -1292,7 +1434,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "noticeType",
@@ -1301,7 +1445,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "publisher",
@@ -1310,7 +1456,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -1332,7 +1480,9 @@ export default [
             "已撤回",
             "warning"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "publishTime",
@@ -1341,9 +1491,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": true,
+    "unique": "title",
     "tabs": "status",
     "filterOptions": {
       "noticeType": [
@@ -1412,7 +1566,9 @@ export default [
         "width": 160,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "apiName",
@@ -1420,7 +1576,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -1429,7 +1587,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "costMs",
@@ -1438,7 +1598,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "result",
@@ -1456,7 +1618,9 @@ export default [
             "成功",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "requestTime",
@@ -1465,9 +1629,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "none"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "result",
     "filterOptions": {
       "apiName": [
@@ -1549,7 +1717,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "taskName",
@@ -1557,7 +1727,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "taskType",
@@ -1566,7 +1738,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "progress",
@@ -1575,7 +1749,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -1601,7 +1777,9 @@ export default [
             "失败",
             "danger"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createUser",
@@ -1610,7 +1788,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -1619,7 +1799,9 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       },
       {
         "name": "finishTime",
@@ -1628,9 +1810,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "none"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "taskType": [
@@ -1714,7 +1900,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -1723,7 +1911,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "customerName",
@@ -1732,7 +1922,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "sourceOrderNo",
@@ -1741,7 +1933,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "trackingNo",
@@ -1750,7 +1944,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "returnType",
@@ -1759,7 +1955,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "skuQty",
@@ -1768,7 +1966,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -1777,7 +1977,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -1803,7 +2005,9 @@ export default [
             "已取消",
             "danger"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -1812,9 +2016,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "customerCode": [
@@ -1920,7 +2128,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "waveNo",
@@ -1929,7 +2139,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -1938,7 +2150,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "abnormalType",
@@ -1947,7 +2161,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "remark",
@@ -1955,7 +2171,9 @@ export default [
         "type": "str",
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -1973,7 +2191,9 @@ export default [
             "已处理",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "reportUser",
@@ -1982,7 +2202,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "reportTime",
@@ -1991,9 +2213,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "none"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "customerCode": [
@@ -2085,7 +2311,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -2094,7 +2322,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "interceptReason",
@@ -2102,7 +2332,9 @@ export default [
         "type": "str",
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "orderStatusName",
@@ -2111,7 +2343,9 @@ export default [
         "width": 130,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -2133,7 +2367,9 @@ export default [
             "拦截失败",
             "danger"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "applyTime",
@@ -2142,9 +2378,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "none"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "customerCode": [
@@ -2226,7 +2466,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -2235,7 +2477,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "customerName",
@@ -2244,7 +2488,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -2253,7 +2499,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "boxCount",
@@ -2262,7 +2510,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "skuQty",
@@ -2271,7 +2521,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -2301,7 +2553,9 @@ export default [
             "已取消",
             "danger"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "etaDate",
@@ -2310,7 +2564,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -2319,9 +2575,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "customerCode": [
@@ -2417,7 +2677,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "platformOrderNo",
@@ -2426,7 +2688,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -2435,7 +2699,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -2444,7 +2710,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "channelName",
@@ -2453,7 +2721,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "trackingNo",
@@ -2462,7 +2732,9 @@ export default [
         "width": 140,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "skuQty",
@@ -2471,7 +2743,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -2509,7 +2783,9 @@ export default [
             "已取消",
             "danger"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -2518,9 +2794,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "customerCode": [
@@ -2622,7 +2902,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -2631,7 +2913,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -2640,7 +2924,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "boxCount",
@@ -2649,7 +2935,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "palletCount",
@@ -2658,7 +2946,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "deliveryType",
@@ -2667,7 +2957,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -2693,7 +2985,9 @@ export default [
             "已取消",
             "danger"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -2702,9 +2996,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "customerCode": [
@@ -2800,7 +3098,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -2809,7 +3109,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -2818,7 +3120,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "returnType",
@@ -2827,7 +3131,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "skuQty",
@@ -2836,7 +3142,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -2862,7 +3170,9 @@ export default [
             "已取消",
             "danger"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -2871,9 +3181,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "customerCode": [
@@ -2964,7 +3278,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -2973,7 +3289,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "channelName",
@@ -2982,7 +3300,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "trackingNo",
@@ -2991,7 +3311,9 @@ export default [
         "width": 140,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "weightKg",
@@ -3000,7 +3322,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -3026,7 +3350,9 @@ export default [
             "已取消",
             "danger"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -3035,9 +3361,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "customerCode": [
@@ -3125,7 +3455,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "channelName",
@@ -3134,7 +3466,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "orderCount",
@@ -3143,7 +3477,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "weightKg",
@@ -3152,7 +3488,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -3174,7 +3512,9 @@ export default [
             "已交接",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -3183,9 +3523,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "channelName": [
@@ -3261,7 +3605,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "orderNo",
@@ -3270,7 +3616,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -3279,7 +3627,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "claimType",
@@ -3288,7 +3638,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "claimAmount",
@@ -3297,7 +3649,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "currency",
@@ -3306,7 +3660,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -3332,7 +3688,9 @@ export default [
             "已驳回",
             "danger"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -3341,9 +3699,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "customerCode": [
@@ -3439,7 +3801,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "title",
@@ -3447,7 +3811,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -3456,7 +3822,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "workType",
@@ -3465,7 +3833,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "priority",
@@ -3474,7 +3844,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -3500,7 +3872,9 @@ export default [
             "已关闭",
             "danger"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -3509,9 +3883,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "customerCode": [
@@ -3604,7 +3982,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "asnNo",
@@ -3613,7 +3993,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -3622,7 +4004,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -3631,7 +4015,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "boxCount",
@@ -3640,7 +4026,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "scanUser",
@@ -3649,7 +4037,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -3667,7 +4057,9 @@ export default [
             "已匹配",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "scanTime",
@@ -3676,9 +4068,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "none"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "customerCode": [
@@ -3769,7 +4165,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "asnNo",
@@ -3778,7 +4176,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -3787,7 +4187,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -3796,7 +4198,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "appointDate",
@@ -3805,7 +4209,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "vehicleType",
@@ -3814,7 +4220,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -3840,7 +4248,9 @@ export default [
             "已取消",
             "danger"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -3849,9 +4259,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "customerCode": [
@@ -3947,7 +4361,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "asnNo",
@@ -3956,7 +4372,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "trayNo",
@@ -3965,7 +4383,9 @@ export default [
         "width": 120,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -3974,7 +4394,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -3983,7 +4405,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "boxCount",
@@ -3992,7 +4416,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "skuQty",
@@ -4001,7 +4427,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "operator",
@@ -4010,7 +4438,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -4028,7 +4458,9 @@ export default [
             "已完成",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "receiptTime",
@@ -4037,9 +4469,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "none"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "customerCode": [
@@ -4140,7 +4576,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "trayNo",
@@ -4149,7 +4587,9 @@ export default [
         "width": 120,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "asnNo",
@@ -4158,7 +4598,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -4167,7 +4609,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "boxCount",
@@ -4176,7 +4620,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "operator",
@@ -4185,7 +4631,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -4207,7 +4655,9 @@ export default [
             "已上架",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -4216,9 +4666,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "whCode": [
@@ -4302,7 +4756,9 @@ export default [
         "width": 110,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "productName",
@@ -4310,7 +4766,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -4319,7 +4777,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "asnNo",
@@ -4328,7 +4788,9 @@ export default [
         "width": 150,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "lengthCm",
@@ -4337,7 +4799,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "widthCm",
@@ -4346,7 +4810,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "heightCm",
@@ -4355,7 +4821,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "weightKg",
@@ -4364,7 +4832,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -4382,7 +4852,9 @@ export default [
             "已测量",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -4391,9 +4863,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "customerCode": [
@@ -4490,7 +4966,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "barcode",
@@ -4499,7 +4977,9 @@ export default [
         "width": 130,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -4508,7 +4988,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "cellCode",
@@ -4517,7 +4999,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "qty",
@@ -4526,7 +5010,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "claimCustomerCode",
@@ -4535,7 +5021,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -4557,7 +5045,9 @@ export default [
             "已作废",
             "info"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -4566,9 +5056,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "whCode": [
@@ -4658,7 +5152,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -4667,7 +5163,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -4676,7 +5174,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "boxCount",
@@ -4685,7 +5185,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "palletCount",
@@ -4694,7 +5196,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "deliveryType",
@@ -4703,7 +5207,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "appointTime",
@@ -4712,7 +5218,9 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "none"
       },
       {
         "name": "status",
@@ -4742,7 +5250,9 @@ export default [
             "已取消",
             "danger"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -4751,9 +5261,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "customerCode": [
@@ -4854,7 +5368,9 @@ export default [
         "width": 120,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "ruleName",
@@ -4862,7 +5378,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -4871,7 +5389,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "orderType",
@@ -4880,7 +5400,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "maxOrderCount",
@@ -4889,7 +5411,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "priority",
@@ -4898,7 +5422,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -4916,7 +5442,9 @@ export default [
             "启用",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -4925,9 +5453,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "update"
       }
     ],
+    "editable": true,
+    "unique": "ruleCode",
     "tabs": "status",
     "filterOptions": {
       "whCode": [
@@ -5016,7 +5548,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "carrier",
@@ -5025,7 +5559,9 @@ export default [
         "width": 120,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -5034,7 +5570,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "parcelCount",
@@ -5043,7 +5581,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "totalWeightKg",
@@ -5052,7 +5592,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -5070,7 +5612,9 @@ export default [
             "已交接",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "handoverTime",
@@ -5079,7 +5623,9 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "none"
       },
       {
         "name": "createTime",
@@ -5088,9 +5634,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "carrier": [
@@ -5179,7 +5729,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "newOrderNos",
@@ -5187,7 +5739,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -5196,7 +5750,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "splitReason",
@@ -5205,7 +5761,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "operator",
@@ -5214,7 +5772,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "splitTime",
@@ -5223,9 +5783,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "none"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": null,
     "filterOptions": {
       "customerCode": [
@@ -5302,7 +5866,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "oldTrackingNo",
@@ -5311,7 +5877,9 @@ export default [
         "width": 140,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "newTrackingNo",
@@ -5320,7 +5888,9 @@ export default [
         "width": 140,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "channelName",
@@ -5329,7 +5899,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "reason",
@@ -5337,7 +5909,9 @@ export default [
         "type": "str",
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -5359,7 +5933,9 @@ export default [
             "失败",
             "danger"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -5368,9 +5944,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "channelName": [
@@ -5451,7 +6031,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -5460,7 +6042,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -5469,7 +6053,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "sku",
@@ -5478,7 +6064,9 @@ export default [
         "width": 110,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "qty",
@@ -5487,7 +6075,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "newBarcode",
@@ -5496,7 +6086,9 @@ export default [
         "width": 130,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "status",
@@ -5518,7 +6110,9 @@ export default [
             "已完成",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -5527,9 +6121,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "customerCode": [
@@ -5620,7 +6218,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "returnNo",
@@ -5629,7 +6229,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -5638,7 +6240,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -5647,7 +6251,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "skuQty",
@@ -5656,7 +6262,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "outboundType",
@@ -5665,7 +6273,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -5687,7 +6297,9 @@ export default [
             "已取消",
             "danger"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -5696,9 +6308,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "customerCode": [
@@ -5794,7 +6410,9 @@ export default [
         "width": 120,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "planName",
@@ -5802,7 +6420,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "carrier",
@@ -5811,7 +6431,9 @@ export default [
         "width": 120,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "fuelRate",
@@ -5820,7 +6442,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "effectiveDate",
@@ -5829,7 +6453,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "expireDate",
@@ -5838,7 +6464,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -5856,7 +6484,9 @@ export default [
             "启用",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -5865,9 +6495,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "update"
       }
     ],
+    "editable": true,
+    "unique": "planCode",
     "tabs": "status",
     "filterOptions": {
       "carrier": [
@@ -5952,7 +6586,9 @@ export default [
         "width": 120,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "tempName",
@@ -5960,7 +6596,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "carrier",
@@ -5969,7 +6607,9 @@ export default [
         "width": 120,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "country",
@@ -5978,7 +6618,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "zoneCount",
@@ -5987,7 +6629,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -6005,7 +6649,9 @@ export default [
             "启用",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -6014,9 +6660,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "update"
       }
     ],
+    "editable": true,
+    "unique": "tempCode",
     "tabs": "status",
     "filterOptions": {
       "carrier": [
@@ -6102,7 +6752,9 @@ export default [
         "width": 120,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "chargeName",
@@ -6110,7 +6762,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "carrier",
@@ -6119,7 +6773,9 @@ export default [
         "width": 120,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "chargeType",
@@ -6128,7 +6784,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "amount",
@@ -6137,7 +6795,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "currency",
@@ -6146,7 +6806,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -6164,7 +6826,9 @@ export default [
             "启用",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -6173,9 +6837,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "update"
       }
     ],
+    "editable": true,
+    "unique": "chargeCode",
     "tabs": "status",
     "filterOptions": {
       "carrier": [
@@ -6269,7 +6937,9 @@ export default [
         "width": 120,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "tempName",
@@ -6277,7 +6947,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "channelName",
@@ -6286,7 +6958,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "billingMode",
@@ -6295,7 +6969,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "currency",
@@ -6304,7 +6980,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -6322,7 +7000,9 @@ export default [
             "启用",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -6331,9 +7011,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "update"
       }
     ],
+    "editable": true,
+    "unique": "tempCode",
     "tabs": "status",
     "filterOptions": {
       "channelName": [
@@ -6422,7 +7106,9 @@ export default [
         "width": 100,
         "kw": true,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerName",
@@ -6431,7 +7117,9 @@ export default [
         "width": 110,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "channelName",
@@ -6440,7 +7128,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "freightTempName",
@@ -6448,7 +7138,9 @@ export default [
         "type": "str",
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "discountRate",
@@ -6457,7 +7149,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -6475,7 +7169,9 @@ export default [
             "启用",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -6484,9 +7180,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "update"
       }
     ],
+    "editable": true,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "customerCode": [
@@ -6574,7 +7274,9 @@ export default [
         "width": 120,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "itemName",
@@ -6582,7 +7284,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "billingUnit",
@@ -6591,7 +7295,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "unitPrice",
@@ -6600,7 +7306,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "currency",
@@ -6609,7 +7317,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -6627,7 +7337,9 @@ export default [
             "启用",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -6636,9 +7348,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "update"
       }
     ],
+    "editable": true,
+    "unique": "itemCode",
     "tabs": "status",
     "filterOptions": {
       "billingUnit": [
@@ -6722,7 +7438,9 @@ export default [
         "width": 120,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "planName",
@@ -6730,7 +7448,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -6739,7 +7459,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "freeDays",
@@ -6748,7 +7470,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "unitPrice",
@@ -6757,7 +7481,9 @@ export default [
         "width": 140,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "currency",
@@ -6766,7 +7492,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -6784,7 +7512,9 @@ export default [
             "启用",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -6793,9 +7523,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "update"
       }
     ],
+    "editable": true,
+    "unique": "planCode",
     "tabs": "status",
     "filterOptions": {
       "whCode": [
@@ -6882,7 +7616,9 @@ export default [
         "width": 120,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "schemeName",
@@ -6890,7 +7626,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCount",
@@ -6899,7 +7637,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "currency",
@@ -6908,7 +7648,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "effectiveDate",
@@ -6917,7 +7659,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -6939,7 +7683,9 @@ export default [
             "失效",
             "warning"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -6948,9 +7694,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "update"
       }
     ],
+    "editable": true,
+    "unique": "schemeCode",
     "tabs": "status",
     "filterOptions": {
       "currency": [
@@ -7029,7 +7779,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "bizNo",
@@ -7038,7 +7790,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -7047,7 +7801,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "feeType",
@@ -7056,7 +7812,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "amount",
@@ -7065,7 +7823,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "currency",
@@ -7074,7 +7834,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -7092,7 +7854,9 @@ export default [
             "已出账",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "feeTime",
@@ -7101,9 +7865,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "none"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "customerCode": [
@@ -7199,7 +7967,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -7208,7 +7978,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "customerName",
@@ -7217,7 +7989,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "billPeriod",
@@ -7226,7 +8000,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "amount",
@@ -7235,7 +8011,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "currency",
@@ -7244,7 +8022,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -7266,7 +8046,9 @@ export default [
             "已结清",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -7275,9 +8057,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "customerCode": [
@@ -7372,7 +8158,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -7381,7 +8169,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "billNo",
@@ -7390,7 +8180,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "amount",
@@ -7399,7 +8191,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "currency",
@@ -7408,7 +8202,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "balanceAfter",
@@ -7417,7 +8213,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "expendTime",
@@ -7426,9 +8224,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "none"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": null,
     "filterOptions": {
       "customerCode": [
@@ -7508,7 +8310,9 @@ export default [
         "width": 120,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "tempName",
@@ -7516,7 +8320,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "billCycle",
@@ -7525,7 +8331,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "feeTypes",
@@ -7533,7 +8341,9 @@ export default [
         "type": "str",
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -7551,7 +8361,9 @@ export default [
             "启用",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -7560,9 +8372,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "update"
       }
     ],
+    "editable": true,
+    "unique": "tempCode",
     "tabs": "status",
     "filterOptions": {
       "billCycle": [
@@ -7637,7 +8453,9 @@ export default [
         "width": 120,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "tempName",
@@ -7645,7 +8463,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "tempType",
@@ -7654,7 +8474,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "paperSize",
@@ -7663,7 +8485,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "isDefault",
@@ -7681,7 +8505,9 @@ export default [
             "是",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "status",
@@ -7699,7 +8525,9 @@ export default [
             "启用",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -7708,9 +8536,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "update"
       }
     ],
+    "editable": true,
+    "unique": "tempCode",
     "tabs": "status",
     "filterOptions": {
       "tempType": [
@@ -7801,7 +8633,9 @@ export default [
         "width": 120,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "brandName",
@@ -7809,7 +8643,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "domain",
@@ -7818,7 +8654,9 @@ export default [
         "width": 200,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -7836,7 +8674,9 @@ export default [
             "启用",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -7845,9 +8685,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "update"
       }
     ],
+    "editable": true,
+    "unique": "brandCode",
     "tabs": "status",
     "filterOptions": {},
     "mock": [
@@ -7902,7 +8746,9 @@ export default [
         "width": 120,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "agencyName",
@@ -7910,7 +8756,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "agencyType",
@@ -7919,7 +8767,9 @@ export default [
         "width": 120,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "contactName",
@@ -7928,7 +8778,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -7946,7 +8798,9 @@ export default [
             "启用",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -7955,9 +8809,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "update"
       }
     ],
+    "editable": true,
+    "unique": "agencyCode",
     "tabs": "status",
     "filterOptions": {
       "agencyType": [
@@ -8032,7 +8890,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -8041,7 +8901,9 @@ export default [
         "width": 100,
         "kw": true,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "appKeyMasked",
@@ -8050,7 +8912,9 @@ export default [
         "width": 140,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "authTime",
@@ -8059,7 +8923,9 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "none"
       },
       {
         "name": "expireTime",
@@ -8068,7 +8934,9 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "none"
       },
       {
         "name": "status",
@@ -8086,9 +8954,13 @@ export default [
             "有效",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "erpName": [
@@ -8169,7 +9041,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "msgType",
@@ -8178,7 +9052,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "receiver",
@@ -8187,7 +9063,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "readFlag",
@@ -8205,7 +9083,9 @@ export default [
             "已读",
             "info"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "sendTime",
@@ -8214,9 +9094,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "none"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "readFlag",
     "filterOptions": {
       "msgType": [
@@ -8287,7 +9171,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "content",
@@ -8295,7 +9181,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "whCode",
@@ -8304,7 +9192,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "level",
@@ -8326,7 +9216,9 @@ export default [
             "严重",
             "danger"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "handled",
@@ -8344,7 +9236,9 @@ export default [
             "已处理",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -8353,9 +9247,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "level",
     "filterOptions": {
       "warningType": [
@@ -8438,7 +9336,9 @@ export default [
         "type": "str",
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "bankName",
@@ -8447,7 +9347,9 @@ export default [
         "width": 120,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "accountNoMasked",
@@ -8456,7 +9358,9 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "currency",
@@ -8465,7 +9369,9 @@ export default [
         "width": 70,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -8483,7 +9389,9 @@ export default [
             "启用",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "updateTime",
@@ -8492,9 +9400,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "update"
       }
     ],
+    "editable": true,
+    "unique": "accountName",
     "tabs": "status",
     "filterOptions": {
       "bankName": [
@@ -8573,7 +9485,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "bizType",
@@ -8582,7 +9496,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "bizNo",
@@ -8591,7 +9507,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "errorMsg",
@@ -8599,7 +9517,9 @@ export default [
         "type": "str",
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "retryCount",
@@ -8608,7 +9528,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "status",
@@ -8630,7 +9552,9 @@ export default [
             "已忽略",
             "info"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -8639,9 +9563,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "status",
     "filterOptions": {
       "bizType": [
@@ -8721,7 +9649,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "trackingNo",
@@ -8730,7 +9660,9 @@ export default [
         "width": 140,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "channelName",
@@ -8739,7 +9671,9 @@ export default [
         "width": 110,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "labelFormat",
@@ -8748,7 +9682,9 @@ export default [
         "width": 80,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "result",
@@ -8766,7 +9702,9 @@ export default [
             "成功",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "createTime",
@@ -8775,9 +9713,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "create"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "result",
     "filterOptions": {
       "channelName": [
@@ -8858,7 +9800,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "bizNo",
@@ -8867,7 +9811,9 @@ export default [
         "width": 150,
         "kw": true,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": true,
+        "auto": null
       },
       {
         "name": "customerCode",
@@ -8876,7 +9822,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "pushType",
@@ -8885,7 +9833,9 @@ export default [
         "width": 100,
         "kw": false,
         "filter": true,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "costMs",
@@ -8894,7 +9844,9 @@ export default [
         "width": 90,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": null
       },
       {
         "name": "result",
@@ -8912,7 +9864,9 @@ export default [
             "成功",
             "success"
           ]
-        }
+        },
+        "required": true,
+        "auto": null
       },
       {
         "name": "pushTime",
@@ -8921,9 +9875,13 @@ export default [
         "width": 160,
         "kw": false,
         "filter": false,
-        "enum": null
+        "enum": null,
+        "required": false,
+        "auto": "none"
       }
     ],
+    "editable": false,
+    "unique": null,
     "tabs": "result",
     "filterOptions": {
       "customerCode": [

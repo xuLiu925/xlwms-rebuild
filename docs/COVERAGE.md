@@ -3,9 +3,9 @@
 目标：把重建版补到覆盖原 WMS 的全部模块。约束不变（见 CLAUDE.md）：数据全部虚构、不连生产。
 网页端请求体没抓到，所以网页端的接口路径、请求体字段与状态编码大多是**本项目占位**；PDA 端的路径与请求体字段来自 APK 静态还原。
 
-状态说明：✅ 专门实现 · 🟦 通用列表页（规格在 `tools/list-pages/spec*.mjs`，只读） · ⬜ 占位（页面显示"待实现"）
+状态说明：✅ 专门实现 · 🟦 通用列表页（规格在 `tools/list-pages/spec*.mjs`；批次 8 起其中 23 页可本地增删改） · ⬜ 占位（页面显示"待实现"）
 
-## 汇总（2026-11-24，批次 7 完成后）
+## 汇总（2026-11-24，批次 8 完成后）
 
 | 范围 | 总数 | ✅ | 🟦 | ⬜ |
 |---|---|---|---|---|
@@ -79,7 +79,8 @@ PDA 的 175 是 ApiService 方法数；其中 `receipt/listBoxType` 有两个方
    PDA 覆盖到 146/175，剩下的都在批次 7。
 7. **批次 7（已完成）**：其余 29 个 PDA 接口（device ×9、pickAndSort ×4、appendix ×4、messageBoard ×2、auth ×2、home、menu、warehouse ×2、system ×2、
    common/pic/upload、blMoveStock/boxMoveStock），PDA 覆盖到 175/175。规则见下方“批次 7 的数据与规则”。
-   原计划里的“网页端本地增删改（只写本地库）”没有做，网页端 58 个通用列表页仍是只读。
+8. **批次 8（已完成）**：网页端通用列表页本地增删改。58 个通用列表页中 23 个基础资料 / 报价 / 设置类页面可新建、编辑、删除，
+   其余 35 个日志、单据、流水类页面保持只读。规则见下方“批次 8 的数据与规则”。
 
 ## 批次 3 页面的数据与规则
 
@@ -179,6 +180,19 @@ PDA 的 175 是 ApiService 方法数；其中 `receipt/listBoxType` 有两个方
 - **按箱移库**（`/blMoveStock/boxMoveStock`）：boxList（按箱，数量为箱数）、skuList、returnList 可混合提交；先整批校验
   （库位存在、目标未锁定、源目标不同、客户一致、FNSKU 一致、同一来源的数量合计不超过可用数、次品只能去 E 区），全部通过才执行。
 
+## 批次 8 的数据与规则（通用列表页增删改）
+
+- 可编辑的资源在 `tools/list-pages/spec.mjs` 的 `editable` 集合里：customer、seedWall、pickCart、account、role、channel、channelGroup、
+  exchangeRate、notice、waveRule、fuelPlan、zoneTemp、surcharge、freightTemp、logisticsPriceSetting、operateBill、warehouseRent、
+  quotationScheme、billTemplate、printTemplate、brand、agency、receiveAccount。
+- 接口（占位）：`POST /gateway/wms/{key}/add`（返回 `{id}`）、`/update`（请求体带 id，只改传了的字段）、`/delete`（`{ids:[...]}`，任一不存在则整批不删），
+  在 `list/GenericEditController`。只读资源调用返回“该页面只读，不支持编辑”。只写本地库 lp_* 表，后端重启后恢复示例数据。
+- 校验（本项目假设）：关键字列与枚举列必填；文本最长 128；整数 0~1000000；金额/数值 0~1e8 且最多 2 位小数，汇率类最多 6 位；枚举值必须在可选范围内。
+  第一个关键字列若在示例数据中唯一，就作为唯一键（如客户代码、渠道代码）；汇率、物流报价设置没有唯一键。
+- 时间列不在表单里：createTime / publishTime 新建时填当前时间，updateTime 每次保存都填，其他时间列（如最近登录）新建时为空、编辑时不变。
+- 新建 ID 取该资源 ID 区间（idBase 起 1e13 宽）内的最大值 + 1。
+- 前端 `GenericList.vue`：可编辑页面显示“新建”“删除”按钮、勾选列和“编辑 / 删除”操作列，表单由列定义生成；后端未连通、用内置 mock 时不显示编辑入口。
+
 ## 已知限制（通用列表页）
 
 - 后端未连通时前端退回内置 mock（每页前 5 行），此时只有状态页签会过滤，下拉筛选和关键字不生效。
@@ -190,3 +204,4 @@ PDA 的 175 是 ApiService 方法数；其中 `receipt/listBoxType` 有两个方
    `idBase` 用 `ID(n)`，n 取下一个未用的编号。`route` 必须是 `frontend/src/router/index.js` 中 `modules` 里的子路由，且不在 `pages` 里。
 2. 在项目根目录运行 `node tools/list-pages/gen.mjs`，会重新生成建表、数据、注册表、前端配置和 `backend/src/test/resources/list-expected.csv`。
 3. 跑 `mvn test`。不需要手改测试。
+4. 如果这一页要能增删改，把 key 加进 `spec.mjs` 的 `editable`，并把 `GenericEditControllerTest` 里的可编辑资源数（目前 23）改掉。

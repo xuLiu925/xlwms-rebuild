@@ -3,7 +3,7 @@
 import { writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { resources } from './spec.mjs'
+import { resources, editable } from './spec.mjs'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..')
 const out = p => resolve(root, p)
@@ -29,6 +29,7 @@ for (const r of resources) {
   ranges.push([r.idBase + 1, r.idBase + r.count, r.key])
   if (r.columns.filter(c => c[3] && c[3].tabs).length > 1) throw new Error(r.key + ' 有多个 tabs 列')
 }
+for (const k of editable) if (!resources.some(r => r.key === k)) throw new Error('editable 中的资源不存在: ' + k)
 ranges.sort((a, b) => a[0] - b[0]).forEach((x, i, a) => { if (i && x[0] <= a[i - 1][1]) throw new Error('ID 区间重叠: ' + a[i - 1][2] + ' / ' + x[2]) })
 
 for (const r of resources) {
@@ -48,10 +49,21 @@ for (const r of resources) {
   data.push('')
 
   const tabs = cols.find(c => c.tabs)
+  // 批次 8 编辑元数据：关键字列与枚举列必填；createTime/publishTime 新建时由后端填当前时间，updateTime 每次保存都填；
+  // 其他时间列（如最近登录）不在表单里。第一个关键字列在数据里唯一时作为唯一键。
+  const isEditable = editable.has(r.key)
+  for (const c of cols) {
+    c.required = !!(c.kw || c.enum)
+    c.auto = c.type === 'time' ? ({ createTime: 'create', publishTime: 'create', updateTime: 'update' }[c.name] || 'none') : null
+  }
+  const firstKw = cols.find(c => c.kw)
+  const unique = isEditable && firstKw && new Set(rows.map(x => x[firstKw.name])).size === rows.length ? firstKw.name : null
   registry.push({
+    editable: isEditable, unique, idBase: r.idBase,
     key: r.key, table,
     columns: cols.map(c => ({ name: c.name, column: c.column, type: c.type, kw: !!c.kw, filter: !!(c.filter || c.enum),
-      enumLabels: c.enum ? Object.fromEntries(Object.entries(c.enum).map(([k, v]) => [k, v[0]])) : null })),
+      enumLabels: c.enum ? Object.fromEntries(Object.entries(c.enum).map(([k, v]) => [k, v[0]])) : null,
+      required: c.required, auto: c.auto })),
     tabsColumn: tabs ? tabs.name : null
   })
 
@@ -67,8 +79,9 @@ for (const r of resources) {
   })
   front.push({
     key: r.key, route: r.route, title: r.title,
-    columns: cols.map(c => ({ name: c.name, label: c.label, type: c.type, width: c.width, kw: !!c.kw, filter: !!c.filter, enum: c.enum || null })),
-    tabs: tabs ? tabs.name : null, filterOptions, mock, mockTotal: rows.length
+    columns: cols.map(c => ({ name: c.name, label: c.label, type: c.type, width: c.width, kw: !!c.kw, filter: !!c.filter, enum: c.enum || null,
+      required: c.required, auto: c.auto })),
+    editable: isEditable, unique, tabs: tabs ? tabs.name : null, filterOptions, mock, mockTotal: rows.length
   })
 }
 
