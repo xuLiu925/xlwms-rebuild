@@ -143,7 +143,8 @@ Java 后端（Spring Boot 3 / Java 17）+ Vue 2 前端。当前全部是虚构�
 - 用户用 Git Bash：路径要写 `/d/java/...`，**不要写反斜杠路径**（上次因此在 `D:\java` 误建了 .git，需确认已删除：`ls /d/java/.git` 应不存在）。
 - 该目录所有者显示为系统账户，git 会报 dubious ownership。只对项目目录加信任：
   `git config --global --add safe.directory D:/java/xlwms-rebuild`，不要对 `D:/java` 或 `*` 加。
-- 仓库：计划推到私有仓库 `xuLiu925/xlwms-rebuild`（用户账号下其他仓库都是公开的，**不要推到公开仓库**）。
+- 仓库：`xuLiu925/xlwms-rebuild`，**是公开仓库**。2026-11-24 用户明确决定保持公开并继续推送。推送前仍要扫一遍待推送的提交：
+  不能含 `_private/`、APK、签名密钥、令牌、账号密码、个人信息或真实业务数据（客户名、单号、库存、仓库名等）。
 - PDA 安装包与反编译产物放 `_private/`，已在 .gitignore 中，不要提交。
 
 ## 可直接用的提示词
