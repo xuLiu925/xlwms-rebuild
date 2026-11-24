@@ -1,0 +1,25 @@
+server:
+  port: 0
+spring:
+  application:
+    name: xlwms-rebuild-test
+  # 测试用 H2 内存库，MySQL 兼容模式，复用同一套 schema.sql / data.sql。
+  datasource:
+    # IGNORECASE=TRUE 让 H2 的 = / LIKE 不区分大小写，贴近 MySQL 默认 *_ci 排序规则
+    url: jdbc:h2:mem:xlwms_dev;MODE=MySQL;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE;IGNORECASE=TRUE;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  sql:
+    init:
+      mode: always
+      encoding: UTF-8
+      schema-locations: classpath:db/schema.sql
+      data-locations: classpath:db/data.sql
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: input

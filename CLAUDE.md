@@ -64,6 +64,17 @@ Java 后端（Spring Boot 3 / Java 17）+ Vue 2 前端。当前全部是虚构�
 3. 按请求体类补全后端 DTO；逐步用 MyBatis-Plus + 本地 MySQL 替换示例数据（仅本地开发库）。
 4. 前端把 router 里的占位页逐个实现，先做只读列表页。
 
+## 数据层（2026-11-24：示例数据改为本地 MySQL + MyBatis-Plus）
+- 只迁了三个只读列表页的数据集：`stock_sku`（库存）、`bl_delivery`（一件代发）、`bl_asn`（入库）。
+  对应 `entity/`、`mapper/`（BaseMapper）、`StockController`/`DeliveryController`/`InboundController` 改为 MyBatis-Plus 查询 + 分页插件。
+  PDA 收货/上架/退货/波次仍是回显骨架，未入库。
+- 建表与灌数据：启动时 `spring.sql.init` 跑 `resources/db/schema.sql` + `data.sql`（UTF-8，全部虚构，每次启动重建）。
+- 连接：库 `xlwms_dev`、`createDatabaseIfNotExist=true`；账号用环境变量 `${MYSQL_USER:root}` / `${MYSQL_PASSWORD:}`，
+  **密码不写进仓库**。本机 root 有密码，跑前先设环境变量，例如：
+  `MYSQL_PASSWORD=xxx mvn spring-boot:run`（Git Bash）或在 PowerShell `$env:MYSQL_PASSWORD='xxx'` 再 `mvn spring-boot:run`。
+- 测试：`mvn test` 用 H2（MySQL 兼容模式，`IGNORECASE=TRUE`）复用同一套 schema/data，不依赖真实 MySQL；共 22 个测试通过。
+- 未做：没能在真实 MySQL 上实跑验证（缺 root 密码，按规则没要）；逻辑已由 H2 同构验证。
+
 ## 本机环境（用户电脑，Windows）
 - 项目：`D:\java\xlwms-rebuild`；JDK 17/21 在 `D:\java\java-17.0.1`、`D:\java\jdk-21`；Maven `D:\java\apache-maven-3.9.9`；
   本地 MySQL 8.3 `D:\java\mysql-8.3.0-winx64`；Node `D:\java\nodejs`；jadx 相关工具在 `~/tools/jadx-headless-mcp`。

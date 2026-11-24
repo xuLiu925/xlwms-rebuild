@@ -27,7 +27,9 @@ class HomeControllerTest {
 
     @Test
     void longIdIsSerializedAsString() throws Exception {
+        // 19 位雪花 ID 以字符串返回（值来自 DB，这里只校验类型与数字串格式）
         mvc.perform(post("/gateway/wms/blAsn/page"))
-                .andExpect(jsonPath("$.data.records[0].id").value("1"));
+                .andExpect(jsonPath("$.data.records[0].id").value(org.hamcrest.Matchers.instanceOf(String.class)))
+                .andExpect(jsonPath("$.data.records[0].id").value(org.hamcrest.Matchers.matchesPattern("\\d{16,}")));
     }
 }

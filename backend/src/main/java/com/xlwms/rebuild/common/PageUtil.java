@@ -1,11 +1,22 @@
 package com.xlwms.rebuild.common;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import java.util.List;
 import java.util.Map;
 
 /** 示例接口用的内存分页，返回结构与观察到的 MyBatis-Plus 分页 {records,total,size,current} 一致。 */
 public final class PageUtil {
     private PageUtil() {
+    }
+
+    /** 把 MyBatis-Plus 的分页结果转成与内存分页一致的返回结构（int 输出，避免 Long 被序列化成字符串）。 */
+    public static Map<String, Object> of(IPage<?> p) {
+        return Map.of(
+                "records", p.getRecords(),
+                "total", (int) p.getTotal(),
+                "size", (int) p.getSize(),
+                "current", (int) p.getCurrent(),
+                "pages", (int) p.getPages());
     }
 
     public static long longParam(Map<String, Object> body, String key, long def) {
