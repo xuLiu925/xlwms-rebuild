@@ -43,6 +43,11 @@ Java 后端（Spring Boot 3 / Java 17）+ Vue 2 前端。当前全部是虚构�
   路由里用 `pages` 映射已实现页面。后端 `DeliveryController`（`/blDelivery/{queryInTotal,page}`）与 `StockController` 改为内存分页虚构数据（`common/PageUtil`）。
   **注意**：这两组的请求体字段（keyword/customerCode/status/current/size）、records 字段名、一件代发状态编码（10/20/30/40/50/80/90）都是本项目占位，真实值未抓取。
   本地运行配置在 `.claude/launch.json`（后端 8080、前端 8081）。测试共 16 个通过。
+- 库存只读页补充（2026-11-24）：新增按箱库存 `views/stock/Box.vue` 与退货库存 `views/stock/Return.vue`，
+  路由 `pages` 注册 `stock/box`、`stock/return`。后端 `StockBoxController`（`/gateway/wms/stockBox/{page,boxTotal}`）、
+  `StockReturnController`（`/gateway/wms/stockReturn/{page,returnTotal}`），对应实体/Mapper/表 `stock_box`(18 行)、`stock_return`(15 行)，
+  走 MyBatis-Plus + 本地 MySQL/H2，全部虚构数据。**注意**：这两组的接口路径、请求体字段、退货状态编码
+  （10 待上架/20 已上架/30 待销毁/40 已销毁）都是本项目占位，真实接口未抓取。测试共 26 个通过。
 - 出库作业（2026-11-24）：按 APK 还原波次拣货 `/pda/wave/{pickList,page,pageCell,skuDetail,scanCell,scanSku,pick,queryIntercepting}`
   与复核 `/pda/review/{get4piecePackage,review4packageV2,get4MorePiece,morePieceV2,confirmDelivery}`（`WaveController`、`ReviewController`，
   DTO 在 `dto/wave`、`dto/review`，用 Java record）。响应字段按 APK 的 WavePageBean/PiecePackageBean/MorePieceBean/PutAwayStatus 等还原。
@@ -65,7 +70,7 @@ Java 后端（Spring Boot 3 / Java 17）+ Vue 2 前端。当前全部是虚构�
 4. 前端把 router 里的占位页逐个实现，先做只读列表页。
 
 ## 数据层（2026-11-24：示例数据改为本地 MySQL + MyBatis-Plus）
-- 只迁了三个只读列表页的数据集：`stock_sku`（库存）、`bl_delivery`（一件代发）、`bl_asn`（入库）。
+- 已迁的只读列表页数据集：`stock_sku`（库存）、`bl_delivery`（一件代发）、`bl_asn`（入库），后补 `stock_box`（按箱库存）、`stock_return`（退货库存）。
   对应 `entity/`、`mapper/`（BaseMapper）、`StockController`/`DeliveryController`/`InboundController` 改为 MyBatis-Plus 查询 + 分页插件。
   PDA 收货/上架/退货/波次仍是回显骨架，未入库。
 - 建表与灌数据：启动时 `spring.sql.init` 跑 `resources/db/schema.sql` + `data.sql`（UTF-8，全部虚构，每次启动重建）。

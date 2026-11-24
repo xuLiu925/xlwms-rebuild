@@ -53,3 +53,35 @@ CREATE TABLE bl_asn (
   eta_time      VARCHAR(32),
   create_time   VARCHAR(32)
 );
+
+DROP TABLE IF EXISTS stock_box;
+CREATE TABLE stock_box (
+  id            BIGINT       NOT NULL PRIMARY KEY,
+  box_no        VARCHAR(64),
+  sku           VARCHAR(64),
+  product_name  VARCHAR(128),
+  customer_code VARCHAR(32),
+  customer_name VARCHAR(64),
+  cell_code     VARCHAR(32),
+  box_spec      VARCHAR(32),
+  stock_attr    VARCHAR(16),
+  qty           INT,
+  shelf_time    VARCHAR(32)
+);
+
+DROP TABLE IF EXISTS stock_return;
+CREATE TABLE stock_return (
+  id            BIGINT       NOT NULL PRIMARY KEY,
+  return_no     VARCHAR(64),
+  tracking_no   VARCHAR(64),
+  sku           VARCHAR(64),
+  product_name  VARCHAR(128),
+  customer_code VARCHAR(32),
+  customer_name VARCHAR(64),
+  qty           INT,
+  reason        VARCHAR(64),
+  status        INT,
+  status_name   VARCHAR(32),
+  cell_code     VARCHAR(32),
+  receive_time  VARCHAR(32)
+);

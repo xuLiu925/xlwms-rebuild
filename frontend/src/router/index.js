@@ -25,7 +25,9 @@ const pages = {
   'inbound/ASN': () => import('../views/inbound/ASN.vue'),
   'outbound/parcel': () => import('../views/outbound/Parcel.vue'),
   'outbound/wave': () => import('../views/outbound/Wave.vue'),
-  'stock/sku': () => import('../views/stock/Sku.vue')
+  'stock/sku': () => import('../views/stock/Sku.vue'),
+  'stock/box': () => import('../views/stock/Box.vue'),
+  'stock/return': () => import('../views/stock/Return.vue')
 }
 const routes = [
   { path: '/login', component: () => import('../views/Login.vue') },

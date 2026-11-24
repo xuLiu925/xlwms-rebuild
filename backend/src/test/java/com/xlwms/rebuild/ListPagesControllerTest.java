@@ -54,4 +54,32 @@ class ListPagesControllerTest {
                         .content("{\"stockAttr\":\"次品\"}"))
                 .andExpect(jsonPath("$.data.skuCount").value(4));
     }
+
+    @Test
+    void stockBoxPageWorksWithoutBody() throws Exception {
+        mvc.perform(post("/gateway/wms/stockBox/page"))
+                .andExpect(jsonPath("$.data.total").value(18))
+                .andExpect(jsonPath("$.data.records[0].id").isString());
+    }
+
+    @Test
+    void stockBoxTotalMatchesFilter() throws Exception {
+        mvc.perform(post("/gateway/wms/stockBox/boxTotal").contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"stockAttr\":\"次品\"}"))
+                .andExpect(jsonPath("$.data.boxCount").value(2));
+    }
+
+    @Test
+    void stockReturnPageWorksWithoutBody() throws Exception {
+        mvc.perform(post("/gateway/wms/stockReturn/page"))
+                .andExpect(jsonPath("$.data.total").value(15))
+                .andExpect(jsonPath("$.data.records[0].id").isString());
+    }
+
+    @Test
+    void stockReturnTotalMatchesFilter() throws Exception {
+        mvc.perform(post("/gateway/wms/stockReturn/returnTotal").contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"status\":20}"))
+                .andExpect(jsonPath("$.data.returnCount").value(4));
+    }
 }
