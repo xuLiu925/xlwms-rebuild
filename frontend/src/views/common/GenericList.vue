@@ -57,7 +57,7 @@ export default {
       this.config.columns.forEach(c => { if (c.filter || c.enum) q[c.name] = '' })
       return q
     },
-    numeric (c) { return ['int', 'money', 'rate'].includes(c.type) },
+    numeric (c) { return ['int', 'num', 'money', 'rate'].includes(c.type) },
     options (c) {
       if (c.enum) return Object.entries(c.enum).map(([v, [label]]) => ({ value: v, label }))
       return (this.config.filterOptions[c.name] || []).map(v => ({ value: v, label: String(v) }))

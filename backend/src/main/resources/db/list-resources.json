@@ -993,5 +993,2996 @@
       }
     ],
     "tabsColumn": "status"
+  },
+  {
+    "key": "globalAsn",
+    "table": "lp_global_asn",
+    "columns": [
+      {
+        "name": "asnNo",
+        "column": "asn_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "customerName",
+        "column": "customer_name",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "whCode",
+        "column": "wh_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "boxCount",
+        "column": "box_count",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "skuQty",
+        "column": "sku_qty",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "10": "在途",
+          "11": "收货中",
+          "15": "已收货",
+          "30": "已上架",
+          "90": "已取消"
+        }
+      },
+      {
+        "name": "etaDate",
+        "column": "eta_date",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "createTime",
+        "column": "create_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "globalParcel",
+    "table": "lp_global_parcel",
+    "columns": [
+      {
+        "name": "orderNo",
+        "column": "order_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "platformOrderNo",
+        "column": "platform_order_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "whCode",
+        "column": "wh_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "channelName",
+        "column": "channel_name",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "trackingNo",
+        "column": "tracking_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "skuQty",
+        "column": "sku_qty",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "10": "待审核",
+          "20": "待拣货",
+          "30": "拣货中",
+          "40": "待复核",
+          "50": "已出库",
+          "80": "已拦截",
+          "90": "已取消"
+        }
+      },
+      {
+        "name": "createTime",
+        "column": "create_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "globalFreight",
+    "table": "lp_global_freight",
+    "columns": [
+      {
+        "name": "orderNo",
+        "column": "order_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "whCode",
+        "column": "wh_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "boxCount",
+        "column": "box_count",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "palletCount",
+        "column": "pallet_count",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "deliveryType",
+        "column": "delivery_type",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "10": "待处理",
+          "20": "作业中",
+          "30": "已出库",
+          "90": "已取消"
+        }
+      },
+      {
+        "name": "createTime",
+        "column": "create_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "globalReturn",
+    "table": "lp_global_return",
+    "columns": [
+      {
+        "name": "returnNo",
+        "column": "return_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "whCode",
+        "column": "wh_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "returnType",
+        "column": "return_type",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "skuQty",
+        "column": "sku_qty",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "10": "待收货",
+          "20": "已收货",
+          "30": "已上架",
+          "90": "已取消"
+        }
+      },
+      {
+        "name": "createTime",
+        "column": "create_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "directMailOrder",
+    "table": "lp_direct_mail_order",
+    "columns": [
+      {
+        "name": "orderNo",
+        "column": "order_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "channelName",
+        "column": "channel_name",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "trackingNo",
+        "column": "tracking_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "weightKg",
+        "column": "weight_kg",
+        "type": "num",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "10": "待打单",
+          "20": "已打单",
+          "30": "已交接",
+          "90": "已取消"
+        }
+      },
+      {
+        "name": "createTime",
+        "column": "create_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "directMailBox",
+    "table": "lp_direct_mail_box",
+    "columns": [
+      {
+        "name": "boxNo",
+        "column": "box_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "channelName",
+        "column": "channel_name",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "orderCount",
+        "column": "order_count",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "weightKg",
+        "column": "weight_kg",
+        "type": "num",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "10": "装箱中",
+          "20": "已封箱",
+          "30": "已交接"
+        }
+      },
+      {
+        "name": "createTime",
+        "column": "create_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "claim",
+    "table": "lp_claim",
+    "columns": [
+      {
+        "name": "claimNo",
+        "column": "claim_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "orderNo",
+        "column": "order_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "claimType",
+        "column": "claim_type",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "claimAmount",
+        "column": "claim_amount",
+        "type": "money",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "currency",
+        "column": "currency",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "10": "待处理",
+          "20": "处理中",
+          "30": "已赔付",
+          "40": "已驳回"
+        }
+      },
+      {
+        "name": "createTime",
+        "column": "create_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "workOrder",
+    "table": "lp_work_order",
+    "columns": [
+      {
+        "name": "workOrderNo",
+        "column": "work_order_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "title",
+        "column": "title",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "workType",
+        "column": "work_type",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "priority",
+        "column": "priority",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "10": "待受理",
+          "20": "处理中",
+          "30": "已完成",
+          "90": "已关闭"
+        }
+      },
+      {
+        "name": "createTime",
+        "column": "create_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "arrivalScan",
+    "table": "lp_arrival_scan",
+    "columns": [
+      {
+        "name": "scanNo",
+        "column": "scan_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "asnNo",
+        "column": "asn_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "whCode",
+        "column": "wh_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "boxCount",
+        "column": "box_count",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "scanUser",
+        "column": "scan_user",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "未匹配",
+          "1": "已匹配"
+        }
+      },
+      {
+        "name": "scanTime",
+        "column": "scan_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "deliveryGoods",
+    "table": "lp_delivery_goods",
+    "columns": [
+      {
+        "name": "appointNo",
+        "column": "appoint_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "asnNo",
+        "column": "asn_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "whCode",
+        "column": "wh_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "appointDate",
+        "column": "appoint_date",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "vehicleType",
+        "column": "vehicle_type",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "10": "待确认",
+          "20": "已确认",
+          "30": "已到仓",
+          "90": "已取消"
+        }
+      },
+      {
+        "name": "createTime",
+        "column": "create_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "palletReceive",
+    "table": "lp_pallet_receive",
+    "columns": [
+      {
+        "name": "receiptNo",
+        "column": "receipt_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "asnNo",
+        "column": "asn_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "trayNo",
+        "column": "tray_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "whCode",
+        "column": "wh_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "boxCount",
+        "column": "box_count",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "skuQty",
+        "column": "sku_qty",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "operator",
+        "column": "operator",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "10": "收货中",
+          "20": "已完成"
+        }
+      },
+      {
+        "name": "receiptTime",
+        "column": "receipt_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "palletForming",
+    "table": "lp_pallet_forming",
+    "columns": [
+      {
+        "name": "formNo",
+        "column": "form_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "trayNo",
+        "column": "tray_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "asnNo",
+        "column": "asn_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "whCode",
+        "column": "wh_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "boxCount",
+        "column": "box_count",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "operator",
+        "column": "operator",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "10": "组托中",
+          "20": "已完成",
+          "30": "已上架"
+        }
+      },
+      {
+        "name": "createTime",
+        "column": "create_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "newProduct",
+    "table": "lp_new_product",
+    "columns": [
+      {
+        "name": "sku",
+        "column": "sku",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "productName",
+        "column": "product_name",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "asnNo",
+        "column": "asn_no",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "lengthCm",
+        "column": "length_cm",
+        "type": "num",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "widthCm",
+        "column": "width_cm",
+        "type": "num",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "heightCm",
+        "column": "height_cm",
+        "type": "num",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "weightKg",
+        "column": "weight_kg",
+        "type": "num",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "待测量",
+          "1": "已测量"
+        }
+      },
+      {
+        "name": "createTime",
+        "column": "create_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "inventoryClaim",
+    "table": "lp_inventory_claim",
+    "columns": [
+      {
+        "name": "claimNo",
+        "column": "claim_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "barcode",
+        "column": "barcode",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "whCode",
+        "column": "wh_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "cellCode",
+        "column": "cell_code",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "qty",
+        "column": "qty",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "claimCustomerCode",
+        "column": "claim_customer_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "10": "待认领",
+          "20": "已认领",
+          "30": "已作废"
+        }
+      },
+      {
+        "name": "createTime",
+        "column": "create_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "outFreight",
+    "table": "lp_out_freight",
+    "columns": [
+      {
+        "name": "orderNo",
+        "column": "order_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "whCode",
+        "column": "wh_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "boxCount",
+        "column": "box_count",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "palletCount",
+        "column": "pallet_count",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "deliveryType",
+        "column": "delivery_type",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "appointTime",
+        "column": "appoint_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "10": "待拣货",
+          "20": "拣货中",
+          "30": "待装柜",
+          "40": "已出库",
+          "90": "已取消"
+        }
+      },
+      {
+        "name": "createTime",
+        "column": "create_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "waveRule",
+    "table": "lp_wave_rule",
+    "columns": [
+      {
+        "name": "ruleCode",
+        "column": "rule_code",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "ruleName",
+        "column": "rule_name",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "whCode",
+        "column": "wh_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "orderType",
+        "column": "order_type",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "maxOrderCount",
+        "column": "max_order_count",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "priority",
+        "column": "priority",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "停用",
+          "1": "启用"
+        }
+      },
+      {
+        "name": "updateTime",
+        "column": "update_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "scanForm",
+    "table": "lp_scan_form",
+    "columns": [
+      {
+        "name": "formNo",
+        "column": "form_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "carrier",
+        "column": "carrier",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "whCode",
+        "column": "wh_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "parcelCount",
+        "column": "parcel_count",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "totalWeightKg",
+        "column": "total_weight_kg",
+        "type": "num",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "10": "待交接",
+          "20": "已交接"
+        }
+      },
+      {
+        "name": "handoverTime",
+        "column": "handover_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "createTime",
+        "column": "create_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "splitOrder",
+    "table": "lp_split_order",
+    "columns": [
+      {
+        "name": "orderNo",
+        "column": "order_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "newOrderNos",
+        "column": "new_order_nos",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "splitReason",
+        "column": "split_reason",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "operator",
+        "column": "operator",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "splitTime",
+        "column": "split_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": null
+  },
+  {
+    "key": "swapOrder",
+    "table": "lp_swap_order",
+    "columns": [
+      {
+        "name": "orderNo",
+        "column": "order_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "oldTrackingNo",
+        "column": "old_tracking_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "newTrackingNo",
+        "column": "new_tracking_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "channelName",
+        "column": "channel_name",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "reason",
+        "column": "reason",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "10": "待换单",
+          "20": "已换单",
+          "30": "失败"
+        }
+      },
+      {
+        "name": "createTime",
+        "column": "create_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "rebrand",
+    "table": "lp_rebrand",
+    "columns": [
+      {
+        "name": "taskNo",
+        "column": "task_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "whCode",
+        "column": "wh_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "sku",
+        "column": "sku",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "qty",
+        "column": "qty",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "newBarcode",
+        "column": "new_barcode",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "10": "待处理",
+          "20": "处理中",
+          "30": "已完成"
+        }
+      },
+      {
+        "name": "createTime",
+        "column": "create_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "returnOutbound",
+    "table": "lp_return_outbound",
+    "columns": [
+      {
+        "name": "orderNo",
+        "column": "order_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "returnNo",
+        "column": "return_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "whCode",
+        "column": "wh_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "skuQty",
+        "column": "sku_qty",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "outboundType",
+        "column": "outbound_type",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "10": "待出库",
+          "20": "已出库",
+          "90": "已取消"
+        }
+      },
+      {
+        "name": "createTime",
+        "column": "create_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "fuelPlan",
+    "table": "lp_fuel_plan",
+    "columns": [
+      {
+        "name": "planCode",
+        "column": "plan_code",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "planName",
+        "column": "plan_name",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "carrier",
+        "column": "carrier",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "fuelRate",
+        "column": "fuel_rate",
+        "type": "num",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "effectiveDate",
+        "column": "effective_date",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "expireDate",
+        "column": "expire_date",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "停用",
+          "1": "启用"
+        }
+      },
+      {
+        "name": "updateTime",
+        "column": "update_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "zoneTemp",
+    "table": "lp_zone_temp",
+    "columns": [
+      {
+        "name": "tempCode",
+        "column": "temp_code",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "tempName",
+        "column": "temp_name",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "carrier",
+        "column": "carrier",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "country",
+        "column": "country",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "zoneCount",
+        "column": "zone_count",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "停用",
+          "1": "启用"
+        }
+      },
+      {
+        "name": "updateTime",
+        "column": "update_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "surcharge",
+    "table": "lp_surcharge",
+    "columns": [
+      {
+        "name": "chargeCode",
+        "column": "charge_code",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "chargeName",
+        "column": "charge_name",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "carrier",
+        "column": "carrier",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "chargeType",
+        "column": "charge_type",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "amount",
+        "column": "amount",
+        "type": "money",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "currency",
+        "column": "currency",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "停用",
+          "1": "启用"
+        }
+      },
+      {
+        "name": "updateTime",
+        "column": "update_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "freightTemp",
+    "table": "lp_freight_temp",
+    "columns": [
+      {
+        "name": "tempCode",
+        "column": "temp_code",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "tempName",
+        "column": "temp_name",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "channelName",
+        "column": "channel_name",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "billingMode",
+        "column": "billing_mode",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "currency",
+        "column": "currency",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "停用",
+          "1": "启用"
+        }
+      },
+      {
+        "name": "updateTime",
+        "column": "update_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "logisticsPriceSetting",
+    "table": "lp_logistics_price_setting",
+    "columns": [
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": true,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "customerName",
+        "column": "customer_name",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "channelName",
+        "column": "channel_name",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "freightTempName",
+        "column": "freight_temp_name",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "discountRate",
+        "column": "discount_rate",
+        "type": "rate",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "停用",
+          "1": "启用"
+        }
+      },
+      {
+        "name": "updateTime",
+        "column": "update_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "operateBill",
+    "table": "lp_operate_bill",
+    "columns": [
+      {
+        "name": "itemCode",
+        "column": "item_code",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "itemName",
+        "column": "item_name",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "billingUnit",
+        "column": "billing_unit",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "unitPrice",
+        "column": "unit_price",
+        "type": "money",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "currency",
+        "column": "currency",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "停用",
+          "1": "启用"
+        }
+      },
+      {
+        "name": "updateTime",
+        "column": "update_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "warehouseRent",
+    "table": "lp_warehouse_rent",
+    "columns": [
+      {
+        "name": "planCode",
+        "column": "plan_code",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "planName",
+        "column": "plan_name",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "whCode",
+        "column": "wh_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "freeDays",
+        "column": "free_days",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "unitPrice",
+        "column": "unit_price",
+        "type": "money",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "currency",
+        "column": "currency",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "停用",
+          "1": "启用"
+        }
+      },
+      {
+        "name": "updateTime",
+        "column": "update_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "quotationScheme",
+    "table": "lp_quotation_scheme",
+    "columns": [
+      {
+        "name": "schemeCode",
+        "column": "scheme_code",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "schemeName",
+        "column": "scheme_name",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "customerCount",
+        "column": "customer_count",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "currency",
+        "column": "currency",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "effectiveDate",
+        "column": "effective_date",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "草稿",
+          "1": "生效",
+          "2": "失效"
+        }
+      },
+      {
+        "name": "updateTime",
+        "column": "update_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "businessExpenses",
+    "table": "lp_business_expenses",
+    "columns": [
+      {
+        "name": "feeNo",
+        "column": "fee_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "bizNo",
+        "column": "biz_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "feeType",
+        "column": "fee_type",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "amount",
+        "column": "amount",
+        "type": "money",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "currency",
+        "column": "currency",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "10": "未出账",
+          "20": "已出账"
+        }
+      },
+      {
+        "name": "feeTime",
+        "column": "fee_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "billsReceivable",
+    "table": "lp_bills_receivable",
+    "columns": [
+      {
+        "name": "billNo",
+        "column": "bill_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "customerName",
+        "column": "customer_name",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "billPeriod",
+        "column": "bill_period",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "amount",
+        "column": "amount",
+        "type": "money",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "currency",
+        "column": "currency",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "10": "待确认",
+          "20": "已确认",
+          "30": "已结清"
+        }
+      },
+      {
+        "name": "createTime",
+        "column": "create_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "expend",
+    "table": "lp_expend",
+    "columns": [
+      {
+        "name": "expendNo",
+        "column": "expend_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "billNo",
+        "column": "bill_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "amount",
+        "column": "amount",
+        "type": "money",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "currency",
+        "column": "currency",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "balanceAfter",
+        "column": "balance_after",
+        "type": "money",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "expendTime",
+        "column": "expend_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": null
+  },
+  {
+    "key": "billTemplate",
+    "table": "lp_bill_template",
+    "columns": [
+      {
+        "name": "tempCode",
+        "column": "temp_code",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "tempName",
+        "column": "temp_name",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "billCycle",
+        "column": "bill_cycle",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "feeTypes",
+        "column": "fee_types",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "停用",
+          "1": "启用"
+        }
+      },
+      {
+        "name": "updateTime",
+        "column": "update_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "printTemplate",
+    "table": "lp_print_template",
+    "columns": [
+      {
+        "name": "tempCode",
+        "column": "temp_code",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "tempName",
+        "column": "temp_name",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "tempType",
+        "column": "temp_type",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "paperSize",
+        "column": "paper_size",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "isDefault",
+        "column": "is_default",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "否",
+          "1": "是"
+        }
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "停用",
+          "1": "启用"
+        }
+      },
+      {
+        "name": "updateTime",
+        "column": "update_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "brand",
+    "table": "lp_brand",
+    "columns": [
+      {
+        "name": "brandCode",
+        "column": "brand_code",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "brandName",
+        "column": "brand_name",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "domain",
+        "column": "domain",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "停用",
+          "1": "启用"
+        }
+      },
+      {
+        "name": "updateTime",
+        "column": "update_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "agency",
+    "table": "lp_agency",
+    "columns": [
+      {
+        "name": "agencyCode",
+        "column": "agency_code",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "agencyName",
+        "column": "agency_name",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "agencyType",
+        "column": "agency_type",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "contactName",
+        "column": "contact_name",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "停用",
+          "1": "启用"
+        }
+      },
+      {
+        "name": "updateTime",
+        "column": "update_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "erpAuth",
+    "table": "lp_erp_auth",
+    "columns": [
+      {
+        "name": "erpName",
+        "column": "erp_name",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": true,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "appKeyMasked",
+        "column": "app_key_masked",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "authTime",
+        "column": "auth_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "expireTime",
+        "column": "expire_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "已过期",
+          "1": "有效"
+        }
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "msgNotice",
+    "table": "lp_msg_notice",
+    "columns": [
+      {
+        "name": "title",
+        "column": "title",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "msgType",
+        "column": "msg_type",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "receiver",
+        "column": "receiver",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "readFlag",
+        "column": "read_flag",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "未读",
+          "1": "已读"
+        }
+      },
+      {
+        "name": "sendTime",
+        "column": "send_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "readFlag"
+  },
+  {
+    "key": "warningMsg",
+    "table": "lp_warning_msg",
+    "columns": [
+      {
+        "name": "warningType",
+        "column": "warning_type",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "content",
+        "column": "content",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "whCode",
+        "column": "wh_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "level",
+        "column": "level",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "1": "提示",
+          "2": "警告",
+          "3": "严重"
+        }
+      },
+      {
+        "name": "handled",
+        "column": "handled",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "未处理",
+          "1": "已处理"
+        }
+      },
+      {
+        "name": "createTime",
+        "column": "create_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "level"
+  },
+  {
+    "key": "receiveAccount",
+    "table": "lp_receive_account",
+    "columns": [
+      {
+        "name": "accountName",
+        "column": "account_name",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "bankName",
+        "column": "bank_name",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "accountNoMasked",
+        "column": "account_no_masked",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "currency",
+        "column": "currency",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "停用",
+          "1": "启用"
+        }
+      },
+      {
+        "name": "updateTime",
+        "column": "update_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "errorPool",
+    "table": "lp_error_pool",
+    "columns": [
+      {
+        "name": "errorNo",
+        "column": "error_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "bizType",
+        "column": "biz_type",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "bizNo",
+        "column": "biz_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "errorMsg",
+        "column": "error_msg",
+        "type": "str",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "retryCount",
+        "column": "retry_count",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "status",
+        "column": "status",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "待处理",
+          "1": "已解决",
+          "2": "已忽略"
+        }
+      },
+      {
+        "name": "createTime",
+        "column": "create_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "status"
+  },
+  {
+    "key": "labelRecord",
+    "table": "lp_label_record",
+    "columns": [
+      {
+        "name": "orderNo",
+        "column": "order_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "trackingNo",
+        "column": "tracking_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "channelName",
+        "column": "channel_name",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "labelFormat",
+        "column": "label_format",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "result",
+        "column": "result",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "失败",
+          "1": "成功"
+        }
+      },
+      {
+        "name": "createTime",
+        "column": "create_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "result"
+  },
+  {
+    "key": "pushRecord",
+    "table": "lp_push_record",
+    "columns": [
+      {
+        "name": "pushNo",
+        "column": "push_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "bizNo",
+        "column": "biz_no",
+        "type": "str",
+        "kw": true,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "customerCode",
+        "column": "customer_code",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "pushType",
+        "column": "push_type",
+        "type": "str",
+        "kw": false,
+        "filter": true,
+        "enumLabels": null
+      },
+      {
+        "name": "costMs",
+        "column": "cost_ms",
+        "type": "int",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      },
+      {
+        "name": "result",
+        "column": "result",
+        "type": "int",
+        "kw": false,
+        "filter": true,
+        "enumLabels": {
+          "0": "失败",
+          "1": "成功"
+        }
+      },
+      {
+        "name": "pushTime",
+        "column": "push_time",
+        "type": "time",
+        "kw": false,
+        "filter": false,
+        "enumLabels": null
+      }
+    ],
+    "tabsColumn": "result"
   }
 ]

@@ -4,7 +4,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -25,9 +25,8 @@ class GenericListControllerTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"customer,12", "customerRecharge,16", "seedWall,8", "pickCart,10", "account,12", "role,6", "channel,14",
-            "channelGroup,5", "exchangeRate,8", "notice,9", "requestLog,20", "taskCenter,12", "returnOrder,18",
-            "outboundAbnormal,11", "outboundIntercept,10"})
+    // 期望总数由 tools/list-pages/gen.mjs 生成，新增资源无需手改测试
+    @CsvFileSource(resources = "/list-expected.csv")
     void everyResourcePages(String key, int total) throws Exception {
         call(key + "/page", "{\"current\":1,\"size\":5}")
                 .andExpect(jsonPath("$.code").value(200))
@@ -41,6 +40,20 @@ class GenericListControllerTest {
         call("customer/page", "{\"status\":0}")
                 .andExpect(jsonPath("$.data.total").value(2))
                 .andExpect(jsonPath("$.data.records[0].statusName").value("停用"));
+    }
+
+    @Test
+    void nonTabEnumIsFilterableAndNamed() throws Exception {
+        call("warningMsg/page", "{\"handled\":0,\"size\":50}")
+                .andExpect(jsonPath("$.data.total").value(6))
+                .andExpect(jsonPath("$.data.records[0].handledName").value("未处理"))
+                .andExpect(jsonPath("$.data.records[0].levelName").isString());
+    }
+
+    @Test
+    void decimalColumnsAreNumbers() throws Exception {
+        call("newProduct/page", "{\"status\":1,\"size\":1}")
+                .andExpect(jsonPath("$.data.records[0].weightKg").isNumber());
     }
 
     @Test

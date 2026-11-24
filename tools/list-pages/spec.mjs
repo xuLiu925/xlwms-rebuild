@@ -4,18 +4,17 @@
 // 全部字段、编码、接口路径均为本项目占位；数据全部虚构。不要写入任何真实业务数据。
 //
 // 列定义：[name(camel), label, type, opts]
-//   type: str | int | money | rate | time
+//   type: str | int | num(两位小数) | money | rate | time
 //   opts: { kw: 参与关键字搜索, filter: 下拉筛选, enum: {值: [文案, tag类型]}, width, tabs: 作为状态页签 }
+//   enum 列自动可筛选；每个资源最多一个 tabs 列。
+// 批次 2 起的资源按模块分在 spec-orders / spec-finance / spec-settings 中。
 
-const pad = (n, w = 3) => String(n).padStart(w, '0')
-const pick = (arr, i) => arr[i % arr.length]
-const day = (i, base = 1) => `2026-11-${pad(((i + base - 1) % 23) + 1, 2)}`
-const time = (i, base = 1, h = 9) => `${day(i, base)} ${pad((h + i) % 24, 2)}:${pad((i * 7) % 60, 2)}:00`
-const WH = ['WH01', 'WH02']
-const CUS = i => ({ customerCode: 'C' + pad((i % 5) + 1), customerName: '示例客户' + ((i % 5) + 1) })
-const ON_OFF = { 1: ['启用', 'success'], 0: ['停用', 'info'] }
+import { pad, pick, day, time, WH, CUS, ON_OFF } from './helpers.mjs'
+import { orders } from './spec-orders.mjs'
+import { finance } from './spec-finance.mjs'
+import { settings } from './spec-settings.mjs'
 
-export const resources = [
+const batch1 = [
   {
     key: 'customer', route: 'customer/list', title: '客户列表', idBase: 3100000000000000,
     columns: [
@@ -262,3 +261,5 @@ export const resources = [
       orderStatusName: pick(['待拣货', '拣货中', '待复核'], i), status: pick([10, 20, 20, 30], i), applyTime: time(i) })
   }
 ]
+
+export const resources = [...batch1, ...orders, ...finance, ...settings]

@@ -66,7 +66,11 @@ Java 后端（Spring Boot 3 / Java 17）+ Vue 2 前端。当前全部是虚构�
   `db/list-resources.json`、`frontend/src/config/listPages.generated.js`；后端 `list/GenericListController`
   （`POST /gateway/wms/{key}/{page,statistics}`，标识符只取自注册表，值走绑定参数，专门 Controller 的路径优先），
   前端 `views/common/GenericList.vue`，路由对未在 `pages` 中的子路由自动套用。已上 15 页（见 COVERAGE.md）。
-  这些页的路径、字段、状态编码全部是本项目占位。测试共 53 个通过。下一步是批次 2。
+  这些页的路径、字段、状态编码全部是本项目占位。
+- 批次 2（2026-11-24）：再加 43 个通用列表页（全局订单 8、入库 6、出库 5、退货 2、物流报价 4、应收报价 4、应收结算 4、设置 7、工具箱 3），
+  网页端覆盖 69/79。规格拆为 `spec.mjs`（批次 1 + 汇总）、`spec-orders/finance/settings.mjs`，公共工具在 `helpers.mjs`（`ID(n)` 分配 ID）。
+  生成器新增 `num` 类型、规格自检，并输出 `backend/src/test/resources/list-expected.csv` 供参数化测试读取。测试共 98 个通过。
+  剩余 10 个网页页面是作业/配置类（见 COVERAGE.md 批次 3）。
 - 官方文档：2026-11-24 搜索未找到领星海外仓 WMS 的公开帮助中心或开放 API 文档（apifox 上搜到的“海外仓开放平台”属于 jcex，不是领星）。
 
 ## 未知 / 未验证

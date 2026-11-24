@@ -8,7 +8,7 @@ import { resources } from './spec.mjs'
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..')
 const out = p => resolve(root, p)
 const snake = s => s.replace(/[A-Z]/g, c => '_' + c.toLowerCase())
-const sqlType = { str: 'VARCHAR(128)', int: 'INT', money: 'DECIMAL(14,2)', rate: 'DECIMAL(14,6)', time: 'VARCHAR(19)' }
+const sqlType = { str: 'VARCHAR(128)', int: 'INT', num: 'DECIMAL(14,2)', money: 'DECIMAL(14,2)', rate: 'DECIMAL(14,6)', time: 'VARCHAR(19)' }
 const sqlVal = (v, type) => (type === 'str' || type === 'time') ? `'${String(v ?? '').replace(/'/g, "''")}'` : String(v)
 const HEAD = '-- 由 tools/list-pages/gen.mjs 生成，勿手改；全部虚构示例数据。\n'
 
@@ -16,6 +16,20 @@ const schema = [HEAD]
 const data = [HEAD]
 const registry = []
 const front = []
+
+// 规格自检：key/route 唯一、ID 区间不重叠且在 JS 安全整数内、每个资源最多一个页签列
+const seen = { key: new Set(), route: new Set() }
+const ranges = []
+for (const r of resources) {
+  for (const f of ['key', 'route']) {
+    if (seen[f].has(r[f])) throw new Error('重复的 ' + f + ': ' + r[f])
+    seen[f].add(r[f])
+  }
+  if (r.idBase + r.count >= Number.MAX_SAFE_INTEGER) throw new Error(r.key + ' 的 idBase 超出 JS 安全整数')
+  ranges.push([r.idBase + 1, r.idBase + r.count, r.key])
+  if (r.columns.filter(c => c[3] && c[3].tabs).length > 1) throw new Error(r.key + ' 有多个 tabs 列')
+}
+ranges.sort((a, b) => a[0] - b[0]).forEach((x, i, a) => { if (i && x[0] <= a[i - 1][1]) throw new Error('ID 区间重叠: ' + a[i - 1][2] + ' / ' + x[2]) })
 
 for (const r of resources) {
   if (!/^[a-zA-Z][a-zA-Z0-9]*$/.test(r.key)) throw new Error('bad key ' + r.key)
@@ -46,7 +60,7 @@ for (const r of resources) {
   const mock = rows.slice(0, 5).map(row => {
     const m = { id: String(row.id) }
     for (const c of cols) {
-      m[c.name] = c.type === 'money' || c.type === 'rate' ? Number(row[c.name]) : row[c.name]
+      m[c.name] = ['num', 'money', 'rate'].includes(c.type) ? Number(row[c.name]) : row[c.name]
       if (c.enum) m[c.name + 'Name'] = c.enum[row[c.name]][0]
     }
     return m
@@ -64,4 +78,5 @@ writeFileSync(out('backend/src/main/resources/db/list-resources.json'), JSON.str
 writeFileSync(out('frontend/src/config/listPages.generated.js'),
   '// 由 tools/list-pages/gen.mjs 生成，勿手改。接口路径、字段与编码均为本项目占位；mock 为虚构数据。\n' +
   'export default ' + JSON.stringify(front, null, 2) + '\n')
+writeFileSync(out('backend/src/test/resources/list-expected.csv'), resources.map(r => r.key + ',' + r.count).join('\n') + '\n')
 console.log(`生成 ${resources.length} 个列表页：` + resources.map(r => r.route).join(', '))
