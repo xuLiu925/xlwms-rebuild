@@ -192,6 +192,12 @@ public class StockStore {
                 && r.boxType.equals(boxType) && r.productQuality == quality).findFirst().orElse(null);
     }
 
+    /** 可用数量（库存减冻结）。 */
+    public synchronized int availOf(String cellNo, String sku, String boxType, int quality) {
+        Row r = exact(cellNo, sku, boxType, quality);
+        return r == null ? 0 : r.qty - r.freezeQty;
+    }
+
     public synchronized int qtyOf(String cellNo, String sku, String boxType, int quality) {
         Row r = exact(cellNo, sku, boxType, quality);
         return r == null ? 0 : r.qty;

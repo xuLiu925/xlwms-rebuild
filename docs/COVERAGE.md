@@ -5,12 +5,12 @@
 
 状态说明：✅ 专门实现 · 🟦 通用列表页（规格在 `tools/list-pages/spec*.mjs`，只读） · ⬜ 占位（页面显示"待实现"）
 
-## 汇总（2026-11-24，批次 6 完成后）
+## 汇总（2026-11-24，批次 7 完成后）
 
 | 范围 | 总数 | ✅ | 🟦 | ⬜ |
 |---|---|---|---|---|
 | 网页端子路由 | 79 | 21 | 58 | 0 |
-| PDA 接口（ApiService） | 175 | 146 | — | 29 |
+| PDA 接口（ApiService） | 175 | 175 | — | 0 |
 
 PDA 的 175 是 ApiService 方法数；其中 `receipt/listBoxType` 有两个方法共用一个路径，按方法计 2 个。
 
@@ -51,14 +51,14 @@ PDA 的 175 是 ApiService 方法数；其中 `receipt/listBoxType` 有两个方
 | blReturnIn FBA 退货 | 24 | 24 | 批次 6，`FbaReturnController` + `FbaReturnStore`：签收、清点、上架、认领、退货拣货 |
 | wave 波次拣货 | 16 | 16 | 按件拣货 8 个（`WaveController`）+ 按箱拣货 8 个（批次 4，`WaveBoxController`） |
 | stock 库内 | 10 | 10 | 批次 4，`PdaStockController` + `StockStore`：查询、调整、移库、整库位移库 |
-| device 设备任务 | 9 | 0 | |
+| device 设备任务 | 9 | 9 | 批次 7，`PdaDeviceController` + `DeviceStore`：4 个准备接口在 /pda/device 下，5 个任务接口在 /gateway/wms/device 下 |
 | delivery 出库确认 | 8 | 8 | 批次 4，`PdaDeliveryController`：出库确认 3 个 + 大货复核 5 个 |
 | review 复核 | 6 | 6 | 批次 4 补了 getCustomerCode4More |
 | inventoryCheck 盘点 | 6 | 6 | 批次 4，`PdaInventoryCheckController` + `InventoryCheckStore` |
 | newProduct 新品维护 | 5 | 5 | 批次 5，`PdaNewProductController` + `NewProductStore` |
-| pickAndSort 边拣边分 | 4 | 0 | |
-| appendix 附件 | 4 | 0 | 上传类，本地只做假实现 |
-| 其他（auth/home/menu/warehouse/system/messageBoard/common/blReceipt/blMoveStock） | 13 | 1 | 批次 5 做了 blReceipt/measureBoxType |
+| pickAndSort 边拣边分 | 4 | 4 | 批次 7，`PickAndSortController` + `PickAndSortStore`，拣货数写回波次 |
+| appendix 附件 | 4 | 4 | 批次 7，`AppendixController` + `AppendixStore`，只记元数据、不存文件 |
+| 其他（auth/home/menu/warehouse/system/messageBoard/common/blReceipt/blMoveStock） | 13 | 13 | 批次 5 做了 blReceipt/measureBoxType；批次 7 补齐其余 12 个（`AuthController` 与网页端共用、`PdaMiscController`、`MessageBoardController`、`AppendixController` 的 /gateway/common/pic/upload） |
 
 ## 分批计划
 
@@ -73,7 +73,9 @@ PDA 的 175 是 ApiService 方法数；其中 `receipt/listBoxType` 有两个方
    随后把批次 1 的 8 个收货/上架骨架接口也接入了 Store，PDA 收货/上架不再有无状态骨架。
 6. **批次 6（已完成）**：PDA 退货 42 个接口（return receive ×11、create ×6、destruct，blReturnIn ×24），并把批次 1 的 6 个退货上架骨架改为有状态。
    PDA 覆盖到 146/175，剩下的都在批次 7。
-7. **批次 7**：其他 PDA 接口（device、pickAndSort、appendix、messageBoard、auth/home/menu/warehouse/system），以及网页端的本地增删改（只写本地库）。
+7. **批次 7（已完成）**：其余 29 个 PDA 接口（device ×9、pickAndSort ×4、appendix ×4、messageBoard ×2、auth ×2、home、menu、warehouse ×2、system ×2、
+   common/pic/upload、blMoveStock/boxMoveStock），PDA 覆盖到 175/175。规则见下方“批次 7 的数据与规则”。
+   原计划里的“网页端本地增删改（只写本地库）”没有做，网页端 58 个通用列表页仍是只读。
 
 ## 批次 3 页面的数据与规则
 
@@ -141,6 +143,37 @@ PDA 的 175 是 ApiService 方法数；其中 `receipt/listBoxType` 有两个方
   - 清点可追加预报外的 FNSKU（`addFnSku`，isNewAdd=true）；FNSKU 必须属于任务的客户。
   - 认领 `createClaim` 在退件单里建一张 orderType=4 的待上架单，之后走退件上架。客户权限字段为占位（全部 true）。
   - 退货拣货任务 PK2611000001：pickStatus 0 待拣 / 1 拣货中 / 2 已完成；`finishTaskOrder` 允许少拣后结束，但至少要拣过一件。
+
+## 批次 7 的数据与规则（PDA 其他接口）
+
+路径、查询参数名、表单字段、请求体与响应字段取自 APK；下面的规则、状态串和编码都是本项目假设，除非另有说明。
+
+- **设备任务**（`DeviceStore`）：设备库位固定为 B-01-01、B-01-03（tenantEnabled 返回的 specialCellNos），vendor 为占位串。
+  - 只有涉及设备库位的作业才建任务；不涉及时直接放行（deviceStatus=NONE、canProceed=true、latestTaskId=null）。
+  - 设备“瞬间”处理完：B-01-03 上的行模拟异常（exceptionType BIN_NOT_ARRIVED，料箱未到位），其余行成功。
+  - deviceStatus：NONE / EXCEPTION / COMPLETED；bizStatus：WAITING / READY；行 taskStatus：SUCCESS / FAILED / RESOLVED。
+  - 同一 bizType + bizNo 重复准备返回同一个任务。cell/prepare 的 bizNo 为 `CELL:库位,库位`；bill/prepare 本地只支持 bizType=DELIVERY（出库单）；
+    wave/prepare 逐个出库单、逐个明细建行（seqNo = 出库单序号，subSeqNo = 明细序号），库位取自波次拣货行。
+  - tasks/resolve 一次处理全部异常行；tasks/wave/subOrder/resolve 处理一行。没有待处理异常时报错。
+- **边拣边分**（`PickAndSortStore`）：只有多品、未拣完的波次能绑车（示例里是 WV26110002）；一个波次一辆车，一辆车同时只服务一个波次。
+  - 每个出库单一格，gridSerial 从 1 开始，gridNo = 车号-两位格号；格子 state：EMPTY / PICKING / FULL。
+  - 扫一次按格号从小到大分配给还缺这个 SKU 的格子；实际数量 = min(期望数, 拣货行剩余, 各格缺口合计)。
+  - 拣货数写回 `OutboundSampleStore` 的波次拣货行，与普通按件拣货共用状态，拣完后出库单变为待复核。不扣 `StockStore`（与按件拣货一致）。
+- **附件与图片**（`AppendixStore`）：只在内存记录元数据，**不保存文件内容**，url 是 `local-demo://` 占位串，不能下载。
+  - bizCode：RETURN / OUTBOUND / INBOUND / MESSAGE_BOARD，各自的附件类型见 `AppendixStore.TYPES`（全部占位）。
+  - 附件 jpg/jpeg/png/gif/webp/pdf，图片上传只收前五种，日志上传 zip/log/txt；单个不超过 10MB、不能为空；一批最多 9 个，整批校验通过才登记。
+  - `appendix/remove` 在 APK 里是 GET 但会删除数据，本地照做。
+- **留言板**（`MessageBoardStore`）：search 在入库单、出库单、退件单里按单号 / 来源单号 / 跟踪号查找。
+  reply 的 orderType 1 入库单 / 2 出库单 / 3 退件单（占位）；内容 1–500 字，单据必须存在、客户一致，附件 fileKey 必须已上传。
+- **登录**：`AuthController` 网页端与 PDA 共用，同时接受 account 与 loginAccount，不校验也不保存密码；getUserInfo 同时返回网页端占位字段和 APK 的 UserInfo 字段，
+  PDA 的 `Authorization: Bearer xxx` 会去掉前缀。
+- **首页**：receiptCount = 未收完的入库单，putAwayCount = 未上完的上架单，outBoundCount = 未出库的出库单（统计口径占位）。
+- **菜单**：一个根节点 code=PDA（占位），下挂 8 个子菜单，编码 114001–114008 取自 APK 的 MenuPermissionCode，中文名按枚举名翻译。
+- **仓库与参数**：仓库 WH01、WH02（虚构）。参数项 itemNo / paramsNo 取自 APK 的 SettingConstants，取值全部占位（见 `PdaMiscController.PARAMS`）；
+  listParams 对未知参数项返回 itemValue=null，findParams 对未知参数项报错。这些参数目前**不影响**收货、复核等流程。
+- **版本检查**：最新版本占位为 2.0.0；code 1 有新版本 / 0 已是最新（占位），没有安装包，url 为空。查询参数名 version 按 APK 常量推断。
+- **按箱移库**（`/blMoveStock/boxMoveStock`）：boxList（按箱，数量为箱数）、skuList、returnList 可混合提交；先整批校验
+  （库位存在、目标未锁定、源目标不同、客户一致、FNSKU 一致、同一来源的数量合计不超过可用数、次品只能去 E 区），全部通过才执行。
 
 ## 已知限制（通用列表页）
 

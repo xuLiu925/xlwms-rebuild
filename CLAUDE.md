@@ -90,7 +90,15 @@ Java 后端（Spring Boot 3 / Java 17）+ Vue 2 前端。当前全部是虚构�
   （`ReturnFlowController` + `ReturnStore`，含本地模拟的 destruct，原退货上架骨架删除）；FBA 退货 `/pda/blReturnIn/**` 24 个
   （`FbaReturnController` + `FbaReturnStore`：签收、清点、上架、认领、退货拣货）。新规则：次品只能上 E 区（`StockStore.requireQualityCell`）。
   规则见 COVERAGE.md“批次 6 的数据与规则”。测试共 122 个通过（`mvn clean test`；删测试类后不 clean 会把旧报告算进去）。
-  变异检查：去掉次品库位规则后有 2 个用例失败。下一步是批次 7（device / pickAndSort / appendix / 其他 PDA 接口）。
+  变异检查：去掉次品库位规则后有 2 个用例失败。
+- 批次 7（2026-11-24）：其余 29 个 PDA 接口，**PDA 覆盖 175/175**。设备任务 9 个（`PdaDeviceController` + `DeviceStore`，
+  设备库位 B-01-01/B-01-03，B-01-03 模拟异常，resolve 后放行）、边拣边分 4 个（`PickAndSortController` + `PickAndSortStore`，
+  绑车后按格分配，拣货数写回 `OutboundSampleStore` 波次）、附件 4 个 + `/gateway/common/pic/upload`（`AppendixController` + `AppendixStore`，
+  只记元数据、不存文件）、留言板 2 个（`MessageBoardController` + `MessageBoardStore`）、`PdaMiscController`（首页、菜单、仓库、参数、版本检查、
+  按箱移库 `/blMoveStock/boxMoveStock`，整批校验后执行）。PDA 登录 `/auth/{login,getUserInfo}` 与网页端共用 `AuthController`
+  （同时接受 account / loginAccount，去掉 `Bearer ` 前缀）。规则见 COVERAGE.md“批次 7 的数据与规则”。
+  测试共 129 个通过（`mvn clean test`）。变异检查：把按箱移库的“同一来源合计”改成逐行检查后 1 个用例失败。
+  原计划里的网页端本地增删改没有做，58 个通用列表页仍只读。
 - 官方文档：2026-11-24 搜索未找到领星海外仓 WMS 的公开帮助中心或开放 API 文档（apifox 上搜到的“海外仓开放平台”属于 jcex，不是领星）。
 
 ## 未知 / 未验证

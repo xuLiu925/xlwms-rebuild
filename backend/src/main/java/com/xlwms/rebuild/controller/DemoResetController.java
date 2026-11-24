@@ -1,12 +1,16 @@
 package com.xlwms.rebuild.controller;
 
 import com.xlwms.rebuild.common.R;
+import com.xlwms.rebuild.service.AppendixStore;
+import com.xlwms.rebuild.service.DeviceStore;
 import com.xlwms.rebuild.service.FbaReturnStore;
 import com.xlwms.rebuild.service.FreightStore;
 import com.xlwms.rebuild.service.InboundWorkStore;
 import com.xlwms.rebuild.service.InventoryCheckStore;
 import com.xlwms.rebuild.service.NewProductStore;
+import com.xlwms.rebuild.service.MessageBoardStore;
 import com.xlwms.rebuild.service.OutboundSampleStore;
+import com.xlwms.rebuild.service.PickAndSortStore;
 import com.xlwms.rebuild.service.ReceiptStore;
 import com.xlwms.rebuild.service.ReturnStore;
 import com.xlwms.rebuild.service.StockStore;
@@ -26,11 +30,17 @@ public class DemoResetController {
     private final NewProductStore newProducts;
     private final ReturnStore returns;
     private final FbaReturnStore fbaReturns;
+    private final DeviceStore devices;
+    private final PickAndSortStore pickAndSort;
+    private final AppendixStore appendix;
+    private final MessageBoardStore messageBoard;
 
     public DemoResetController(OutboundSampleStore outbound, InboundWorkStore inbound, StockStore stock,
                                InventoryCheckStore inventoryCheck, FreightStore freight,
                                ReceiptStore receipts, NewProductStore newProducts,
-                               ReturnStore returns, FbaReturnStore fbaReturns) {
+                               ReturnStore returns, FbaReturnStore fbaReturns,
+                               DeviceStore devices, PickAndSortStore pickAndSort,
+                               AppendixStore appendix, MessageBoardStore messageBoard) {
         this.outbound = outbound;
         this.inbound = inbound;
         this.stock = stock;
@@ -40,6 +50,10 @@ public class DemoResetController {
         this.newProducts = newProducts;
         this.returns = returns;
         this.fbaReturns = fbaReturns;
+        this.devices = devices;
+        this.pickAndSort = pickAndSort;
+        this.appendix = appendix;
+        this.messageBoard = messageBoard;
     }
 
     @PostMapping("/gateway/wms/demo/reset")
@@ -54,6 +68,10 @@ public class DemoResetController {
         fbaReturns.reset();
         outbound.reset();
         inbound.reset();
+        devices.reset();
+        pickAndSort.reset();
+        appendix.reset();
+        messageBoard.reset();
         return R.ok(true);
     }
 }
