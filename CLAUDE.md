@@ -60,6 +60,13 @@ Java 后端（Spring Boot 3 / Java 17）+ Vue 2 前端。当前全部是虚构�
   数据在 `service/OutboundSampleStore`（内存、有状态：拣完→可复核→复核完→可出库，重启恢复）。业务异常 `BizException` → `{code:500,msg}`（错误码为占位）。
   网页端 `views/outbound/Wave.vue` 对接**占位路径** `/wave/{statistics,page}`（真实网页接口未抓取）；`/pdaDemo` 是本地 PDA 作业模拟页，
   `/demo/outbound/reset` 是本地演示专用接口。波次/出库单状态编码、拣货方式编码、流转规则都是本项目假设。测试共 22 个通过。
+- 全功能补全计划（2026-11-24）：用户要求把重建版补到覆盖原 WMS 全部模块，清单与分批计划见 `docs/COVERAGE.md`
+  （网页端 79 个子路由、PDA 175 个接口逐项标状态）。批次 1 已完成：通用只读列表页机制——
+  规格 `tools/list-pages/spec.mjs` → `node tools/list-pages/gen.mjs` 生成 `db/schema-list.sql`、`db/data-list.sql`（`lp_*` 表）、
+  `db/list-resources.json`、`frontend/src/config/listPages.generated.js`；后端 `list/GenericListController`
+  （`POST /gateway/wms/{key}/{page,statistics}`，标识符只取自注册表，值走绑定参数，专门 Controller 的路径优先），
+  前端 `views/common/GenericList.vue`，路由对未在 `pages` 中的子路由自动套用。已上 15 页（见 COVERAGE.md）。
+  这些页的路径、字段、状态编码全部是本项目占位。测试共 53 个通过。下一步是批次 2。
 - 官方文档：2026-11-24 搜索未找到领星海外仓 WMS 的公开帮助中心或开放 API 文档（apifox 上搜到的“海外仓开放平台”属于 jcex，不是领星）。
 
 ## 未知 / 未验证

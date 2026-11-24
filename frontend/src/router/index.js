@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import listPages from '../config/listPages.generated'
 Vue.use(Router)
+const GenericList = () => import('../views/common/GenericList.vue')
+const listConfigs = Object.fromEntries(listPages.map(c => [c.route, c]))
 const Stub = name => ({ render: h => h('div', { style: 'padding:24px' }, name + '（待实现）') })
 // 模块与子路由取自公开 bundle 的路由表
 const modules = {
@@ -42,7 +45,13 @@ const routes = [
   { path: '/pdaDemo', component: () => import('../views/pda/OutboundDemo.vue') },
   ...Object.entries(modules).map(([m, kids]) => ({
     path: '/' + m, component: { render: h => h('router-view') },
-    children: kids.map(k => ({ path: k, component: pages[m + '/' + k] || Stub(m + '/' + k) }))
+    children: kids.map(k => {
+      const key = m + '/' + k
+      if (pages[key]) return { path: k, component: pages[key] }
+      // 通用只读列表页（配置由 tools/list-pages/gen.mjs 生成）
+      if (listConfigs[key]) return { path: k, component: GenericList, props: { config: listConfigs[key] } }
+      return { path: k, component: Stub(key) }
+    })
   }))
 ]
 const router = new Router({ mode: 'history', routes })

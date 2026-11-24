@@ -14,8 +14,8 @@ spring:
     init:
       mode: always
       encoding: UTF-8
-      schema-locations: classpath:db/schema.sql
-      data-locations: classpath:db/data.sql
+      schema-locations: classpath:db/schema.sql,classpath:db/schema-list.sql
+      data-locations: classpath:db/data.sql,classpath:db/data-list.sql
 
 mybatis-plus:
   configuration:
