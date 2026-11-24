@@ -45,7 +45,7 @@ class PdaBatch5Test {
 
     @Test
     void receiptQueries() throws Exception {
-        getUrl("/pda/receipt/getAllReceiptList").andExpect(jsonPath("$.data.length()").value(4));
+        getUrl("/pda/receipt/getAllReceiptList").andExpect(jsonPath("$.data.length()").value(5));
         getUrl("/pda/receipt/getAsn", "param", "CS2611000001").andExpect(jsonPath("$.data[0].asnNo").value("RA2611000001"));
         getUrl("/pda/receipt/getAsn", "param", "nope").andExpect(jsonPath("$.code").value(500));
         getUrl("/pda/receipt/getOrderDtl", "asnNo", "RA2611000001")
@@ -83,7 +83,7 @@ class PdaBatch5Test {
                 .andExpect(jsonPath("$.code").value(500));
         // 少收一箱也可以完成收货
         postJson("/pda/receipt/finishWholeBoxReceipt", "{\"asnNo\":\"RA2611000001\"}").andExpect(jsonPath("$.data").value("PA2611000001"));
-        getUrl("/pda/receipt/getAllReceiptList").andExpect(jsonPath("$.data.length()").value(3));
+        getUrl("/pda/receipt/getAllReceiptList").andExpect(jsonPath("$.data.length()").value(4));
 
         getUrl("/pda/shelf/merge/page").andExpect(jsonPath("$.data.records[0].putawayNo").value("PA2611000001"));
         getUrl("/pda/shelf/merge/scanContent", "content", "BX-0001-02").andExpect(jsonPath("$.data[0].putawayType").value(1));

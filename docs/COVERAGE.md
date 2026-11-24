@@ -45,8 +45,8 @@ PDA 的 175 是 ApiService 方法数；其中 `receipt/listBoxType` 有两个方
 
 | 模块 | 接口数 | 已实现 | 说明 |
 |---|---|---|---|
-| receipt 收货 | 22 | 22 | 批次 1 的 4 个是无状态骨架（`ReceiptController`）；批次 5 补 18 个（`PdaReceiptFlowController` + `ReceiptStore`） |
-| shelf 上架 | 24 | 24 | 批次 1 的 4 个 /v2 是无状态骨架（`ShelvesController`）；批次 5 补 20 个（`PdaShelfFlowController` + `PutawayStore`，含 /shelf/selectCell） |
+| receipt 收货 | 22 | 22 | 全部在 `PdaReceiptFlowController` + `ReceiptStore`（批次 1 的 4 个骨架已并入并改为有状态） |
+| shelf 上架 | 24 | 24 | 全部在 `PdaShelfFlowController` + `PutawayStore`，含 /shelf/selectCell（批次 1 的 4 个 /v2 骨架已并入并改为有状态） |
 | return 退货收货/上架/创建 | 24 | 6 | putaway 6 个（destruct 未做） |
 | blReturnIn FBA 退货 | 24 | 0 | |
 | wave 波次拣货 | 16 | 16 | 按件拣货 8 个（`WaveController`）+ 按箱拣货 8 个（批次 4，`WaveBoxController`） |
@@ -70,7 +70,7 @@ PDA 的 175 是 ApiService 方法数；其中 `receipt/listBoxType` 有两个方
 4. **批次 4（已完成）**：PDA 库内与出库补全 33 个接口：stock ×10、inventoryCheck ×6、delivery ×8、wave 按箱拣货 ×8、review 剩余 1。
    PDA 端覆盖到 60/175。规则见下方“批次 4 的数据与规则”。
 5. **批次 5（已完成）**：PDA 收货/上架/新品维护 44 个接口（receipt ×18 方法、shelf ×20、newProduct ×5、blReceipt/measureBoxType），PDA 覆盖到 104/175。
-   **遗留**：批次 1 的 8 个收货/上架接口仍是无状态骨架，没有接到 `ReceiptStore`/`PutawayStore`，后续应改成有状态实现。
+   随后把批次 1 的 8 个收货/上架骨架接口也接入了 Store，PDA 收货/上架不再有无状态骨架。
 6. **批次 6**：PDA 退货：return receive/create ×17、destruct、blReturnIn ×24。
 7. **批次 7**：其他 PDA 接口（device、pickAndSort、appendix、messageBoard、auth/home/menu/warehouse/system），以及网页端的本地增删改（只写本地库）。
 
@@ -107,8 +107,13 @@ PDA 的 175 是 ApiService 方法数；其中 `receipt/listBoxType` 有两个方
 
 路径、查询参数名、请求体与响应字段取自 APK；规则与编码是本项目假设。流程：收货（`ReceiptStore`）→ 自动生成上架单（`PutawayStore`，单号 PA + 入库单号后段）→ 上架写入 `StockStore`。
 
-- **4 张示例入库单**：RA2611000001 按箱预报（3 个箱唛，含新品 SKU-0012）；RA2611000002 按箱型预报；RA2611000003 按箱型、中转入库；
-  RA2611000004 按箱预报、托盘收货（含新品 SKU-0013）。forecastType 1 按箱 / 2 按箱型；inboundType 1 普通 / 2 中转。
+- **5 张示例入库单**：RA2611000001 按箱预报（3 个箱唛，含新品 SKU-0012）；RA2611000002 按箱型预报；RA2611000003 按箱型、中转入库；
+  RA2611000004 按箱预报、托盘收货（含新品 SKU-0013）；RA2611000005 按 SKU 预报（`skuReceipt` 可多次累计、可带托盘）。
+  forecastType 1 按箱 / 2 按箱型 / 3 按 SKU；inboundType 1 普通 / 2 中转。按 SKU 预报的单没有箱，boxCount 计为 1。
+- **原批次 1 的 4 个收货接口**：`scanPallet` 返回托盘是否可用（status 0 空闲 / 1 已绑定未上架）；`getBoxTypeInfo` 返回箱规（有实测值用实测值）；
+  `skuReceipt` 散收与托盘收的合计一起校验，返回上架单号；`wholeOrderReceipt` 把剩余全部按预报收完并完成收货。
+- **原批次 1 的 4 个 /v2 上架接口**：`scanBarcode` 与 v1 相同；`getRecommendCell/v2` 返回待上架 SKU 与箱型及推荐库位；
+  `confirm` 同一 SKU 多行合计不得超过待上架数；`box/submitShelf` 每箱可去不同库位，箱唛不能重复。都是先全部校验再统一上架。
 - **收货**：状态沿用 10 在途 / 11 收货中 / 15 已收货；不允许超收；一个箱唛只收一次；“完成收货”接口允许少收后直接置为 15。
   带了 rowVersion 就必须与当前一致（每次变更加 1）。多箱 / 多托盘提交先全部校验再收货，任一项不通过则整体不生效；
   `batchReceipt/submit` 和 `measureBoxType/batch` 按单处理，失败的单写进返回列表，成功的单照常生效。

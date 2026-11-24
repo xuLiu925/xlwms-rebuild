@@ -31,11 +31,10 @@ Java 后端（Spring Boot 3 / Java 17）+ Vue 2 前端。当前全部是虚构�
 - 代码：`backend/`（统一信封、Long→String、首页/入库/库存三组示例接口 + 入库收货 `ReceiptController`、5 个测试）；`frontend/`（路由表、登录与首页、入库管理页、API 封装）。
 - 入库收货 DTO（2026-11-24）：`backend/.../dto/receipt/` 下按反编译字段建了 `WholeOrderReceiptReq`、
   `PalletReceiptScanReq`、`SkuForecastReceiptReq`（含 Sku/SkuPallet/PalletSku 内部类）、`BoxTypeInfoReq`；
-  `ReceiptController` 实现 `/gateway/wms/pda/receipt/{scanPallet,getBoxTypeInfo,skuReceipt,wholeOrderReceipt}`，
-  全部返回虚构示例数据，不连生产。真实路径取自 ApiService（`/gateway/wms/pda/...`，与网页端 `/gateway/wms` 同网关）。
+  当初由 `ReceiptController` 实现 `/gateway/wms/pda/receipt/{scanPallet,getBoxTypeInfo,skuReceipt,wholeOrderReceipt}` 的无状态骨架；
+  该类已在批次 5 之后删除，这 4 个接口并入 `PdaReceiptFlowController`（见下文）。真实路径取自 ApiService（`/gateway/wms/pda/...`，与网页端 `/gateway/wms` 同网关）。
 - 上架 DTO（2026-11-24）：`dto/shelves/` 下 `SkuShelvesReq`（含 SkuShelvesItem）、`BoxShelvesReq`（含 BoxShelvesItem）；
-  `ShelvesController` 实现 `/gateway/wms/pda/shelf/v2/{scanBarcode(GET),getRecommendCell/v2(GET),confirm,box/submitShelf}`，
-  同样虚构数据、不连生产。
+  当初的 `ShelvesController`（`/pda/shelf/v2/{scanBarcode,getRecommendCell/v2,confirm,box/submitShelf}` 骨架）同样已删除，并入 `PdaShelfFlowController`。
 - 退货上架 DTO（2026-11-24）：`dto/returnputaway/` 下 `ReturnPutawayScanReq`、`ShelvesInfoReq`（含 ShelvesSubmit）、`Appendix`；
   `ReturnPutawayController` 实现 `/gateway/wms/pda/return/putaway/{scanBarcode,scanOrderNo,scanCell(GET),listOrder(GET),detail/scanBarcode(GET),submit}`，
   虚构数据、不连生产。销毁 `destruct`（破坏性操作）未实现。测试共 11 个通过。
@@ -84,7 +83,9 @@ Java 后端（Spring Boot 3 / Java 17）+ Vue 2 前端。当前全部是虚构�
 - 批次 5（2026-11-24）：PDA 再补 44 个接口，PDA 覆盖 104/175。收货 18 个方法 + `blReceipt/measureBoxType`
   （`PdaReceiptFlowController` + `ReceiptStore`，4 张虚构入库单）、上架 20 个（`PdaShelfFlowController` + `PutawayStore`，上架写入 `StockStore`）、
   新品维护 5 个（`PdaNewProductController` + `NewProductStore`）。收货自动生成上架单。`StockStore` 新增新品 SKU-0012/0013 与 `putIn`。
-  **遗留**：批次 1 的 8 个收货/上架接口（`ReceiptController`、`ShelvesController`）仍是无状态骨架，没接到新 Store。
+  批次 1 的 8 个收货/上架骨架接口随后已接入 Store（删除 `ReceiptController`、`ShelvesController`，并入两个 Flow 控制器，
+  返回类型改为 APK 的 ScanPalletStatus / BoxTypeInfoRsp / String / RecommendCellListBean / PutAwayStatus）；
+  为让 skuReceipt 有真实数据，新增第 5 张入库单 RA2611000005（forecastType 3 按 SKU 预报）。至此 PDA 收货/上架接口全部有状态。
   规则见 COVERAGE.md“批次 5 的数据与规则”。测试共 121 个通过（做过一次变异检查：去掉超收校验后有 2 个用例失败）。下一步是批次 6（PDA 退货）。
 - 官方文档：2026-11-24 搜索未找到领星海外仓 WMS 的公开帮助中心或开放 API 文档（apifox 上搜到的“海外仓开放平台”属于 jcex，不是领星）。
 

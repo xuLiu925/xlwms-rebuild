@@ -54,6 +54,8 @@ public class PutawayStore {
         public final String palletCode;
         public final List<String> boxBarcodes = new ArrayList<>();
         public final Map<String, Integer> boxTypes = new LinkedHashMap<>();
+        /** 按 SKU 收货时放在托盘上的散件 */
+        public final Map<String, Integer> skus = new LinkedHashMap<>();
         public String shelfCellNo;
 
         Pallet(String palletCode) {
@@ -148,6 +150,15 @@ public class PutawayStore {
         o.boxTypes.computeIfAbsent(boxType, k -> new BoxTypeLine()).receiptQty += qty;
         if (palletCode != null) {
             o.pallets.computeIfAbsent(palletCode, Pallet::new).boxTypes.merge(boxType, qty, Integer::sum);
+        }
+    }
+
+    synchronized void addSkus(ReceiptStore.Asn a, Map<String, Integer> qty, String palletCode) {
+        Order o = orderFor(a);
+        qty.forEach((sku, q) -> o.skus.computeIfAbsent(sku, k -> new SkuLine()).receiptQty += q);
+        if (palletCode != null) {
+            Pallet p = o.pallets.computeIfAbsent(palletCode, Pallet::new);
+            qty.forEach((sku, q) -> p.skus.merge(sku, q, Integer::sum));
         }
     }
 
@@ -252,6 +263,7 @@ public class PutawayStore {
             putBox(o, bb, cellNo);
         }
         p.boxTypes.forEach((bt, qty) -> putBoxType(o, bt, qty, cellNo));
+        p.skus.forEach((sku, qty) -> putSku(o, sku, qty, cellNo));
         p.shelfCellNo = cellNo.trim();
     }
 

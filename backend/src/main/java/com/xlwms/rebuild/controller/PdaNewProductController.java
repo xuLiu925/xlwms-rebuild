@@ -87,6 +87,7 @@ public class PdaNewProductController {
         Set<String> s = new LinkedHashSet<>();
         a.boxes.values().forEach(b -> s.addAll(b.skus.keySet()));
         a.boxTypes.keySet().forEach(bt -> s.add(stock.boxType(bt).sku()));
+        s.addAll(a.skuLines.keySet());
         return s;
     }
 

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * PDA 收货（/pda/receipt/** 新接口）的内存数据，重启或 reset 后恢复。收货会在 {@link PutawayStore} 生成/追加上架单。
  * 数据虚构，规则与编码是本项目假设：
  * <ul>
- *   <li>forecastType：1 按箱预报（箱唛 + 箱内 SKU 明细）/ 2 按箱型预报；inboundType：1 普通入库 / 2 中转入库</li>
+ *   <li>forecastType：1 按箱预报（箱唛 + 箱内 SKU 明细）/ 2 按箱型预报 / 3 按 SKU 预报；inboundType：1 普通入库 / 2 中转入库</li>
  *   <li>入库单 status 沿用网页端观察到的 10 在途 / 11 收货中 / 15 已收货；“完成收货”后即使少收也置为 15</li>
  *   <li>不允许超收；一个箱唛只能收一次</li>
  *   <li>rowVersion 每次变更加 1，请求里带了 rowVersion 就必须与当前一致（乐观锁）</li>
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ReceiptStore {
 
-    public static final Map<Integer, String> FORECAST_TYPE = Map.of(1, "按箱", 2, "按箱型");
+    public static final Map<Integer, String> FORECAST_TYPE = Map.of(1, "按箱", 2, "按箱型", 3, "按SKU");
     public static final Map<Integer, String> STATUS = Map.of(10, "在途", 11, "收货中", 15, "已收货");
 
     public static class SkuLine {
@@ -81,6 +81,8 @@ public class ReceiptStore {
         public final String createTime;
         public final Map<String, Box> boxes = new LinkedHashMap<>();
         public final Map<String, BoxTypeLine> boxTypes = new LinkedHashMap<>();
+        /** 按 SKU 预报（forecastType=3）的明细，可多次收货累计 */
+        public final Map<String, SkuLine> skuLines = new LinkedHashMap<>();
         public boolean finished;
         public int rowVersion = 1;
 
@@ -97,18 +99,25 @@ public class ReceiptStore {
         }
 
         public int boxCount() {
-            return boxes.size() + boxTypes.values().stream().mapToInt(b -> b.asnBoxQty).sum();
+            return boxes.size() + boxTypes.values().stream().mapToInt(b -> b.asnBoxQty).sum() + (skuLines.isEmpty() ? 0 : 1);
         }
 
         public int receivedBoxCount() {
-            return (int) boxes.values().stream().filter(b -> b.received).count() + boxTypes.values().stream().mapToInt(b -> b.receiptQty).sum();
+            // 按 SKU 预报的单没有箱，整单记为 1 “箱”，全部收完才算收完
+            int skuDone = skuLines.isEmpty() ? 0 : skuLines.values().stream().allMatch(l -> l.receiptQty == l.asnQty) ? 1 : 0;
+            return (int) boxes.values().stream().filter(b -> b.received).count() + boxTypes.values().stream().mapToInt(b -> b.receiptQty).sum() + skuDone;
+        }
+
+        public boolean anyReceived() {
+            return boxes.values().stream().anyMatch(b -> b.received) || boxTypes.values().stream().anyMatch(t -> t.receiptQty > 0)
+                    || skuLines.values().stream().anyMatch(l -> l.receiptQty > 0);
         }
 
         public int status() {
             if (finished || receivedBoxCount() == boxCount()) {
                 return 15;
             }
-            return receivedBoxCount() == 0 ? 10 : 11;
+            return anyReceived() ? 11 : 10;
         }
     }
 
@@ -137,6 +146,9 @@ public class ReceiptStore {
         Asn a4 = asn("RA2611000004", "C002", "示例客户2", 1, 1, 1, "2026-11-24 07:30:00");
         box(a4, "BX-0004-01", "SKU-0004", 12);
         box(a4, "BX-0004-02", "SKU-0005", 6, "SKU-0013", 3);
+        Asn a5 = asn("RA2611000005", "C003", "示例客户3", 3, 1, 0, "2026-11-24 08:00:00");
+        a5.skuLines.put("SKU-0006", new SkuLine(20));
+        a5.skuLines.put("SKU-0003", new SkuLine(6));
     }
 
     private Asn asn(String no, String cc, String cn, int forecastType, int inboundType, int palletFlag, String time) {
@@ -251,12 +263,66 @@ public class ReceiptStore {
         return l;
     }
 
+    /** 只校验不收货：按 SKU 收货。qty 为本批每个 SKU 的合计数量。 */
+    public synchronized void checkSkus(Asn a, String rowVersion, Map<String, Integer> qty) {
+        checkOpen(a, rowVersion);
+        if (a.forecastType != 3) {
+            throw new BizException("入库单 " + a.asnNo + " 不是按 SKU 预报");
+        }
+        if (qty.isEmpty()) {
+            throw new BizException("请至少收一个 SKU");
+        }
+        qty.forEach((sku, q) -> {
+            SkuLine l = a.skuLines.get(sku);
+            if (l == null) {
+                throw new BizException("SKU 不属于入库单 " + a.asnNo + "：" + sku);
+            }
+            if (q == null || q <= 0 || l.receiptQty + q > l.asnQty) {
+                throw new BizException("SKU " + sku + " 收货数量超出预报，剩余可收 " + (l.asnQty - l.receiptQty));
+            }
+        });
+    }
+
+    /** 按 SKU 收货（调用前先 checkSkus）。palletCode 不为空表示这些货在该托盘上。 */
+    public synchronized void receiveSkus(String asnNo, Map<String, Integer> qty, String palletCode) {
+        Asn a = get(asnNo);
+        qty.forEach((sku, q) -> a.skuLines.get(sku).receiptQty += q);
+        a.rowVersion++;
+        putaway.addSkus(a, qty, palletCode);
+    }
+
+    /** 整单收货：剩余的箱、箱型、SKU 全部按预报收完并完成收货。 */
+    public synchronized Asn receiveAllAndFinish(String asnNo, String rowVersion) {
+        Asn a = get(asnNo);
+        checkOpen(a, rowVersion);
+        for (Box b : a.boxes.values()) {
+            if (!b.received) {
+                receiveBox(asnNo, null, b.boxBarcode, null, null);
+            }
+        }
+        for (BoxTypeLine t : a.boxTypes.values()) {
+            if (t.receiptQty < t.asnBoxQty) {
+                receiveBoxType(asnNo, null, t.boxType, t.asnBoxQty - t.receiptQty, null);
+            }
+        }
+        Map<String, Integer> rest = new LinkedHashMap<>();
+        a.skuLines.forEach((sku, l) -> {
+            if (l.receiptQty < l.asnQty) {
+                rest.put(sku, l.asnQty - l.receiptQty);
+            }
+        });
+        if (!rest.isEmpty()) {
+            receiveSkus(asnNo, rest, null);
+        }
+        return finish(asnNo);
+    }
+
     public synchronized Asn finish(String asnNo) {
         Asn a = get(asnNo);
         if (a.finished) {
             throw new BizException("入库单已完成收货：" + a.asnNo);
         }
-        if (a.receivedBoxCount() == 0) {
+        if (!a.anyReceived()) {
             throw new BizException("入库单还没有收货，不能完成");
         }
         a.finished = true;

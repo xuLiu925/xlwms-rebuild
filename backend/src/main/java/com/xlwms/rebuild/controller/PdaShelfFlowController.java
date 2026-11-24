@@ -3,6 +3,8 @@ package com.xlwms.rebuild.controller;
 import com.xlwms.rebuild.common.BizException;
 import com.xlwms.rebuild.common.PageUtil;
 import com.xlwms.rebuild.common.R;
+import com.xlwms.rebuild.dto.shelves.BoxShelvesReq;
+import com.xlwms.rebuild.dto.shelves.SkuShelvesReq;
 import com.xlwms.rebuild.service.PutawayStore;
 import com.xlwms.rebuild.service.PutawayStore.Box;
 import com.xlwms.rebuild.service.PutawayStore.Order;
@@ -23,8 +25,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * PDA 上架（批次 5）：/gateway/wms/pda/shelf/ 下 19 个接口与 /gateway/wms/shelf/selectCell。路径、参数名、请求体与响应字段取自 APK；
- * 规则见 {@link PutawayStore}，上架写入 {@link StockStore}。批次 1 的 4 个 /pda/shelf/v2 接口仍是 {@link ShelvesController} 的无状态骨架。
+ * PDA 上架：/gateway/wms/pda/shelf/ 下全部 23 个接口与 /gateway/wms/shelf/selectCell。路径、参数名、请求体与响应字段取自 APK；
+ * 规则见 {@link PutawayStore}，上架写入 {@link StockStore}。v2/confirm 与 v2/box/submitShelf 的请求体沿用 dto/shelves 下批次 1 的类。
  * shelfType、putAwayType 等编码为本项目假设。数据虚构，不连生产。
  */
 @RestController
@@ -178,7 +180,8 @@ public class PdaShelfFlowController {
 
     // ---------- 按 SKU 上架 ----------
 
-    @GetMapping("/gateway/wms/pda/shelf/scanBarcode")
+    /** 扫产品条码（BarcodeCheck）。v1 与 v2 两个路径行为相同。 */
+    @GetMapping({"/gateway/wms/pda/shelf/scanBarcode", "/gateway/wms/pda/shelf/v2/scanBarcode"})
     public R<Map<String, Object>> scanBarcode(@RequestParam String barcode, @RequestParam(required = false) String customerCode,
                                               @RequestParam String putawayNo, @RequestParam(required = false) String whCode) {
         Order o = putaway.get(putawayNo);
@@ -251,6 +254,106 @@ public class PdaShelfFlowController {
     public R<Object> commitCompleteOrder(@RequestBody CommitCompleteOrderReq req) {
         putaway.completeAll(putaway.get(req.putawayNo()), req.cellNo());
         return R.ok(null);
+    }
+
+    /**
+     * 上架单的推荐库位与待上架明细（RecommendCellListBean：skuList / boxList 两组分页）。
+     * areaTypes 本项目不区分。按箱型的行放在 boxList.records[0].boxTypeList 下。
+     */
+    @GetMapping("/gateway/wms/pda/shelf/v2/getRecommendCell/v2")
+    public R<Map<String, Object>> getRecommendCell(@RequestParam(defaultValue = "1") int current, @RequestParam(defaultValue = "20") int size,
+                                                   @RequestParam String putawayNo, @RequestParam(required = false) String whCode,
+                                                   @RequestParam(required = false) String customerCode, @RequestParam(required = false) String areaTypes) {
+        Order o = putaway.get(putawayNo);
+        List<Map<String, Object>> skus = new ArrayList<>();
+        o.skus.forEach((sku, l) -> {
+            if (l.pending() > 0) {
+                Map<String, Object> m = skuRow(sku, l);
+                m.put("recommendCellList", recommendCellBean(sku).get("recommendCellList"));
+                m.remove("recommendCell");
+                skus.add(m);
+            }
+        });
+        List<Map<String, Object>> types = new ArrayList<>();
+        o.boxTypes.forEach((bt, l) -> {
+            if (l.pending() > 0) {
+                Map<String, Object> m = new LinkedHashMap<>();
+                m.put("allBoxQty", l.receiptQty);
+                m.put("boxType", bt);
+                m.put("cellAreaType", "存储区");
+                m.put("customizeBarcode", "");
+                m.put("lastPutaway", !stock.cellsHolding(stock.boxType(bt).sku()).isEmpty());
+                m.put("recommendCell", putaway.recommendCell(stock.boxType(bt).sku()));
+                m.put("waitShelfBoxQty", l.pending());
+                types.add(m);
+            }
+        });
+        List<Map<String, Object>> boxGroups = types.isEmpty() ? List.of()
+                : List.of(Map.of("boxTypeList", types, "inboundType", String.valueOf(o.inboundType)));
+        Map<String, Object> m = new LinkedHashMap<>();
+        m.put("boxList", PageUtil.page(boxGroups, current, size));
+        m.put("customerCode", o.customerCode);
+        m.put("putAwayStatus", o.status() == 2 ? 1 : 0);
+        m.put("putawayNo", o.putawayNo);
+        m.put("putawayType", o.putawayType());
+        m.put("skuList", PageUtil.page(skus, current, size));
+        m.put("sourceNo", o.sourceNo);
+        m.put("tenantCode", "DEMO");
+        m.put("whCode", StockStore.WH);
+        return R.ok(m);
+    }
+
+    /** 按 SKU 上架确认（PutAwayStatus）：同一 SKU 多行合计不得超过待上架数，库位全部有效，校验通过后统一上架。 */
+    @PostMapping("/gateway/wms/pda/shelf/v2/confirm")
+    public R<Map<String, Object>> confirm(@RequestBody SkuShelvesReq req) {
+        Order o = putaway.get(req.getPutawayNo());
+        if (req.getSkuList() == null || req.getSkuList().isEmpty()) {
+            throw new BizException("skuList 不能为空");
+        }
+        Map<String, Integer> sum = new LinkedHashMap<>();
+        for (SkuShelvesReq.SkuShelvesItem it : req.getSkuList()) {
+            SkuLine l = o.skus.get(it.getProductSku());
+            if (l == null) {
+                throw new BizException("SKU 不在上架单 " + o.putawayNo + " 中：" + it.getProductSku());
+            }
+            stock.requireCell(it.getCellNo(), true);
+            int total = sum.merge(it.getProductSku(), it.getPutawayQty(), Integer::sum);
+            if (it.getPutawayQty() <= 0 || total > l.pending()) {
+                throw new BizException("SKU " + it.getProductSku() + " 上架数量超出待上架数量，剩余 " + l.pending());
+            }
+        }
+        for (SkuShelvesReq.SkuShelvesItem it : req.getSkuList()) {
+            putaway.putSku(o, it.getProductSku(), it.getPutawayQty(), it.getCellNo());
+        }
+        return R.ok(putAwayStatus(o));
+    }
+
+    /** 整箱上架（PutAwayStatus）：每箱可以去不同库位；先校验全部箱子再统一上架。 */
+    @PostMapping("/gateway/wms/pda/shelf/v2/box/submitShelf")
+    public R<Map<String, Object>> submitShelf(@RequestBody BoxShelvesReq req) {
+        Order o = putaway.get(req.getPutawayNo());
+        if (req.getBoxBarcodeList() == null || req.getBoxBarcodeList().isEmpty()) {
+            throw new BizException("boxBarcodeList 不能为空");
+        }
+        Map<String, Integer> need = new LinkedHashMap<>();
+        java.util.Set<String> seen = new java.util.HashSet<>();
+        for (BoxShelvesReq.BoxShelvesItem it : req.getBoxBarcodeList()) {
+            Box b = o.boxes.get(it.getBoxBarcode());
+            if (b == null || b.shelved || !seen.add(it.getBoxBarcode())) {
+                throw new BizException("箱唛不存在、已上架或重复：" + it.getBoxBarcode());
+            }
+            stock.requireCell(it.getCellNo(), true);
+            b.skus.forEach((sku, q) -> need.merge(sku, q, Integer::sum));
+        }
+        for (Map.Entry<String, Integer> e : need.entrySet()) {
+            if (o.skus.get(e.getKey()).pending() < e.getValue()) {
+                throw new BizException(e.getKey() + " 已部分按 SKU 上架，不能整箱上架");
+            }
+        }
+        for (BoxShelvesReq.BoxShelvesItem it : req.getBoxBarcodeList()) {
+            putaway.putBox(o, it.getBoxBarcode(), it.getCellNo());
+        }
+        return R.ok(putAwayStatus(o));
     }
 
     // ---------- 整箱上架 ----------

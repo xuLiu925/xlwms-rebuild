@@ -3,6 +3,10 @@ package com.xlwms.rebuild.controller;
 import com.xlwms.rebuild.common.BizException;
 import com.xlwms.rebuild.common.PageUtil;
 import com.xlwms.rebuild.common.R;
+import com.xlwms.rebuild.dto.receipt.BoxTypeInfoReq;
+import com.xlwms.rebuild.dto.receipt.PalletReceiptScanReq;
+import com.xlwms.rebuild.dto.receipt.SkuForecastReceiptReq;
+import com.xlwms.rebuild.dto.receipt.WholeOrderReceiptReq;
 import com.xlwms.rebuild.service.NewProductStore;
 import com.xlwms.rebuild.service.PutawayStore;
 import com.xlwms.rebuild.service.ReceiptStore;
@@ -25,9 +29,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * PDA 收货（批次 5）：/gateway/wms/pda/receipt/ 下 17 个路径（listBoxType 在 APK 里有两个方法共用一个路径）与
+ * PDA 收货：/gateway/wms/pda/receipt/ 下全部 21 个路径（listBoxType 在 APK 里有两个方法共用一个路径）与
  * /gateway/wms/blReceipt/measureBoxType。路径、参数名、请求体与响应字段取自 APK；规则见 {@link ReceiptStore}。
- * 批次 1 的 4 个收货接口（scanPallet/getBoxTypeInfo/skuReceipt/wholeOrderReceipt）仍是 {@link ReceiptController} 的无状态骨架。
+ * scanPallet / getBoxTypeInfo / skuReceipt / wholeOrderReceipt 的请求体沿用 dto/receipt 下批次 1 按反编译建的类。
  * 数据虚构，不连生产。
  */
 @RestController
@@ -111,13 +115,15 @@ public class PdaReceiptFlowController {
     private int pcs(Asn a, boolean received) {
         int boxPcs = a.boxes.values().stream().mapToInt(b -> received ? b.receiptQty() : b.asnQty()).sum();
         int typePcs = a.boxTypes.values().stream().mapToInt(t -> (received ? t.receiptQty : t.asnBoxQty) * stock.boxType(t.boxType).pcsPerBox()).sum();
-        return boxPcs + typePcs;
+        int skuPcs = a.skuLines.values().stream().mapToInt(l -> received ? l.receiptQty : l.asnQty).sum();
+        return boxPcs + typePcs + skuPcs;
     }
 
     private Set<String> skus(Asn a) {
         Set<String> s = new HashSet<>();
         a.boxes.values().forEach(b -> s.addAll(b.skus.keySet()));
         a.boxTypes.keySet().forEach(bt -> s.add(stock.boxType(bt).sku()));
+        s.addAll(a.skuLines.keySet());
         return s;
     }
 
@@ -279,6 +285,11 @@ public class PdaReceiptFlowController {
             int[] v = agg.computeIfAbsent(b.sku(), k -> new int[2]);
             v[0] += t.asnBoxQty * b.pcsPerBox();
             v[1] += t.receiptQty * b.pcsPerBox();
+        });
+        a.skuLines.forEach((sku, l) -> {
+            int[] v = agg.computeIfAbsent(sku, k -> new int[2]);
+            v[0] += l.asnQty;
+            v[1] += l.receiptQty;
         });
         List<Map<String, Object>> rows = new ArrayList<>();
         agg.forEach((sku, v) -> rows.add(skuView(sku, v[0], v[1])));
@@ -533,6 +544,98 @@ public class PdaReceiptFlowController {
             throw new BizException("入库单 " + a.asnNo + " 中没有待收的该产品：" + p.sku());
         }
         return R.ok(out);
+    }
+
+    // ---------- 原批次 1 的 4 个接口（已改为有状态） ----------
+
+    /** 收货前扫托盘，看托盘能不能用（ScanPalletStatus）。status 本项目假设：0 空闲可用 / 1 已绑定未上架。 */
+    @PostMapping("/gateway/wms/pda/receipt/scanPallet")
+    public R<Map<String, Object>> scanPallet(@RequestBody PalletReceiptScanReq req) {
+        String code = req.getPalletCode() == null ? "" : req.getPalletCode().trim();
+        if (code.isEmpty()) {
+            throw new BizException("托盘号不能为空");
+        }
+        return R.ok(Map.of("palletCode", code, "status", putaway.palletInUse(code) ? 1 : 0, "tenantCode", "DEMO", "whCode", StockStore.WH));
+    }
+
+    /** 入库单箱型的箱规（List&lt;BoxTypeInfoRsp&gt;），boxTypeList 为空返回全部；有实测值时用实测值。 */
+    @PostMapping("/gateway/wms/pda/receipt/getBoxTypeInfo")
+    public R<List<Map<String, Object>>> getBoxTypeInfo(@RequestBody BoxTypeInfoReq req) {
+        Asn a = receipts.get(req.getAsnNo());
+        List<String> wanted = req.getBoxTypeList() == null || req.getBoxTypeList().isEmpty()
+                ? new ArrayList<>(a.boxTypes.keySet()) : req.getBoxTypeList();
+        List<Map<String, Object>> out = new ArrayList<>();
+        for (String bt : wanted) {
+            BoxTypeLine t = a.boxTypes.get(bt);
+            if (t == null) {
+                throw new BizException("箱型不属于入库单 " + a.asnNo + "：" + bt);
+            }
+            BoxType b = stock.boxType(bt);
+            double[] d = t.measured != null ? t.measured : new double[] {b.length(), b.width(), b.height(), b.weight()};
+            Map<String, Object> m = new LinkedHashMap<>();
+            m.put("boxType", bt);
+            m.put("customizeBarcode", "");
+            m.put("height", fmt(d[2]));
+            m.put("heightBs", fmt(d[2] / 2.54));
+            m.put("isCnMark", false);
+            m.put("length", fmt(d[0]));
+            m.put("lengthBs", fmt(d[0] / 2.54));
+            m.put("sizeUnit", "cm");
+            m.put("unitMark", "1");
+            m.put("weight", fmt(d[3]));
+            m.put("weightBs", fmt(d[3] * 2.20462));
+            m.put("weightUnit", "kg");
+            m.put("width", fmt(d[1]));
+            m.put("widthBs", fmt(d[1] / 2.54));
+            out.add(m);
+        }
+        return R.ok(out);
+    }
+
+    /**
+     * 按 SKU 收货（SkuForecastReceiptReq），返回上架单号。skuList 是散收，skuPalletList 是按托盘收；
+     * 全部 SKU 合计校验通过（不超收、托盘空闲）后才收货。
+     */
+    @PostMapping("/gateway/wms/pda/receipt/skuReceipt")
+    public R<String> skuReceipt(@RequestBody SkuForecastReceiptReq req) {
+        Asn a = receipts.get(req.getAsnNo());
+        Map<String, Integer> loose = new LinkedHashMap<>();
+        if (req.getSkuList() != null) {
+            req.getSkuList().forEach(s -> loose.merge(s.getProductSku(), s.getReceiptQty(), Integer::sum));
+        }
+        Map<String, Map<String, Integer>> byPallet = new LinkedHashMap<>();
+        if (req.getSkuPalletList() != null) {
+            for (SkuForecastReceiptReq.SkuPallet p : req.getSkuPalletList()) {
+                String code = p.getPalletCode() == null ? "" : p.getPalletCode().trim();
+                if (code.isEmpty() || byPallet.containsKey(code) || putaway.palletInUse(code)) {
+                    throw new BizException("托盘号为空或已被占用：" + code);
+                }
+                Map<String, Integer> m = new LinkedHashMap<>();
+                if (p.getSkuList() != null) {
+                    p.getSkuList().forEach(s -> m.merge(s.getProductSku(), s.getReceiptQty(), Integer::sum));
+                }
+                byPallet.put(code, m);
+            }
+        }
+        Map<String, Integer> total = new LinkedHashMap<>(loose);
+        byPallet.values().forEach(m -> m.forEach((sku, q) -> total.merge(sku, q, Integer::sum)));
+        receipts.checkSkus(a, req.getRowVersion(), total);
+        if (!loose.isEmpty()) {
+            receipts.receiveSkus(a.asnNo, loose, null);
+        }
+        byPallet.forEach((code, m) -> {
+            if (!m.isEmpty()) {
+                receipts.receiveSkus(a.asnNo, m, code);
+            }
+        });
+        return R.ok(receipts.putawayNoOf(a.asnNo));
+    }
+
+    /** 整单收货：剩余全部按预报收完并完成收货。 */
+    @PostMapping("/gateway/wms/pda/receipt/wholeOrderReceipt")
+    public R<Object> wholeOrderReceipt(@RequestBody WholeOrderReceiptReq req) {
+        receipts.receiveAllAndFinish(req.getAsnNo(), req.getRowVersion());
+        return R.ok(null);
     }
 
     // ---------- 箱规测量 ----------
