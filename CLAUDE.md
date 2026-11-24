@@ -76,7 +76,12 @@ Java 后端（Spring Boot 3 / Java 17）+ Vue 2 前端。当前全部是虚构�
   收货上架/上架（`InboundWorkStore` 内存 + basic_cell 库位校验）、二次分拣/复核/按箱复核/称重出库（扩展 `OutboundSampleStore`，
   新增已拣完多品波次 WV26110004）、库龄分析、全局设置、运费试算、分区测试（`ZoneCalculator`，规则虚构）。细节见 COVERAGE.md。
   **不装 MySQL 也能跑后端**：`.claude/launch.json` 的 `backend-h2`（带测试类路径 + `src/test/resources/application-h2.yml`），
-  已用它和前端联调过登录、复核、称重出库、运费试算、上架、库龄等页面。测试共 108 个通过。下一步是批次 4（PDA 库内与出库）。
+  已用它和前端联调过登录、复核、称重出库、运费试算、上架、库龄等页面。
+- 批次 4（2026-11-24）：PDA 再补 33 个接口，PDA 覆盖 60/175。库内 `/pda/stock/**` ×10（`PdaStockController` + `StockStore`）、
+  盘点 `/pda/inventoryCheck/**` ×6（`InventoryCheckStore`，complete 时把实盘数写回库存）、出库确认与大货复核 `/pda/delivery/**` ×8
+  （`PdaDeliveryController`）、按箱拣货 ×8（`WaveBoxController` + `FreightStore`，拣货扣减按箱库存）、`review/getCustomerCode4More`。
+  路径/参数/字段取自 APK，业务规则和编码是本项目假设（见 COVERAGE.md“批次 4 的数据与规则”）。`POST /demo/reset` 重置全部内存数据。
+  测试共 114 个通过。下一步是批次 5（PDA 收货/上架/新品维护）。
 - 官方文档：2026-11-24 搜索未找到领星海外仓 WMS 的公开帮助中心或开放 API 文档（apifox 上搜到的“海外仓开放平台”属于 jcex，不是领星）。
 
 ## 未知 / 未验证

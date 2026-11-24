@@ -5,12 +5,12 @@
 
 状态说明：✅ 专门实现 · 🟦 通用列表页（规格在 `tools/list-pages/spec*.mjs`，只读） · ⬜ 占位（页面显示"待实现"）
 
-## 汇总（2026-11-24，批次 3 完成后）
+## 汇总（2026-11-24，批次 4 完成后）
 
 | 范围 | 总数 | ✅ | 🟦 | ⬜ |
 |---|---|---|---|---|
 | 网页端子路由 | 79 | 21 | 58 | 0 |
-| PDA 接口（ApiService） | 175 | 27 | — | 148 |
+| PDA 接口（ApiService） | 175 | 60 | — | 115 |
 
 ## 网页端（按 router 模块）
 
@@ -47,12 +47,12 @@
 | shelf 上架 | 24 | 4 | v2 scanBarcode / getRecommendCell / confirm / box/submitShelf |
 | return 退货收货/上架/创建 | 24 | 6 | putaway 6 个（destruct 未做） |
 | blReturnIn FBA 退货 | 24 | 0 | |
-| wave 波次拣货 | 16 | 8 | 按件拣货；按箱拣货 boxPick 系列未做 |
-| stock 库内 | 10 | 0 | 查询、移库、调整、盘点 |
+| wave 波次拣货 | 16 | 16 | 按件拣货 8 个（`WaveController`）+ 按箱拣货 8 个（批次 4，`WaveBoxController`） |
+| stock 库内 | 10 | 10 | 批次 4，`PdaStockController` + `StockStore`：查询、调整、移库、整库位移库 |
 | device 设备任务 | 9 | 0 | |
-| delivery 出库确认 | 8 | 0 | |
-| review 复核 | 6 | 5 | getCustomerCode4More 未做 |
-| inventoryCheck 盘点 | 6 | 0 | |
+| delivery 出库确认 | 8 | 8 | 批次 4，`PdaDeliveryController`：出库确认 3 个 + 大货复核 5 个 |
+| review 复核 | 6 | 6 | 批次 4 补了 getCustomerCode4More |
+| inventoryCheck 盘点 | 6 | 6 | 批次 4，`PdaInventoryCheckController` + `InventoryCheckStore` |
 | newProduct 新品维护 | 5 | 0 | |
 | pickAndSort 边拣边分 | 4 | 0 | |
 | appendix 附件 | 4 | 0 | 上传类，本地只做假实现 |
@@ -65,7 +65,8 @@
    生成器加了自检（key/route 唯一、ID 区间不重叠、ID 不超过 JS 安全整数、每个资源最多一个页签列），测试期望值也由生成器输出。
 3. **批次 3（已完成）**：剩余 10 个网页端作业/配置/工具页，左侧菜单布局（`views/layout/Layout.vue`，菜单由路由表生成），
    本地演示登录（`/auth/login`，不校验不保存密码），以及不依赖 MySQL 的 H2 本地运行方式（`.claude/launch.json` 的 backend-h2）。网页端 79/79 都有页面。
-4. **批次 4**：PDA 库内与出库补全：stock ×10、inventoryCheck ×6、delivery ×8、wave 按箱拣货 ×8、review 剩余 1，接入现有 `OutboundSampleStore` 的状态流转。
+4. **批次 4（已完成）**：PDA 库内与出库补全 33 个接口：stock ×10、inventoryCheck ×6、delivery ×8、wave 按箱拣货 ×8、review 剩余 1。
+   PDA 端覆盖到 60/175。规则见下方“批次 4 的数据与规则”。
 5. **批次 5**：PDA 收货/上架补全：receipt ×18、shelf ×20、newProduct ×5。
 6. **批次 6**：PDA 退货：return receive/create ×17、destruct、blReturnIn ×24。
 7. **批次 7**：其他 PDA 接口（device、pickAndSort、appendix、messageBoard、auth/home/menu/warehouse/system），以及网页端的本地增删改（只写本地库）。
@@ -82,6 +83,22 @@
 | 登录 | `AuthController` `/auth/{login,getUserInfo,logout}` | 内存令牌 | 账号密码非空即可；不校验、不保存密码；其他接口不鉴权 |
 
 所有路径与字段都是本项目占位，真实网页接口未抓取。
+
+## 批次 4 的数据与规则（PDA）
+
+路径、查询参数名、请求体与响应字段取自 APK（ApiService 与 data.model.bean，离线反编译）；下面的业务规则和编码都是本项目假设。
+
+- **库存**（`StockStore`，内存）：一行 = 库位 + SKU + 箱型（空串为散件）+ 品质（1 良品 / 2 次品）。按箱库存以“箱”计数。
+  库位 E-09-09 锁定，不能移入。`stock/adjust` 的 adjustFlag：1 调增 / 2 调减，带了 beforeStkQty 就必须与当前库存一致。
+  `stock/search` 的 queryType：1 SKU/条码、2 FNSKU、3 箱型、4 库位，不传则全部。`stock/stockCellQuality` 按“整库位移库”实现（真实语义未确认）。
+- **盘点**（`InventoryCheckStore`）：两张单，IC2611000001 明盘、IC2611000002 盲盘（盲盘不下发账面数）。status：0 待盘点 / 1 盘点中 / 2 已完成。
+  start 时拍账面快照；扫到账面没有的产品会新增一行（盘盈）；所有库位提交后才能 complete，complete 把实盘数写回库存。只盘散件。
+- **大货出库**（`FreightStore`）：按箱波次 BW26110001 含两张大货单 FO2611000001/0002。按箱拣货会扣减对应库位的按箱库存；
+  拣完 → 待复核(10) → 大货复核要求每个箱型实出等于应出 → 已复核(20) → 出库确认 → 已出库(30)。
+- **出库确认**：`delivery/getConfirmInfo` 的 outboundType 1 = 一件代发（`OutboundSampleStore`），2 = 大货；`confirmDelivery`/`bulkConfirmDelivery`
+  按单号自动区分两类，整批先校验再出库，任何一单不满足就整批不生效。
+- **序列号**：`delivery/review/getSysBaseParam` 固定返回 false（不要求扫序列号）；`scanProductSn` 只做校验和回显，响应字段是占位。
+- **重置**：`POST /gateway/wms/demo/reset` 把所有内存示例数据恢复初始状态（本地演示专用）。
 
 ## 已知限制（通用列表页）
 

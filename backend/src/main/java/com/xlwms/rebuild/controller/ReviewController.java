@@ -61,6 +61,30 @@ public class ReviewController {
         return R.ok(putAwayStatus(all));
     }
 
+    /**
+     * 一票多件复核前取客户与快递信息（CustomerCode4More：delivery / express / orderType / outBoundList / tenantCode / whCode）。
+     * orderType 编码是本项目假设（1 一票一件 / 2 一票多件，按出库单的件数判断）；tenantCode 为占位值。
+     */
+    @GetMapping("/getCustomerCode4More")
+    public R<Map<String, Object>> getCustomerCode4More(@RequestParam String deliveryNo, @RequestParam(required = false) String whCode) {
+        Delivery d = store.lookup(deliveryNo);
+        Map<String, Object> express = new LinkedHashMap<>();
+        express.put("customerCode", d.customerCode);
+        express.put("customerName", d.customerName);
+        express.put("deliveryNo", d.deliveryNo);
+        express.put("expressNo", d.expressNo);
+        express.put("logisticsChannel", d.logisticsChannel);
+        express.put("sourceNo", d.sourceNo);
+        Map<String, Object> m = new LinkedHashMap<>();
+        m.put("delivery", Map.of("customerCode", d.customerCode, "deliveryNo", d.deliveryNo));
+        m.put("express", List.of(express));
+        m.put("orderType", d.skuNum() > 1 ? 2 : 1);
+        m.put("outBoundList", List.of());
+        m.put("tenantCode", "DEMO");
+        m.put("whCode", OutboundSampleStore.WH);
+        return R.ok(m);
+    }
+
     /** 一票多件复核：返回整单 SKU 汇总与已扫数量。 */
     @GetMapping("/get4MorePiece")
     public R<Map<String, Object>> get4MorePiece(@RequestParam String deliveryNo,
