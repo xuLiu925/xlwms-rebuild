@@ -24,12 +24,15 @@ const modules = {
 const pages = {
   'inbound/ASN': () => import('../views/inbound/ASN.vue'),
   'outbound/parcel': () => import('../views/outbound/Parcel.vue'),
+  'outbound/wave': () => import('../views/outbound/Wave.vue'),
   'stock/sku': () => import('../views/stock/Sku.vue')
 }
 const routes = [
   { path: '/login', component: () => import('../views/Login.vue') },
   { path: '/', redirect: '/dashboard' },
   { path: '/dashboard', component: () => import('../views/Dashboard.vue') },
+  // 本地演示页：模拟 PDA 出库作业，只连本地后端
+  { path: '/pdaDemo', component: () => import('../views/pda/OutboundDemo.vue') },
   ...Object.entries(modules).map(([m, kids]) => ({
     path: '/' + m, component: { render: h => h('router-view') },
     children: kids.map(k => ({ path: k, component: pages[m + '/' + k] || Stub(m + '/' + k) }))

@@ -26,10 +26,17 @@ public final class PageUtil {
     }
 
     public static <T> Map<String, Object> page(List<T> all, Map<String, Object> body) {
-        long current = Math.max(1, longParam(body, "current", 1));
-        long size = Math.min(200, Math.max(1, longParam(body, "size", 20)));
+        return page(all, longParam(body, "current", 1), longParam(body, "size", 20));
+    }
+
+    /** 分页并附带 pages（PDA 的分页 bean 有 pages 字段）。 */
+    public static <T> Map<String, Object> page(List<T> all, long current, long size) {
+        current = Math.max(1, current);
+        size = Math.min(200, Math.max(1, size));
         int from = (int) Math.min(all.size(), (current - 1) * size);
         int to = (int) Math.min(all.size(), from + size);
-        return Map.of("records", all.subList(from, to), "total", all.size(), "size", size, "current", current);
+        // 用 int 输出，避免 Long 被全局配置序列化成字符串
+        return Map.of("records", all.subList(from, to), "total", all.size(), "size", (int) size, "current", (int) current,
+                "pages", (int) ((all.size() + size - 1) / size));
     }
 }

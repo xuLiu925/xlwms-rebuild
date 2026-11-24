@@ -43,6 +43,13 @@ Java 后端（Spring Boot 3 / Java 17）+ Vue 2 前端。当前全部是虚构�
   路由里用 `pages` 映射已实现页面。后端 `DeliveryController`（`/blDelivery/{queryInTotal,page}`）与 `StockController` 改为内存分页虚构数据（`common/PageUtil`）。
   **注意**：这两组的请求体字段（keyword/customerCode/status/current/size）、records 字段名、一件代发状态编码（10/20/30/40/50/80/90）都是本项目占位，真实值未抓取。
   本地运行配置在 `.claude/launch.json`（后端 8080、前端 8081）。测试共 16 个通过。
+- 出库作业（2026-11-24）：按 APK 还原波次拣货 `/pda/wave/{pickList,page,pageCell,skuDetail,scanCell,scanSku,pick,queryIntercepting}`
+  与复核 `/pda/review/{get4piecePackage,review4packageV2,get4MorePiece,morePieceV2,confirmDelivery}`（`WaveController`、`ReviewController`，
+  DTO 在 `dto/wave`、`dto/review`，用 Java record）。响应字段按 APK 的 WavePageBean/PiecePackageBean/MorePieceBean/PutAwayStatus 等还原。
+  数据在 `service/OutboundSampleStore`（内存、有状态：拣完→可复核→复核完→可出库，重启恢复）。业务异常 `BizException` → `{code:500,msg}`（错误码为占位）。
+  网页端 `views/outbound/Wave.vue` 对接**占位路径** `/wave/{statistics,page}`（真实网页接口未抓取）；`/pdaDemo` 是本地 PDA 作业模拟页，
+  `/demo/outbound/reset` 是本地演示专用接口。波次/出库单状态编码、拣货方式编码、流转规则都是本项目假设。测试共 22 个通过。
+- 官方文档：2026-11-24 搜索未找到领星海外仓 WMS 的公开帮助中心或开放 API 文档（apifox 上搜到的“海外仓开放平台”属于 jcex，不是领星）。
 
 ## 未知 / 未验证
 - 构建已修通（2026-11-24）：后端 JDK 17 下 `mvn test` 2 个测试通过；前端 Node 22 下 `npm install && npm run build` 成功（已提交 package-lock.json）。
