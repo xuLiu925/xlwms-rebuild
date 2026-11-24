@@ -5,12 +5,12 @@
 
 状态说明：✅ 专门实现 · 🟦 通用列表页（规格在 `tools/list-pages/spec*.mjs`，只读） · ⬜ 占位（页面显示"待实现"）
 
-## 汇总（2026-11-24，批次 5 完成后）
+## 汇总（2026-11-24，批次 6 完成后）
 
 | 范围 | 总数 | ✅ | 🟦 | ⬜ |
 |---|---|---|---|---|
 | 网页端子路由 | 79 | 21 | 58 | 0 |
-| PDA 接口（ApiService） | 175 | 104 | — | 71 |
+| PDA 接口（ApiService） | 175 | 146 | — | 29 |
 
 PDA 的 175 是 ApiService 方法数；其中 `receipt/listBoxType` 有两个方法共用一个路径，按方法计 2 个。
 
@@ -47,8 +47,8 @@ PDA 的 175 是 ApiService 方法数；其中 `receipt/listBoxType` 有两个方
 |---|---|---|---|
 | receipt 收货 | 22 | 22 | 全部在 `PdaReceiptFlowController` + `ReceiptStore`（批次 1 的 4 个骨架已并入并改为有状态） |
 | shelf 上架 | 24 | 24 | 全部在 `PdaShelfFlowController` + `PutawayStore`，含 /shelf/selectCell（批次 1 的 4 个 /v2 骨架已并入并改为有状态） |
-| return 退货收货/上架/创建 | 24 | 6 | putaway 6 个（destruct 未做） |
-| blReturnIn FBA 退货 | 24 | 0 | |
+| return 退货收货/上架/创建 | 24 | 24 | 批次 6，`ReturnFlowController` + `ReturnStore`：receive 11、create 6（commitOrder 两个方法共用路径）、putaway 7 含 destruct；原 putaway 骨架已删除 |
+| blReturnIn FBA 退货 | 24 | 24 | 批次 6，`FbaReturnController` + `FbaReturnStore`：签收、清点、上架、认领、退货拣货 |
 | wave 波次拣货 | 16 | 16 | 按件拣货 8 个（`WaveController`）+ 按箱拣货 8 个（批次 4，`WaveBoxController`） |
 | stock 库内 | 10 | 10 | 批次 4，`PdaStockController` + `StockStore`：查询、调整、移库、整库位移库 |
 | device 设备任务 | 9 | 0 | |
@@ -71,7 +71,8 @@ PDA 的 175 是 ApiService 方法数；其中 `receipt/listBoxType` 有两个方
    PDA 端覆盖到 60/175。规则见下方“批次 4 的数据与规则”。
 5. **批次 5（已完成）**：PDA 收货/上架/新品维护 44 个接口（receipt ×18 方法、shelf ×20、newProduct ×5、blReceipt/measureBoxType），PDA 覆盖到 104/175。
    随后把批次 1 的 8 个收货/上架骨架接口也接入了 Store，PDA 收货/上架不再有无状态骨架。
-6. **批次 6**：PDA 退货：return receive/create ×17、destruct、blReturnIn ×24。
+6. **批次 6（已完成）**：PDA 退货 42 个接口（return receive ×11、create ×6、destruct，blReturnIn ×24），并把批次 1 的 6 个退货上架骨架改为有状态。
+   PDA 覆盖到 146/175，剩下的都在批次 7。
 7. **批次 7**：其他 PDA 接口（device、pickAndSort、appendix、messageBoard、auth/home/menu/warehouse/system），以及网页端的本地增删改（只写本地库）。
 
 ## 批次 3 页面的数据与规则
@@ -122,6 +123,24 @@ PDA 的 175 是 ApiService 方法数；其中 `receipt/listBoxType` 有两个方
   推荐库位：已有该 SKU 库存的库位优先，否则第一个空库位。锁定库位 E-09-09 一律拒绝。
 - **托盘**：托盘号在上架完成前不能被另一次收货复用；`preCheckPalletList` 返回目标库位上已有其他托盘的冲突，空列表表示可提交。
 - **新品**：SKU-0012、SKU-0013 初始为待测量；`receiptMeasure` 先校验全部再记录（0~300 cm、0~500 kg），测量后从待维护清单移除。
+
+## 批次 6 的数据与规则（PDA 退件 / FBA 退货）
+
+路径、查询参数名、请求体与响应字段取自 APK；规则与编码是本项目假设。上架写入 `StockStore`，拣货从 `StockStore` 扣减。
+
+- **品质与库位**：productQuality 1 良品 / 2 次品；**次品只能上架到 E 区库位**（`StockStore.requireQualityCell`），良品不限。
+- **退件单**（`ReturnStore`）：status 10 待收货 / 20 待上架 / 30 已完成；orderType 1 买家退货 / 2 拒收 / 3 PDA 新建 / 4 认领。
+  示例单 RN2611000001、0002 待收货，RN2611000003 已收货待上架（良 1 次 1）。
+  - 收货：至少一个包裹到货；暂存库位必须有效；可以收预报外的产品（但必须属于同一客户）；序列号在单内不能重复。
+  - PDA 新建：跟踪号不能和已有退件单重复，产品必须属于所选客户，新单直接是待上架。`create/type` 的 createType 1 新建 / 2 已有退件单。
+    平台退货建单（PlatformReturnCommitReq 的 platformReturn）本地不支持；APK 里该方法多带的一个请求头名字未还原，未读取。
+  - 上架：可一次分到多个库位，合计不超过待上架数。销毁只针对次品、必须填处理说明、只在本地内存扣减待处理数。
+- **FBA 退货任务**（`FbaReturnStore`）：status 0 待签收 / 10 已签收 / 20 待清点 / 30 待上架 / 40 已完成。
+  FR2611000001 待签收（预报 FN-DEMO-0001×3、0002×2），FR2611000002 已清点待上架。
+  - 签收分两步：`confirmSign` 扫快递（0→10），`updateStatusSign` 确认明细（10→20）；没有预报的包裹用 `signAndInventory` 一步建成待上架。
+  - 清点可追加预报外的 FNSKU（`addFnSku`，isNewAdd=true）；FNSKU 必须属于任务的客户。
+  - 认领 `createClaim` 在退件单里建一张 orderType=4 的待上架单，之后走退件上架。客户权限字段为占位（全部 true）。
+  - 退货拣货任务 PK2611000001：pickStatus 0 待拣 / 1 拣货中 / 2 已完成；`finishTaskOrder` 允许少拣后结束，但至少要拣过一件。
 
 ## 已知限制（通用列表页）
 

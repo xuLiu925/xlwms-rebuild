@@ -221,6 +221,21 @@ public class StockStore {
         return before;
     }
 
+    /** 次品只能放 E 区库位（本项目假设的规则，退货上架用）。 */
+    public synchronized void requireQualityCell(String cellNo, int quality) {
+        requireCell(cellNo, true);
+        if (quality == 2 && !cellNo.trim().startsWith("E-")) {
+            throw new BizException("次品只能上架到 E 区库位：" + cellNo);
+        }
+    }
+
+    /** 客户代码 → 客户名（取自产品主数据）。 */
+    public synchronized Map<String, String> customers() {
+        Map<String, String> m = new LinkedHashMap<>();
+        products.values().forEach(p -> m.putIfAbsent(p.customerCode(), p.customerName()));
+        return m;
+    }
+
     /** 入库上架：把 qty 加到目标库位（目标库位必须存在且未锁定）。 */
     public synchronized void putIn(String cellNo, String sku, String boxType, int quality, int qty) {
         requireCell(cellNo, true);

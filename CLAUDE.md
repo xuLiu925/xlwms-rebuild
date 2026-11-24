@@ -36,8 +36,7 @@ Java 后端（Spring Boot 3 / Java 17）+ Vue 2 前端。当前全部是虚构�
 - 上架 DTO（2026-11-24）：`dto/shelves/` 下 `SkuShelvesReq`（含 SkuShelvesItem）、`BoxShelvesReq`（含 BoxShelvesItem）；
   当初的 `ShelvesController`（`/pda/shelf/v2/{scanBarcode,getRecommendCell/v2,confirm,box/submitShelf}` 骨架）同样已删除，并入 `PdaShelfFlowController`。
 - 退货上架 DTO（2026-11-24）：`dto/returnputaway/` 下 `ReturnPutawayScanReq`、`ShelvesInfoReq`（含 ShelvesSubmit）、`Appendix`；
-  `ReturnPutawayController` 实现 `/gateway/wms/pda/return/putaway/{scanBarcode,scanOrderNo,scanCell(GET),listOrder(GET),detail/scanBarcode(GET),submit}`，
-  虚构数据、不连生产。销毁 `destruct`（破坏性操作）未实现。测试共 11 个通过。
+  当初的 `ReturnPutawayController` 骨架已在批次 6 删除，退货上架（含本地模拟的 destruct）并入 `ReturnFlowController`。
 - 只读列表页（2026-11-24）：前端 `views/outbound/Parcel.vue`（一件代发，状态页签+筛选+分页）、`views/stock/Sku.vue`（产品库存，汇总卡片+筛选+分页），
   路由里用 `pages` 映射已实现页面。后端 `DeliveryController`（`/blDelivery/{queryInTotal,page}`）与 `StockController` 改为内存分页虚构数据（`common/PageUtil`）。
   **注意**：这两组的请求体字段（keyword/customerCode/status/current/size）、records 字段名、一件代发状态编码（10/20/30/40/50/80/90）都是本项目占位，真实值未抓取。
@@ -86,7 +85,12 @@ Java 后端（Spring Boot 3 / Java 17）+ Vue 2 前端。当前全部是虚构�
   批次 1 的 8 个收货/上架骨架接口随后已接入 Store（删除 `ReceiptController`、`ShelvesController`，并入两个 Flow 控制器，
   返回类型改为 APK 的 ScanPalletStatus / BoxTypeInfoRsp / String / RecommendCellListBean / PutAwayStatus）；
   为让 skuReceipt 有真实数据，新增第 5 张入库单 RA2611000005（forecastType 3 按 SKU 预报）。至此 PDA 收货/上架接口全部有状态。
-  规则见 COVERAGE.md“批次 5 的数据与规则”。测试共 121 个通过（做过一次变异检查：去掉超收校验后有 2 个用例失败）。下一步是批次 6（PDA 退货）。
+  规则见 COVERAGE.md“批次 5 的数据与规则”。
+- 批次 6（2026-11-24）：PDA 退货 42 个接口，PDA 覆盖 146/175。退件 `/pda/return/{receive,create,putaway}/**` 共 24 个
+  （`ReturnFlowController` + `ReturnStore`，含本地模拟的 destruct，原退货上架骨架删除）；FBA 退货 `/pda/blReturnIn/**` 24 个
+  （`FbaReturnController` + `FbaReturnStore`：签收、清点、上架、认领、退货拣货）。新规则：次品只能上 E 区（`StockStore.requireQualityCell`）。
+  规则见 COVERAGE.md“批次 6 的数据与规则”。测试共 122 个通过（`mvn clean test`；删测试类后不 clean 会把旧报告算进去）。
+  变异检查：去掉次品库位规则后有 2 个用例失败。下一步是批次 7（device / pickAndSort / appendix / 其他 PDA 接口）。
 - 官方文档：2026-11-24 搜索未找到领星海外仓 WMS 的公开帮助中心或开放 API 文档（apifox 上搜到的“海外仓开放平台”属于 jcex，不是领星）。
 
 ## 未知 / 未验证
