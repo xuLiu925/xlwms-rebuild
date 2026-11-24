@@ -71,11 +71,17 @@ Java 后端（Spring Boot 3 / Java 17）+ Vue 2 前端。当前全部是虚构�
   网页端覆盖 69/79。规格拆为 `spec.mjs`（批次 1 + 汇总）、`spec-orders/finance/settings.mjs`，公共工具在 `helpers.mjs`（`ID(n)` 分配 ID）。
   生成器新增 `num` 类型、规格自检，并输出 `backend/src/test/resources/list-expected.csv` 供参数化测试读取。测试共 98 个通过。
   剩余 10 个网页页面是作业/配置类（见 COVERAGE.md 批次 3）。
+- 批次 3（2026-11-24）：网页端 79/79 都有页面。新增左侧菜单布局 `views/layout/Layout.vue`（菜单由 router 的 modules 生成，
+  中文名在 `config/menu.js`）、本地演示登录 `AuthController`（不校验不保存密码，其他接口不鉴权）、10 个作业/配置/工具页：
+  收货上架/上架（`InboundWorkStore` 内存 + basic_cell 库位校验）、二次分拣/复核/按箱复核/称重出库（扩展 `OutboundSampleStore`，
+  新增已拣完多品波次 WV26110004）、库龄分析、全局设置、运费试算、分区测试（`ZoneCalculator`，规则虚构）。细节见 COVERAGE.md。
+  **不装 MySQL 也能跑后端**：`.claude/launch.json` 的 `backend-h2`（带测试类路径 + `src/test/resources/application-h2.yml`），
+  已用它和前端联调过登录、复核、称重出库、运费试算、上架、库龄等页面。测试共 108 个通过。下一步是批次 4（PDA 库内与出库）。
 - 官方文档：2026-11-24 搜索未找到领星海外仓 WMS 的公开帮助中心或开放 API 文档（apifox 上搜到的“海外仓开放平台”属于 jcex，不是领星）。
 
 ## 未知 / 未验证
-- 构建已修通（2026-11-24）：后端 JDK 17 下 `mvn test` 2 个测试通过；前端 Node 22 下 `npm install && npm run build` 成功（已提交 package-lock.json）。
-  注意 `Map.of` 最多 10 对键值，超过请用 LinkedHashMap。前后端都还没实际启动联调过。
+- 构建已修通（2026-11-24）：后端 JDK 17 下 `mvn test` 通过；前端 Node 22 下 `npm install && npm run build` 成功（已提交 package-lock.json）。
+  注意 `Map.of` 最多 10 对键值，超过请用 LinkedHashMap。前后端已用 H2（backend-h2）联调过，尚未在真实 MySQL 上跑。
 - 所有接口的请求体字段、鉴权头名称与值、PDA 请求签名算法。
 - 页面真实布局与业务规则。dex 只解析了类/方法签名与注解，方法体未反编译。
 

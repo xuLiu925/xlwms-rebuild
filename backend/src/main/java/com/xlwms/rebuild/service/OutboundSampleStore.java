@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
  *   <li>波次 pickWay：1 单品拣货（一票一件）/ 2 多品拣货（一票多件）</li>
  *   <li>出库单 status：0 待拣货 / 10 待复核 / 20 已复核 / 30 已出库</li>
  *   <li>波次拣完后，其出库单才可复核；全部包裹复核后才可确认出库</li>
+ *   <li>网页端（批次 3）：多品波次拣完后可二次分拣（只计数，不卡复核）；称重页要求已复核，称重后即确认出库</li>
  * </ul>
  */
 @Service
@@ -81,6 +82,8 @@ public class OutboundSampleStore {
         public final String productName;
         public final int qty;
         public int scanQty;
+        /** 二次分拣已分到该出库单格口的数量（网页端二次分拣页用） */
+        public int sortQty;
 
         PackItem(String sku, String barcode, String productName, int qty) {
             this.sku = sku;
@@ -113,6 +116,8 @@ public class OutboundSampleStore {
         public final String waveNo;
         public final List<Pack> packs = new ArrayList<>();
         public int status;
+        /** 称重结果（kg），未称重为 null */
+        public Double weightKg;
 
         Delivery(String deliveryNo, String sourceNo, String expressNo, String customerCode, String customerName,
                  String logisticsChannel, String waveNo) {
@@ -183,6 +188,29 @@ public class OutboundSampleStore {
             pack.items.add(new PackItem("SKU-0006", "BC00010006", "示例手机壳 6", 1));
             d.packs.add(pack);
         }
+        // 波次 4：多品拣货、已拣完，供网页端二次分拣 / 复核 / 按箱复核 / 称重演示；401 有两个包裹
+        Wave w4 = wave("WV26110004", "C004", "示例客户4", "CART-04", 2, "2026-11-24 07:40:00");
+        PickLine l41 = new PickLine("SKU-0008", "示例笔记本 8", "BC00010008", "D-01-01", 3);
+        PickLine l42 = new PickLine("SKU-0009", "示例马克杯 9", "BC00010009", "D-01-02", 2);
+        l41.pickQty = 3;
+        l42.pickQty = 2;
+        w4.lines.add(l41);
+        w4.lines.add(l42);
+        w4.pickStatus = 2;
+        Delivery d41 = delivery("OB2611000401", w4, "示例快递A", "TRK0000000401");
+        d41.status = 10;
+        Pack p411 = new Pack("OB2611000401-1", 1);
+        p411.items.add(new PackItem("SKU-0008", "BC00010008", "示例笔记本 8", 2));
+        Pack p412 = new Pack("OB2611000401-2", 2);
+        p412.items.add(new PackItem("SKU-0009", "BC00010009", "示例马克杯 9", 1));
+        d41.packs.add(p411);
+        d41.packs.add(p412);
+        Delivery d42 = delivery("OB2611000402", w4, "示例快递A", "TRK0000000402");
+        d42.status = 10;
+        Pack p42 = new Pack("OB2611000402-1", 1);
+        p42.items.add(new PackItem("SKU-0008", "BC00010008", "示例笔记本 8", 1));
+        p42.items.add(new PackItem("SKU-0009", "BC00010009", "示例马克杯 9", 1));
+        d42.packs.add(p42);
     }
 
     private Wave wave(String no, String cc, String cn, String cart, int pickWay, String time) {
@@ -297,5 +325,67 @@ public class OutboundSampleStore {
         }
         d.status = 30;
         return d;
+    }
+
+    // ---------- 网页端作业（批次 3） ----------
+
+    /** 按出库单号或快递单号查找。 */
+    public synchronized Delivery lookup(String no) {
+        String key = no == null ? "" : no.trim();
+        Delivery d = deliveries.get(key);
+        if (d != null) {
+            return d;
+        }
+        return deliveries.values().stream().filter(x -> x.expressNo.equals(key)).findFirst()
+                .orElseThrow(() -> new BizException("未找到出库单：" + no));
+    }
+
+    /** 二次分拣：在多品波次中扫一个条码，分到第一个还缺这个条码的出库单格口。返回 [格口号(从1起), 出库单]。 */
+    public synchronized Object[] sortScan(String waveNo, String barcode) {
+        Wave w = wave(waveNo);
+        if (w.pickWay != 2) {
+            throw new BizException("只有多品波次需要二次分拣");
+        }
+        if (w.pickStatus != 2) {
+            throw new BizException("波次尚未拣货完成，不能分拣");
+        }
+        for (int i = 0; i < w.deliveryNos.size(); i++) {
+            Delivery d = deliveries.get(w.deliveryNos.get(i));
+            for (Pack p : d.packs) {
+                for (PackItem it : p.items) {
+                    if (it.barcode.equals(barcode) && it.sortQty < it.qty) {
+                        it.sortQty++;
+                        return new Object[] {i + 1, d};
+                    }
+                }
+            }
+        }
+        throw new BizException("条码不属于该波次，或该条码已全部分拣：" + barcode);
+    }
+
+    /** 按箱复核：扫包裹号，整箱视为复核通过。返回所属出库单。 */
+    public synchronized Delivery reviewPack(String packNo) {
+        String key = packNo == null ? "" : packNo.trim();
+        Delivery d = deliveries.values().stream().filter(x -> x.packs.stream().anyMatch(p -> p.packNo.equals(key))).findFirst()
+                .orElseThrow(() -> new BizException("包裹不存在：" + packNo));
+        Pack p = d.packs.stream().filter(x -> x.packNo.equals(key)).findFirst().orElseThrow();
+        if (p.reviewStatus == 1) {
+            throw new BizException("该包裹已复核");
+        }
+        review(d.deliveryNo, key, true, null);
+        return d;
+    }
+
+    /** 称重出库：要求已复核；记录重量后确认出库。 */
+    public synchronized Delivery weighAndShip(String no, double weightKg) {
+        Delivery d = lookup(no);
+        if (weightKg <= 0 || weightKg > 70) {
+            throw new BizException("重量需在 0~70 kg 之间（本地演示限制）");
+        }
+        if (d.status != 20) {
+            throw new BizException("出库单当前状态为" + DELIVERY_STATUS.get(d.status) + "，需复核完成后才能称重出库");
+        }
+        d.weightKg = weightKg;
+        return confirmDelivery(d.deliveryNo);
     }
 }

@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import listPages from '../config/listPages.generated'
+import { moduleTitles, pageTitles } from '../config/menu'
+import Layout from '../views/layout/Layout.vue'
 Vue.use(Router)
 const GenericList = () => import('../views/common/GenericList.vue')
 const listConfigs = Object.fromEntries(listPages.map(c => [c.route, c]))
@@ -35,24 +37,48 @@ const pages = {
   'basicData/area': () => import('../views/basicData/Area.vue'),
   'basicData/cell': () => import('../views/basicData/Cell.vue'),
   'basicData/tray': () => import('../views/basicData/Tray.vue'),
-  'basicData/packMaterial': () => import('../views/basicData/PackMaterial.vue')
+  'basicData/packMaterial': () => import('../views/basicData/PackMaterial.vue'),
+  // 批次 3：作业/配置/工具页（本地有状态示例，接口路径为本项目占位）
+  'inbound/receivePutaway': () => import('../views/inbound/ReceivePutaway.vue'),
+  'inbound/shelf': () => import('../views/inbound/Shelf.vue'),
+  'outbound/secondSort': () => import('../views/outbound/SecondSort.vue'),
+  'outbound/review': () => import('../views/outbound/Review.vue'),
+  'outbound/boxReview': () => import('../views/outbound/BoxReview.vue'),
+  'outbound/weight': () => import('../views/outbound/Weight.vue'),
+  'statisticalAnalysis/inventoryAgeAnalysis': () => import('../views/statistics/InventoryAge.vue'),
+  'setting/globalSetting': () => import('../views/setting/GlobalSetting.vue'),
+  'toolKit/freightCalculation': () => import('../views/toolKit/FreightCalculation.vue'),
+  'toolKit/zoneTest': () => import('../views/toolKit/ZoneTest.vue')
 }
+const childRoute = (m, k) => {
+  const key = m + '/' + k
+  const path = '/' + key
+  if (pages[key]) return { path, component: pages[key] }
+  // 通用只读列表页（配置由 tools/list-pages/gen.mjs 生成）
+  if (listConfigs[key]) return { path, component: GenericList, props: { config: listConfigs[key] } }
+  return { path, component: Stub(key) }
+}
+const pageRoutes = Object.entries(modules).flatMap(([m, kids]) => kids.map(k => childRoute(m, k)))
+// 左侧菜单：模块 → 子页面
+const menu = Object.entries(modules).map(([m, kids]) => ({
+  path: '/' + m,
+  title: moduleTitles[m] || m,
+  children: kids.map(k => {
+    const key = m + '/' + k
+    return { path: '/' + key, title: pageTitles[key] || (listConfigs[key] && listConfigs[key].title) || key, stub: !pages[key] && !listConfigs[key] }
+  })
+}))
 const routes = [
   { path: '/login', component: () => import('../views/Login.vue') },
-  { path: '/', redirect: '/dashboard' },
-  { path: '/dashboard', component: () => import('../views/Dashboard.vue') },
-  // 本地演示页：模拟 PDA 出库作业，只连本地后端
-  { path: '/pdaDemo', component: () => import('../views/pda/OutboundDemo.vue') },
-  ...Object.entries(modules).map(([m, kids]) => ({
-    path: '/' + m, component: { render: h => h('router-view') },
-    children: kids.map(k => {
-      const key = m + '/' + k
-      if (pages[key]) return { path: k, component: pages[key] }
-      // 通用只读列表页（配置由 tools/list-pages/gen.mjs 生成）
-      if (listConfigs[key]) return { path: k, component: GenericList, props: { config: listConfigs[key] } }
-      return { path: k, component: Stub(key) }
-    })
-  }))
+  {
+    path: '/', component: Layout, props: { menu }, redirect: '/dashboard',
+    children: [
+      { path: '/dashboard', component: () => import('../views/Dashboard.vue') },
+      // 本地演示页：模拟 PDA 出库作业，只连本地后端
+      { path: '/pdaDemo', component: () => import('../views/pda/OutboundDemo.vue') },
+      ...pageRoutes
+    ]
+  }
 ]
 const router = new Router({ mode: 'history', routes })
 router.beforeEach((to, from, next) => {

@@ -1,0 +1,12 @@
+# 本地联调用：不装/不配 MySQL 也能把后端跑起来（H2 内存库，MySQL 兼容模式，复用同一套 schema/data）。
+# 用法（H2 依赖是 test 范围，所以要带测试类路径）：
+#   mvn spring-boot:run -Dspring-boot.run.useTestClasspath=true -Dspring-boot.run.arguments=--spring.config.additional-location=file:src/test/resources/application-h2.yml
+# 也可用 .claude/launch.json 里的 backend-h2 配置。
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:h2:mem:xlwms_dev;MODE=MySQL;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE;IGNORECASE=TRUE;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
