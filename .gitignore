@@ -4,3 +4,8 @@ dist/
 .idea/
 *.iml
 .env
+# 私有分析材料，不进仓库
+_private/
+*.apk
+jadx-out/
+*.dex
