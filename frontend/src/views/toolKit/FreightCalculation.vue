@@ -1,6 +1,5 @@
 <template>
   <div class="page">
-    <h3>运费试算</h3>
     <p class="hint">渠道、费率、材积除数全部虚构，仅演示“实重/材积重取大 → 分区 → 基础运费 + 燃油费”的计算流程。</p>
     <el-form inline size="small" @submit.native.prevent="calc">
       <el-form-item label="发货仓">

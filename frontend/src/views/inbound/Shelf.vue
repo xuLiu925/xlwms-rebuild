@@ -1,6 +1,5 @@
 <template>
   <div class="page">
-    <h3>上架</h3>
     <p class="hint">已收货、待上架的明细（来自本地入库作业示例数据，与“收货上架”页共用）。锁定库位不能上架。</p>
     <el-table v-loading="loading" :data="rows" border size="small">
       <el-table-column prop="asnNo" label="入库单" width="140" />

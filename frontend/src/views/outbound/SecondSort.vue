@@ -1,6 +1,5 @@
 <template>
   <div class="page">
-    <h3>二次分拣</h3>
     <p class="hint">多品波次拣完后，在播种墙上把产品分到各出库单的格口。示例波次 WV26110004 已拣完；条码 BC00010008、BC00010009。</p>
     <el-form inline size="small" @submit.native.prevent="scan">
       <el-form-item label="波次">

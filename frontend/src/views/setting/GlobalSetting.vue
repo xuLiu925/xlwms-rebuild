@@ -1,6 +1,5 @@
 <template>
   <div class="page">
-    <h3>全局设置</h3>
     <p class="hint">配置项是本项目假设的示例，只保存在本地后端内存里，重启后恢复默认值。</p>
     <el-form v-if="items.length" label-width="160px" size="small" style="max-width:560px">
       <template v-for="g in groups">

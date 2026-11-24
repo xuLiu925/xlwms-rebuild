@@ -1,6 +1,5 @@
 <template>
   <div class="page">
-    <h3>库龄分析</h3>
     <p class="hint">按库龄分段统计在库数量。演示数据的库龄天数由 SKU 推算，不是真实入库日期。</p>
     <el-form inline size="small" @submit.native.prevent="load">
       <el-form-item label="搜索"><el-input v-model="query.keyword" clearable placeholder="SKU / 品名" style="width:180px" /></el-form-item>

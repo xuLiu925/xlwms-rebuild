@@ -1,6 +1,5 @@
 <template>
   <div class="page">
-    <h3>产品资料</h3>
     <el-form inline size="small" @submit.native.prevent="search">
       <el-form-item label="搜索">
         <el-input v-model="query.keyword" clearable placeholder="SKU / 条码 / 名称" style="width:220px" />

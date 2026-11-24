@@ -1,35 +1,34 @@
 <template>
   <div class="page">
-    <h3>{{ config.title }}</h3>
     <el-tabs v-if="config.tabs" v-model="tab" @tab-click="search">
-      <el-tab-pane v-for="s in stats" :key="s.status" :name="s.status === '' ? 'all' : String(s.status)" :label="s.statusName + ' ' + s.statusSum" />
+      <el-tab-pane v-for="s in stats" :key="s.status" :name="s.status === '' ? 'all' : String(s.status)" :label="s.statusName + ' (' + s.statusSum + ')'" />
     </el-tabs>
-    <el-form inline size="small" @submit.native.prevent="search">
-      <el-form-item v-if="kwLabels" label="搜索">
-        <el-input v-model="query.keyword" clearable :placeholder="kwLabels" style="width:220px" />
+    <!-- 查询条：和参考系统一样不用外置标签，字段名写在占位文字里 -->
+    <el-form inline @submit.native.prevent="search">
+      <el-form-item v-if="kwLabels">
+        <el-input v-model="query.keyword" clearable :placeholder="kwLabels" suffix-icon="el-icon-search" style="width:240px" />
       </el-form-item>
-      <el-form-item v-for="c in filterCols" :key="c.name" :label="c.label">
-        <el-select v-model="query[c.name]" clearable placeholder="全部" style="width:130px">
+      <el-form-item v-for="c in filterCols" :key="c.name">
+        <el-select v-model="query[c.name]" clearable :placeholder="c.label" style="width:140px">
           <el-option v-for="o in options(c)" :key="o.value" :label="o.label" :value="o.value" />
         </el-select>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit">查询</el-button>
-        <el-button @click="reset">重置</el-button>
+        <el-button class="btn-reset" @click="reset">重置</el-button>
       </el-form-item>
     </el-form>
 
-    <el-table v-loading="loading" :data="rows" border size="small">
-      <el-table-column v-for="c in config.columns" :key="c.name" :label="c.label" :width="c.width"
-        :align="numeric(c) ? 'right' : 'left'">
+    <el-table v-loading="loading" :data="rows" border>
+      <el-table-column v-for="c in config.columns" :key="c.name" :label="c.label" :min-width="c.width"
+        :align="numeric(c) ? 'right' : 'left'" show-overflow-tooltip>
         <template slot-scope="{row}">
           <el-tag v-if="c.enum" size="mini" :type="tagType(c, row[c.name])">{{ row[c.name + 'Name'] }}</el-tag>
           <span v-else>{{ row[c.name] }}</span>
         </template>
       </el-table-column>
     </el-table>
-
-    <el-pagination class="pager" background layout="total, sizes, prev, pager, next"
+    <el-pagination background layout="total, sizes, prev, pager, next"
       :total="total" :current-page.sync="query.current" :page-size.sync="query.size" :page-sizes="[10, 20, 50]"
       @current-change="load" @size-change="search" />
     <p v-if="usingMock" class="hint">后端未连通，当前显示前端内置示例数据。</p>
@@ -93,7 +92,5 @@ export default {
 }
 </script>
 <style scoped>
-.page { padding: 24px }
-.pager { margin-top: 12px; text-align: right }
-.hint { color: #e6a23c; font-size: 12px }
+.hint { color: #f58718; font-size: 12px }
 </style>

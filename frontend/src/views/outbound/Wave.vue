@@ -1,6 +1,5 @@
 <template>
   <div class="page">
-    <h3>波次管理</h3>
     <el-form inline size="small" @submit.native.prevent="search">
       <el-form-item label="单号">
         <el-input v-model="query.keyword" clearable placeholder="波次号 / 出库单号" style="width:220px" />

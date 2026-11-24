@@ -1,6 +1,5 @@
 <template>
   <div class="page">
-    <h3>一件代发</h3>
     <el-form inline size="small" @submit.native.prevent="search">
       <el-form-item label="单号">
         <el-input v-model="query.keyword" clearable placeholder="出库单号 / 跟踪号 / 波次号" style="width:240px" />

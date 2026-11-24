@@ -1,6 +1,5 @@
 <template>
   <div class="page">
-    <h3>分区测试</h3>
     <p class="hint">按承运商查询起止邮编对应的分区。分区规则是虚构的演示规则。</p>
     <el-form inline size="small" @submit.native.prevent="query">
       <el-form-item label="承运商">

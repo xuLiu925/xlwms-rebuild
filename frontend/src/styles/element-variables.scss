@@ -1,0 +1,25 @@
+// Element UI 主题变量。配色参考领星 WMS 公开 CSS 里的取值（主色、文字、边框、状态色），只取数值，不含其图标、字体与品牌资源。
+$--color-primary: #005bf5;
+$--color-success: #28a864;
+$--color-warning: #f58718;
+$--color-danger: #df3148;
+$--color-info: #888c94;
+
+$--color-text-primary: #0b1019;
+$--color-text-regular: #55585f;
+$--color-text-secondary: #888c94;
+$--color-text-placeholder: #a6abb4;
+
+$--border-color-base: #d9dbde;
+$--border-color-light: #e6e8eb;
+$--border-color-lighter: #f0f2f5;
+$--border-color-extra-light: #f5f6f9;
+$--background-color-base: #f5f6f9;
+
+$--border-radius-base: 4px;
+$--table-header-background-color: #f5f6f9;
+$--table-header-font-color: #0b1019;
+$--table-font-color: #33363c;
+
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+@import '~element-ui/packages/theme-chalk/src/index';
