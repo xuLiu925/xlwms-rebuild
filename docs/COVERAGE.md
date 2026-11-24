@@ -63,8 +63,8 @@
 1. **批次 1（已完成）**：通用只读列表页机制 + 15 页。
 2. **批次 2（已完成）**：剩余列表类网页页面 43 页，网页端覆盖到 69/79。规格按模块拆成 `spec-orders`、`spec-finance`、`spec-settings`，
    生成器加了自检（key/route 唯一、ID 区间不重叠、ID 不超过 JS 安全整数、每个资源最多一个页签列），测试期望值也由生成器输出。
-3. **批次 3（已完成）**：剩余 10 个网页端作业/配置/工具页，左侧菜单布局（，菜单由路由表生成），
-   本地演示登录（，不校验不保存密码），以及不依赖 MySQL 的 H2 本地运行方式（ 的 backend-h2）。网页端 79/79 都有页面。
+3. **批次 3（已完成）**：剩余 10 个网页端作业/配置/工具页，左侧菜单布局（`views/layout/Layout.vue`，菜单由路由表生成），
+   本地演示登录（`/auth/login`，不校验不保存密码），以及不依赖 MySQL 的 H2 本地运行方式（`.claude/launch.json` 的 backend-h2）。网页端 79/79 都有页面。
 4. **批次 4**：PDA 库内与出库补全：stock ×10、inventoryCheck ×6、delivery ×8、wave 按箱拣货 ×8、review 剩余 1，接入现有 `OutboundSampleStore` 的状态流转。
 5. **批次 5**：PDA 收货/上架补全：receipt ×18、shelf ×20、newProduct ×5。
 6. **批次 6**：PDA 退货：return receive/create ×17、destruct、blReturnIn ×24。
@@ -74,12 +74,12 @@
 
 | 页面 | 后端 | 状态存放 | 说明 |
 |---|---|---|---|
-| 收货上架、上架 |   |  内存 | 3 张虚构入库单；上架库位查本地 basic_cell，锁定库位或跨仓库位会被拒 |
-| 二次分拣、复核、按箱复核、称重出库 |   |  内存 | 新增已拣完的多品波次 WV26110004；称重要求已复核，称重后即出库 |
-| 库龄分析 |   | 读 stock_sku | 表里没有入库日期，库龄由 SKU 哈希推算，仅演示 |
-| 全局设置 |   | 内存 | 10 个假设的配置项，按类型和范围校验，校验失败整体不生效 |
-| 运费试算、分区测试 |  +  | 无状态 | 渠道、费率、材积除数、分区规则全部虚构 |
-| 登录 |   | 内存令牌 | 账号密码非空即可；不校验、不保存密码；其他接口不鉴权 |
+| 收货上架、上架 | `InboundWorkController` `/inboundWork/**` | `InboundWorkStore` 内存 | 3 张虚构入库单；上架库位查本地 basic_cell，锁定库位或跨仓库位会被拒 |
+| 二次分拣、复核、按箱复核、称重出库 | `OutboundWorkController` `/outboundWork/**` | `OutboundSampleStore` 内存 | 新增已拣完的多品波次 WV26110004；称重要求已复核，称重后即出库 |
+| 库龄分析 | `StockAgeController` `/stockAge/{summary,page}` | 读 stock_sku | 表里没有入库日期，库龄由 SKU 哈希推算，仅演示 |
+| 全局设置 | `GlobalSettingController` `/globalSetting/{get,save}` | 内存 | 10 个假设的配置项，按类型和范围校验，校验失败整体不生效 |
+| 运费试算、分区测试 | `ToolKitController` + `ZoneCalculator` | 无状态 | 渠道、费率、材积除数、分区规则全部虚构 |
+| 登录 | `AuthController` `/auth/{login,getUserInfo,logout}` | 内存令牌 | 账号密码非空即可；不校验、不保存密码；其他接口不鉴权 |
 
 所有路径与字段都是本项目占位，真实网页接口未抓取。
 
