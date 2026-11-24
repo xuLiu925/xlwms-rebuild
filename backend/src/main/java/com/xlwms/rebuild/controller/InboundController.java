@@ -1,6 +1,7 @@
 package com.xlwms.rebuild.controller;
 
 import com.xlwms.rebuild.common.R;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,11 +25,21 @@ public class InboundController {
 
     @PostMapping("/page")
     public R<Map<String, Object>> page() {
-        Map<String, Object> rec = Map.of(
-                "id", 1L, "asnNo", "ASN0000000000XX", "sourceNo", "IB000000000XX", "inboundType", 1,
-                "customerCode", "C001", "customerName", "示例客户", "whCode", "WH01", "status", 10,
-                "boxCount", 10, "receiptCount", 0, "skuQtySum", 100, "etaTime", "2026-12-01",
-                "createTime", "2026-11-01 10:00:00");
+        // Map.of 最多 10 对键值，这里用 LinkedHashMap 并保持字段顺序
+        Map<String, Object> rec = new LinkedHashMap<>();
+        rec.put("id", 1L);
+        rec.put("asnNo", "ASN0000000000XX");
+        rec.put("sourceNo", "IB000000000XX");
+        rec.put("inboundType", 1);
+        rec.put("customerCode", "C001");
+        rec.put("customerName", "示例客户");
+        rec.put("whCode", "WH01");
+        rec.put("status", 10);
+        rec.put("boxCount", 10);
+        rec.put("receiptCount", 0);
+        rec.put("skuQtySum", 100);
+        rec.put("etaTime", "2026-12-01");
+        rec.put("createTime", "2026-11-01 10:00:00");
         return R.ok(Map.of("records", List.of(rec), "total", 1, "size", 20, "current", 1));
     }
 }
